@@ -58,7 +58,11 @@
   .conn-banner { display: none; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 10px; background: var(--hold-soft); color: var(--hold); font-size: 13px; font-weight: 500; width: fit-content; }
   .conn-banner.show { display: flex; }
 
+  .summary-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
   .summary { display: flex; flex-wrap: wrap; gap: 10px; }
+  .sync-state { font-size: 12px; color: var(--text-faint); opacity: 0; transition: opacity 0.25s ease; display: inline-flex; align-items: center; gap: 7px; }
+  .sync-state.show { opacity: 1; }
+  .sync-state.show::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--proceed); }
   .count-chip { display: flex; align-items: baseline; gap: 7px; padding: 9px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: 13px; color: var(--text-muted); box-shadow: var(--shadow); }
   .count-chip strong { font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: var(--text); font-variant-numeric: tabular-nums; }
   .count-chip .dot { width: 8px; height: 8px; border-radius: 50%; }
@@ -152,7 +156,10 @@
       <p class="lede">Live deliverables status across all fan-experience builds. Change a status or date directly, or use the pencil on any card to edit its details &mdash; everything saves for everyone viewing this page.</p>
     </div>
     <div id="connBanner" class="conn-banner">Not yet connected to the shared backend &mdash; changes are only saving in this browser for now.</div>
-    <div class="summary" id="summary"></div>
+    <div class="summary-row">
+      <div class="summary" id="summary"></div>
+      <span id="syncState" class="sync-state" aria-live="polite"></span>
+    </div>
   </header>
 
   <main id="groups"></main>
@@ -436,18 +443,26 @@
 
   async function init() {
     const banner = document.getElementById("connBanner");
-    if (!backendConfigured) { banner.classList.add("show"); render(); return; }
+    // Paint immediately from the local copy; the shared backend can take a few seconds to wake up.
+    render();
+    if (!backendConfigured) { banner.classList.add("show"); return; }
+    const sync = document.getElementById("syncState");
+    sync.textContent = "Syncing latest changes…";
+    sync.classList.add("show");
     try {
       const res = await fetch(SCRIPT_URL);
       if (!res.ok) throw new Error("bad response");
       const rows = await res.json();
       state = mergeWithDefaults(rows);
       saveLocal(state);
+      if (editing.size === 0) render();
+      sync.textContent = "Up to date";
+      setTimeout(() => sync.classList.remove("show"), 1800);
     } catch (err) {
+      sync.classList.remove("show");
       banner.textContent = "Could not reach the shared tracker — showing the last saved copy on this device.";
       banner.classList.add("show");
     }
-    render();
   }
 
   init();
