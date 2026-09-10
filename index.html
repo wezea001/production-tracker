@@ -16,6 +16,7 @@
     --border: #e2ded3;
     --accent: #2c3e6b;
     --accent-soft: #e3e7f2;
+    --link: #2c5ba8;
     --shadow: 0 1px 2px rgba(28,27,24,0.04), 0 8px 20px -12px rgba(28,27,24,0.10);
 
     --new: #7c3aed;      --new-soft: #efe7fd;
@@ -27,326 +28,119 @@
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #14161c;
-      --surface: #1c1f27;
-      --surface-2: #242833;
-      --text: #eceef2;
-      --text-muted: #9aa0ac;
-      --text-faint: #6c7484;
-      --border: #2f3440;
-      --accent: #8fa2df;
-      --accent-soft: #232b45;
+      --bg: #14161c; --surface: #1c1f27; --surface-2: #242833;
+      --text: #eceef2; --text-muted: #9aa0ac; --text-faint: #6c7484;
+      --border: #2f3440; --accent: #8fa2df; --accent-soft: #232b45; --link: #8fb0f0;
       --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 20px -12px rgba(0,0,0,0.5);
-
-      --new: #b28aff;      --new-soft: #2a2140;
-      --proceed: #5fd39c;  --proceed-soft: #16302a;
-      --hold: #e2a13f;     --hold-soft: #3a2c14;
-      --complete: #5cd0e6; --complete-soft: #123137;
+      --new: #b28aff; --new-soft: #2a2140; --proceed: #5fd39c; --proceed-soft: #16302a;
+      --hold: #e2a13f; --hold-soft: #3a2c14; --complete: #5cd0e6; --complete-soft: #123137;
       --canceled: #f18888; --canceled-soft: #3a1c1c;
     }
   }
-
   :root[data-theme="dark"] {
-    --bg: #14161c;
-    --surface: #1c1f27;
-    --surface-2: #242833;
-    --text: #eceef2;
-    --text-muted: #9aa0ac;
-    --text-faint: #6c7484;
-    --border: #2f3440;
-    --accent: #8fa2df;
-    --accent-soft: #232b45;
+    --bg: #14161c; --surface: #1c1f27; --surface-2: #242833;
+    --text: #eceef2; --text-muted: #9aa0ac; --text-faint: #6c7484;
+    --border: #2f3440; --accent: #8fa2df; --accent-soft: #232b45; --link: #8fb0f0;
     --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 20px -12px rgba(0,0,0,0.5);
-
-    --new: #b28aff;      --new-soft: #2a2140;
-    --proceed: #5fd39c;  --proceed-soft: #16302a;
-    --hold: #e2a13f;     --hold-soft: #3a2c14;
-    --complete: #5cd0e6; --complete-soft: #123137;
+    --new: #b28aff; --new-soft: #2a2140; --proceed: #5fd39c; --proceed-soft: #16302a;
+    --hold: #e2a13f; --hold-soft: #3a2c14; --complete: #5cd0e6; --complete-soft: #123137;
     --canceled: #f18888; --canceled-soft: #3a1c1c;
   }
 
   * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Work Sans', ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1240px; margin: 0 auto; padding: 48px 28px 90px; }
 
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
+  header.top { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
+  h1 { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 34px; letter-spacing: -0.01em; margin: 0 0 8px; text-wrap: balance; }
+  .lede { margin: 0; color: var(--text-muted); font-size: 15px; max-width: 62ch; line-height: 1.55; }
 
-  .page {
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 48px 28px 90px;
-  }
-
-  header.top {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-bottom: 40px;
-  }
-
-  h1 {
-    font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif;
-    font-weight: 800;
-    font-size: 34px;
-    letter-spacing: -0.01em;
-    margin: 0 0 8px;
-    text-wrap: balance;
-  }
-
-  .lede {
-    margin: 0;
-    color: var(--text-muted);
-    font-size: 15px;
-    max-width: 62ch;
-    line-height: 1.55;
-  }
-
-  .conn-banner {
-    display: none;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 16px;
-    border-radius: 10px;
-    background: var(--hold-soft);
-    color: var(--hold);
-    font-size: 13px;
-    font-weight: 500;
-    width: fit-content;
-  }
+  .conn-banner { display: none; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 10px; background: var(--hold-soft); color: var(--hold); font-size: 13px; font-weight: 500; width: fit-content; }
   .conn-banner.show { display: flex; }
 
-  .summary {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
+  .summary { display: flex; flex-wrap: wrap; gap: 10px; }
+  .count-chip { display: flex; align-items: baseline; gap: 7px; padding: 9px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: 13px; color: var(--text-muted); box-shadow: var(--shadow); }
+  .count-chip strong { font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: var(--text); font-variant-numeric: tabular-nums; }
+  .count-chip .dot { width: 8px; height: 8px; border-radius: 50%; }
 
-  .count-chip {
-    display: flex;
-    align-items: baseline;
-    gap: 7px;
-    padding: 9px 16px;
-    border-radius: 999px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    font-size: 13px;
-    color: var(--text-muted);
-    box-shadow: var(--shadow);
-  }
-  .count-chip strong {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 15px;
-    color: var(--text);
-    font-variant-numeric: tabular-nums;
-  }
-  .count-chip .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-  }
+  section.group { margin-top: 44px; }
+  .group-title { display: flex; align-items: center; gap: 12px; margin: 0 0 18px; }
+  .group-badge { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 9px; background: var(--accent); color: var(--surface); font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 14px; flex-shrink: 0; }
+  .group-title h2 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: -0.005em; margin: 0; flex-grow: 1; }
 
-  section.group {
-    margin-top: 44px;
-  }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 16px; }
 
-  .group-title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0 0 18px;
-  }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 14px; transition: opacity 0.15s ease; position: relative; }
+  .card.is-canceled { opacity: 0.62; }
+  .card.editing { outline: 2px solid var(--accent); outline-offset: -1px; opacity: 1; }
 
-  .group-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 9px;
-    background: var(--accent);
-    color: var(--surface);
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-weight: 500;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
+  .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .card-title { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex-grow: 1; }
+  .deliverable-name { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 15.5px; line-height: 1.3; }
+  .card.is-canceled .deliverable-name, .card.is-canceled .specs { text-decoration: line-through; text-decoration-color: var(--canceled); }
+  .specs { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text-muted); line-height: 1.4; white-space: pre-line; }
+  .head-controls { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 
-  .group-title h2 {
-    font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif;
-    font-weight: 700;
-    font-size: 19px;
-    letter-spacing: -0.005em;
-    margin: 0;
-  }
-
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-    gap: 16px;
-  }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px 20px 20px;
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    transition: opacity 0.15s ease;
-  }
-
-  .card.is-canceled {
-    opacity: 0.62;
-  }
-
-  .card-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .card-title {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    min-width: 0;
-  }
-
-  .deliverable-name {
-    font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif;
-    font-weight: 700;
-    font-size: 15.5px;
-    line-height: 1.3;
-  }
-
-  .card.is-canceled .deliverable-name,
-  .card.is-canceled .specs {
-    text-decoration: line-through;
-    text-decoration-color: var(--canceled);
-  }
-
-  .specs {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.4;
-  }
-
-  select.status-select {
-    appearance: none;
-    -webkit-appearance: none;
-    font-family: 'Work Sans', sans-serif;
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.01em;
-    border: 1px solid transparent;
-    border-radius: 999px;
-    padding: 6px 28px 6px 12px;
-    cursor: pointer;
-    flex-shrink: 0;
-    background-repeat: no-repeat;
-    background-position: right 11px center;
-  }
-  select.status-select:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-
+  select.status-select { appearance: none; -webkit-appearance: none; font-family: 'Work Sans', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.01em; border: 1px solid transparent; border-radius: 999px; padding: 6px 28px 6px 12px; cursor: pointer; background-repeat: no-repeat; background-position: right 11px center; }
+  select.status-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   select.status-new      { background-color: var(--new-soft);      color: var(--new);      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237c3aed' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
   select.status-proceed  { background-color: var(--proceed-soft);  color: var(--proceed);  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231f8a5f' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
   select.status-hold     { background-color: var(--hold-soft);     color: var(--hold);     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a8690f' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
   select.status-complete { background-color: var(--complete-soft); color: var(--complete); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%230f7a8c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
   select.status-canceled { background-color: var(--canceled-soft); color: var(--canceled); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23c23b3b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
 
-  .date-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    padding: 12px 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
+  .icon-btn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text-muted); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+  .icon-btn:hover { background: var(--surface-2); color: var(--text); }
+  .icon-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .icon-btn svg { width: 14px; height: 14px; }
 
-  .date-field label {
-    display: block;
-    font-size: 10.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-faint);
-    margin-bottom: 5px;
-    font-weight: 600;
-  }
+  .date-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .field-label { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); margin-bottom: 5px; font-weight: 600; }
 
-  input[type="date"] {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: 13px;
-    color: var(--text);
-    background: var(--surface-2);
-    border: 1px solid transparent;
-    border-radius: 7px;
-    padding: 7px 8px;
-    width: 100%;
-    font-variant-numeric: tabular-nums;
+  input[type="date"], .edit-input, .edit-textarea {
+    font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--text); background: var(--surface-2);
+    border: 1px solid transparent; border-radius: 7px; padding: 7px 8px; width: 100%; font-variant-numeric: tabular-nums;
   }
-  input[type="date"]:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 1px;
-    background: var(--surface);
-  }
+  .edit-input.sans, .edit-textarea.sans { font-family: 'Work Sans', sans-serif; }
+  .edit-textarea { resize: vertical; min-height: 64px; line-height: 1.45; }
+  input[type="date"]:focus-visible, .edit-input:focus-visible, .edit-textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; background: var(--surface); }
 
-  .notes-cell {
-    color: var(--text);
-    font-size: 13px;
-    line-height: 1.5;
-    flex-grow: 1;
-  }
+  .notes-cell { font-size: 13px; line-height: 1.5; flex-grow: 1; }
   .notes-cell .note-line { margin: 0 0 4px; color: var(--text-muted); }
   .notes-cell .note-line:last-child { margin-bottom: 0; }
   .notes-cell:empty { display: none; }
 
-  .refs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .ref-pill {
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 999px;
-    background: var(--surface-2);
-    color: var(--text-muted);
-    border: 1px dashed var(--border);
-  }
+  .refs { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ref-pill { font-size: 11px; padding: 4px 10px; border-radius: 999px; background: var(--surface-2); color: var(--text-muted); border: 1px dashed var(--border); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+  a.ref-pill { color: var(--link); border-style: solid; border-color: var(--accent-soft); background: var(--accent-soft); font-weight: 500; }
+  a.ref-pill:hover { filter: brightness(0.95); }
+  a.ref-pill svg { width: 10px; height: 10px; flex-shrink: 0; }
 
-  .card-foot {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .save-state {
-    font-size: 11px;
-    color: var(--text-faint);
-    min-height: 14px;
-  }
+  .card-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 16px; }
+  .save-state { font-size: 11px; color: var(--text-faint); }
   .save-state.error { color: var(--canceled); font-weight: 500; }
 
-  footer.legend {
-    margin-top: 52px;
-    padding-top: 22px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    font-size: 12.5px;
-    color: var(--text-muted);
-  }
+  /* Edit mode */
+  .edit-block { display: flex; flex-direction: column; gap: 12px; }
+  .link-row { display: grid; grid-template-columns: 1fr 1.6fr auto; gap: 6px; align-items: center; }
+  .link-row .icon-btn { width: 28px; height: 28px; }
+  .text-btn { background: none; border: none; color: var(--link); font: inherit; font-size: 12.5px; font-weight: 500; cursor: pointer; padding: 4px 0; }
+  .text-btn.danger { color: var(--canceled); }
+  .text-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  .btn { font: inherit; font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; }
+  .btn.primary { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .edit-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding-top: 6px; }
+
+  .add-card { border: 1px dashed var(--border); border-radius: 14px; background: transparent; color: var(--text-muted); font: inherit; font-size: 13.5px; font-weight: 500; cursor: pointer; min-height: 120px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .add-card:hover { background: var(--surface); color: var(--text); }
+  .add-card:focus-visible { outline: 2px solid var(--accent); }
+
+  footer.legend { margin-top: 52px; padding-top: 22px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 20px; font-size: 12.5px; color: var(--text-muted); }
   footer.legend .item { display: flex; align-items: center; gap: 7px; }
   footer.legend .swatch { width: 10px; height: 10px; border-radius: 3px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -355,7 +149,7 @@
   <header class="top">
     <div>
       <h1>Production Tracker</h1>
-      <p class="lede">Live deliverables status across all fan-experience builds. Update the status and dates directly &mdash; changes save for everyone viewing this page.</p>
+      <p class="lede">Live deliverables status across all fan-experience builds. Change a status or date directly, or use the pencil on any card to edit its details &mdash; everything saves for everyone viewing this page.</p>
     </div>
     <div id="connBanner" class="conn-banner">Not yet connected to the shared backend &mdash; changes are only saving in this browser for now.</div>
     <div class="summary" id="summary"></div>
@@ -373,184 +167,276 @@
 </div>
 
 <script>
-  // Paste your Google Apps Script Web App URL here once deployed.
-  // Until then, the tracker works locally in this browser only (via localStorage).
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTTTV9r8eGhH4xBrcfP0gMgwnLdOkqjt8kOl6IJbukF0rpa5iHiDfPZd0VXmyZ8of9/exec";
 
   const STATUSES = ["new", "proceed", "hold", "complete", "canceled"];
   const STATUS_LABEL = { new: "New", proceed: "Proceed", hold: "Hold", complete: "Complete", canceled: "Canceled" };
 
-  const DEFAULTS = [
-    { id: "stk-wrap", section: "1|Sticker Dispenser", deliverable: "Machine wrap", specs: '36" H × 28" W × 18" D', first: "2026-09-21", final: "2026-10-06", status: "hold", notes: ["Template coming"], refs: [] },
-    { id: "stk-backwalls", section: "1|Sticker Dispenser", deliverable: "Back walls (2)", specs: '117.6" × 117.6" each', first: "2026-09-21", final: "2026-10-06", status: "proceed", notes: ["Bleed: 1” all sides", "Wall 1: Vader + 3 sentences", "Wall 2: Elsa + 3 sentences"], refs: ["Copy"] },
-    { id: "stk-kioskwrap", section: "1|Sticker Dispenser", deliverable: "Sticker kiosk wrap", specs: "8' H × 5' W × 2.5' D", first: "2026-09-21", final: "2026-10-06", status: "hold", notes: ["Template coming"], refs: [] },
-    { id: "stk-overview", section: "1|Sticker Dispenser", deliverable: "Overview sign", specs: '24" × 36"', first: "2026-09-25", final: "2026-10-13", status: "proceed", notes: ["Bleed: 0.5” all sides"], refs: ["Copy"] },
-
-    { id: "kiosk-wrap", section: "2|Photo ID Card Collector Kiosk", deliverable: "Machine wrap", specs: '38" L × 30" W × 111" H', first: "2026-09-16", final: "2026-09-30", status: "complete", notes: [], refs: ["Template"] },
-    { id: "kiosk-pvc", section: "2|Photo ID Card Collector Kiosk", deliverable: "PVC cards", specs: '3.25" × 2" · Front + back', first: "2026-09-16", final: "2026-09-30", status: "proceed", notes: [], refs: ["Template (horizontal)", "Elsa Style Guide", "Property Logos", "Inspiration", "Copy"] },
-    { id: "kiosk-backwalls", section: "2|Photo ID Card Collector Kiosk", deliverable: "Back walls (2)", specs: '117.6" × 117.6" each', first: "2026-09-21", final: "2026-10-06", status: "proceed", notes: ["Bleed: 1” all sides", "Wall 1: Mickey, Stitch + 3 sentences", "Wall 2: Spider-Man + 3 sentences"], refs: ["Copy"] },
-    { id: "kiosk-overview", section: "2|Photo ID Card Collector Kiosk", deliverable: "Overview sign", specs: '24" × 36" all sides', first: "2026-09-25", final: "2026-10-13", status: "proceed", notes: ["Bleed: 0.5” all sides"], refs: ["Copy"] },
-    { id: "kiosk-digital", section: "2|Photo ID Card Collector Kiosk", deliverable: "Digital content", specs: "Digital size, follow template", first: "2026-09-16", final: "2026-09-30", status: "new", notes: [], refs: ["Template"] },
-
-    { id: "artist-sketchbio", section: "3|Artist Signing & Lithograph Area", deliverable: "Sketch-wall bio sign", specs: '24" × 36"', first: "2026-09-25", final: "2026-10-13", status: "hold", notes: ["Bleed: 0.5” all sides", "Artist bios and headshots forthcoming Sept. 29"], refs: [] },
-    { id: "artist-sketchoverview", section: "3|Artist Signing & Lithograph Area", deliverable: "Sketch-wall overview", specs: '24" × 36"', first: "2026-09-25", final: "2026-10-13", status: "proceed", notes: ["Bleed: 0.5” all sides"], refs: ["Copy"] },
-    { id: "artist-lithobio", section: "3|Artist Signing & Lithograph Area", deliverable: "Lithograph artist bio", specs: '47" L × 84" H', first: "2026-09-25", final: "2026-10-13", status: "hold", notes: ["Bleed: 0.5” all sides", "Artist bios and headshots forthcoming Sept. 29"], refs: [] },
-    { id: "artist-lithooverview", section: "3|Artist Signing & Lithograph Area", deliverable: "Lithograph overview", specs: '48" L × 60" H', first: "2026-09-25", final: "2026-10-13", status: "proceed", notes: ["Bleed: 0.5” all sides"], refs: ["Copy"] },
-    { id: "artist-lithowalls", section: "3|Artist Signing & Lithograph Area", deliverable: "Lithograph walls", specs: '6 walls (previously 9) · 24" × 36" each', first: "2026-10-02", final: "2026-10-19", status: "canceled", notes: ["Bleed: 0.5”", "Design direction: forthcoming"], refs: [] },
-
-    { id: "stage-preshow", section: "4|Center Stage & Motion", deliverable: "Pre-show motion loop", specs: "1920 × 1080 · Seamless loop", first: "2026-10-21", final: "2026-10-29", status: "proceed", notes: [], refs: ["Storyboard & inspiration", "Assets"] },
-    { id: "stage-projection", section: "4|Center Stage & Motion", deliverable: "Projection motion", specs: '576” × 240” center wall', first: "2026-10-21", final: "2026-11-04", status: "proceed", notes: [], refs: ["Storyboard & inspiration", "Assets"] }
+  const SECTIONS = [
+    "1|Sticker Dispenser",
+    "2|Photo ID Card Collector Kiosk",
+    "3|Artist Signing & Lithograph Area",
+    "4|Center Stage & Motion"
   ];
 
-  const LOCAL_KEY = "production-tracker-state-v2";
+  const BOX = s => "https://disney.box.com/s/" + s;
+
+  const DEFAULTS = [
+    { id: "stk-wrap", section: SECTIONS[0], deliverable: "Machine wrap", specs: '36" H × 28" W × 18" D', first: "2026-09-21", final: "2026-10-06", status: "hold", notes: ["Template coming"], refs: [] },
+    { id: "stk-backwalls", section: SECTIONS[0], deliverable: "Back walls (2)", specs: '117.6" × 117.6" each', first: "2026-09-21", final: "2026-10-06", status: "proceed", notes: ["Bleed: 1” all sides", "Wall 1: Vader + 3 sentences", "Wall 2: Elsa + 3 sentences"], refs: [{ label: "Copy", url: BOX("5gbvr2m7ompwdtod4r0dn7y22rq4qvkn") }] },
+    { id: "stk-kioskwrap", section: SECTIONS[0], deliverable: "Sticker kiosk wrap", specs: "8' H × 5' W × 2.5' D", first: "2026-09-21", final: "2026-10-06", status: "hold", notes: ["Template coming"], refs: [] },
+    { id: "stk-overview", section: SECTIONS[0], deliverable: "Overview sign", specs: '24" × 36"', first: "2026-09-25", final: "2026-10-13", status: "proceed", notes: ["Bleed: 0.5” all sides"], refs: [{ label: "Copy", url: BOX("7te4q92l3ovizcp5mv2ybtqnuz8xpdhi") }] },
+
+    { id: "kiosk-wrap", section: SECTIONS[1], deliverable: "Machine wrap", specs: '38" L × 30" W × 111" H', first: "2026-09-16", final: "2026-09-30", status: "complete", notes: [], refs: [{ label: "Template", url: BOX("0gd0tjp1ellcbvj2yo8m5bskq0g6w2ow") }] },
+    { id: "kiosk-pvc", section: SECTIONS[1], deliverable: "PVC cards", specs: '3.25" × 2" · Front + back', first: "2026-09-16", final: "2026-09-30", status: "proceed", notes: ["Use horizontal template"], refs: [
+      { label: "Template", url: BOX("z9vbunxz4c2hptodcqdmlgf700jhji43") },
+      { label: "Elsa Style Guide", url: BOX("xdi7mufj7s9ext8m6rt4xsrsc1mau9m3") },
+      { label: "Property Logos", url: BOX("qo5kcbd779b7nc39mf6as3dpugi088zb") },
+      { label: "Inspiration", url: BOX("gnzr6uob1tgbancdvn9zm860gnvuper7") },
+      { label: "Copy", url: BOX("mu3kqf2ouu49pmmbe59mi5f22qi22gxg") }
+    ] },
+    { id: "kiosk-backwalls", section: SECTIONS[1], deliverable: "Back walls (2)", specs: '117.6" × 117.6" each', first: "2026-09-21", final: "2026-10-06", status: "proceed", notes: ["Bleed: 1” all sides", "Wall 1: Mickey, Stitch + 3 sentences", "Wall 2: Spider-Man + 3 sentences"], refs: [{ label: "Copy", url: BOX("34gsn7i1yh9tuih6rhplqzss4y57c4gl") }] },
+    { id: "kiosk-overview", section: SECTIONS[1], deliverable: "Overview sign", specs: '24" × 36" all sides', first: "2026-09-25", final: "2026-10-13", status: "proceed", notes: ["Bleed: 0.5” all sides"], refs: [{ label: "Copy", url: BOX("8211jsk7ik7i0kqlb31kngzs28t0njoe") }] },
+    { id: "kiosk-digital", section: SECTIONS[1], deliverable: "Digital content", specs: "Digital size, follow template", first: "2026-09-16", final: "2026-09-30", status: "new", notes: [], refs: [{ label: "Template", url: BOX("6j8wbihxi0w0nksq3lg7oe9eof9zcqpp") }] },
+
+    { id: "artist-sketchbio", section: SECTIONS[2], deliverable: "Sketch-wall bio sign", specs: '24" × 36"', first: "2026-09-25", final: "2026-10-13", status: "hold", notes: ["Bleed: 0.5” all sides", "Artist bios and headshots forthcoming Sept. 29"], refs: [] },
+    { id: "artist-sketchoverview", section: SECTIONS[2], deliverable: "Sketch-wall overview", specs: '24" × 36"', first: "2026-09-25", final: "2026-10-13", status: "proceed", notes: ["Bleed: 0.5” all sides"], refs: [{ label: "Copy", url: BOX("mba1xk07f4qi15gawhamrbdy1f117t17") }] },
+    { id: "artist-lithobio", section: SECTIONS[2], deliverable: "Lithograph artist bio", specs: '47" L × 84" H', first: "2026-09-25", final: "2026-10-13", status: "hold", notes: ["Bleed: 0.5” all sides", "Artist bios and headshots forthcoming Sept. 29"], refs: [] },
+    { id: "artist-lithooverview", section: SECTIONS[2], deliverable: "Lithograph overview", specs: '48" L × 60" H', first: "2026-09-25", final: "2026-10-13", status: "proceed", notes: ["Bleed: 0.5” all sides"], refs: [{ label: "Copy", url: BOX("z5binjdjeuk1tvyt5egsaf90225r70al") }] },
+    { id: "artist-lithowalls", section: SECTIONS[2], deliverable: "Lithograph walls", specs: '6 walls (previously 9) · 24" × 36" each', first: "2026-10-02", final: "2026-10-19", status: "canceled", notes: ["Bleed: 0.5”", "Design direction: forthcoming"], refs: [] },
+
+    { id: "stage-preshow", section: SECTIONS[3], deliverable: "Pre-show motion loop", specs: "1920 × 1080 · Seamless loop", first: "2026-10-21", final: "2026-10-29", status: "proceed", notes: [], refs: [{ label: "Storyboard & inspiration", url: BOX("dlhvs6vbjbwg0jw2e3q6non1ii6l9b2n") }, { label: "Assets", url: BOX("90dphyzqj8lejnmv20fejgaru38yfwej") }] },
+    { id: "stage-projection", section: SECTIONS[3], deliverable: "Projection motion", specs: '576” × 240” center wall', first: "2026-10-21", final: "2026-11-04", status: "proceed", notes: [], refs: [{ label: "Storyboard & inspiration", url: BOX("dlhvs6vbjbwg0jw2e3q6non1ii6l9b2n") }, { label: "Assets", url: BOX("90dphyzqj8lejnmv20fejgaru38yfwej") }] }
+  ];
+
+  const LOCAL_KEY = "production-tracker-state-v3";
   const backendConfigured = SCRIPT_URL.trim().length > 0;
+  const editing = new Set();
 
-  function loadLocal() {
-    try {
-      const raw = localStorage.getItem(LOCAL_KEY);
-      return raw ? JSON.parse(raw) : null;
-    } catch (e) { return null; }
-  }
+  function loadLocal() { try { const raw = localStorage.getItem(LOCAL_KEY); return raw ? JSON.parse(raw) : null; } catch (e) { return null; } }
+  function saveLocal(rows) { try { localStorage.setItem(LOCAL_KEY, JSON.stringify(rows)); } catch (e) {} }
 
-  function saveLocal(rows) {
-    try { localStorage.setItem(LOCAL_KEY, JSON.stringify(rows)); } catch (e) {}
+  // Backend rows store notes as newline-joined text and refs as JSON text.
+  function normalize(r) {
+    const out = { ...r };
+    if (typeof out.notes === "string") out.notes = out.notes.split("\n").map(s => s.trim()).filter(Boolean);
+    if (!Array.isArray(out.notes)) out.notes = [];
+    if (typeof out.refs === "string") { try { out.refs = JSON.parse(out.refs); } catch (e) { out.refs = []; } }
+    if (!Array.isArray(out.refs)) out.refs = [];
+    out.refs = out.refs.map(x => typeof x === "string" ? { label: x, url: "" } : { label: x.label || "", url: x.url || "" });
+    out.deleted = out.deleted === true || out.deleted === "true" || out.deleted === "TRUE";
+    return out;
   }
 
   function mergeWithDefaults(rows) {
-    const byId = Object.fromEntries(rows.map(r => [r.id, r]));
-    return DEFAULTS.map(d => byId[d.id] ? { ...d, ...byId[d.id] } : d);
+    const byId = Object.fromEntries(rows.map(r => [r.id, normalize(r)]));
+    const merged = DEFAULTS.map(d => byId[d.id] ? { ...d, ...byId[d.id] } : { ...d, deleted: false });
+    rows.forEach(r => { if (!DEFAULTS.some(d => d.id === r.id)) merged.push({ ...normalize(r) }); });
+    return merged.map(r => ({ ...r, status: STATUSES.includes(r.status) ? r.status : "proceed", notes: r.notes || [], refs: r.refs || [] }));
   }
 
   let state = mergeWithDefaults(loadLocal() || []);
+  const visible = () => state.filter(r => !r.deleted);
+
+  function escapeHtml(str) { const div = document.createElement("div"); div.textContent = str == null ? "" : String(str); return div.innerHTML; }
+  function attr(str) { return escapeHtml(str).replace(/"/g, "&quot;"); }
+  function safeUrl(u) { u = (u || "").trim(); return /^https?:\/\//i.test(u) ? u : ""; }
+
+  const ICON_PENCIL = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 2.5l2 2L5 13H3v-2z"/><path d="M10 4l2 2"/></svg>';
+  const ICON_X = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>';
+  const ICON_EXT = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2H2v8h8V7"/><path d="M7 1h4v4"/><path d="M11 1L5.5 6.5"/></svg>';
 
   function renderSummary() {
     const counts = Object.fromEntries(STATUSES.map(s => [s, 0]));
-    state.forEach(r => { counts[r.status] = (counts[r.status] || 0) + 1; });
+    visible().forEach(r => { counts[r.status]++; });
     document.getElementById("summary").innerHTML = STATUSES.map(s => `
-      <span class="count-chip">
-        <span class="dot" style="background:var(--${s})"></span>
-        <strong>${counts[s]}</strong> ${STATUS_LABEL[s]}
-      </span>
-    `).join("");
+      <span class="count-chip"><span class="dot" style="background:var(--${s})"></span><strong>${counts[s]}</strong> ${STATUS_LABEL[s]}</span>`).join("");
   }
 
-  function escapeHtml(str) {
-    const div = document.createElement("div");
-    div.textContent = str;
-    return div.innerHTML;
+  function statusSelectHtml(row) {
+    return `<select class="status-select status-${row.status}" aria-label="Status for ${attr(row.deliverable)}">
+      ${STATUSES.map(s => `<option value="${s}" ${s === row.status ? "selected" : ""}>${STATUS_LABEL[s]}</option>`).join("")}
+    </select>`;
   }
 
-  function cardHtml(row) {
+  function viewCardHtml(row) {
     const notesHtml = row.notes.map(n => `<p class="note-line">${escapeHtml(n)}</p>`).join("");
-    const refsHtml = row.refs.length
-      ? `<div class="refs">${row.refs.map(r => `<span class="ref-pill">${escapeHtml(r)}</span>`).join("")}</div>`
-      : "";
+    const refsHtml = row.refs.length ? `<div class="refs">${row.refs.map(r => {
+      const u = safeUrl(r.url);
+      return u
+        ? `<a class="ref-pill" href="${attr(u)}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.label || "Link")}${ICON_EXT}</a>`
+        : `<span class="ref-pill">${escapeHtml(r.label)}</span>`;
+    }).join("")}</div>` : "";
     return `
-      <article class="card ${row.status === 'canceled' ? 'is-canceled' : ''}" data-id="${row.id}">
+      <article class="card ${row.status === 'canceled' ? 'is-canceled' : ''}" data-id="${attr(row.id)}">
         <div class="card-head">
           <div class="card-title">
             <span class="deliverable-name">${escapeHtml(row.deliverable)}</span>
             <span class="specs">${escapeHtml(row.specs)}</span>
           </div>
-          <select class="status-select status-${row.status}" aria-label="Status for ${escapeHtml(row.deliverable)}">
-            ${STATUSES.map(s => `<option value="${s}" ${s === row.status ? "selected" : ""}>${STATUS_LABEL[s]}</option>`).join("")}
-          </select>
+          <div class="head-controls">
+            ${statusSelectHtml(row)}
+            <button class="icon-btn edit-btn" aria-label="Edit ${attr(row.deliverable)}" title="Edit details">${ICON_PENCIL}</button>
+          </div>
         </div>
-
         <div class="date-row">
-          <div class="date-field">
-            <label>First pass</label>
-            <input type="date" class="first-input" value="${row.first || ''}" aria-label="First pass date for ${escapeHtml(row.deliverable)}">
-          </div>
-          <div class="date-field">
-            <label>Final</label>
-            <input type="date" class="final-input" value="${row.final || ''}" aria-label="Final date for ${escapeHtml(row.deliverable)}">
-          </div>
+          <div><label class="field-label">First pass</label><input type="date" class="first-input" value="${attr(row.first || '')}" aria-label="First pass date for ${attr(row.deliverable)}"></div>
+          <div><label class="field-label">Final</label><input type="date" class="final-input" value="${attr(row.final || '')}" aria-label="Final date for ${attr(row.deliverable)}"></div>
         </div>
-
         <div class="notes-cell">${notesHtml}</div>
         ${refsHtml}
+        <div class="card-foot"><span class="save-state"></span></div>
+      </article>`;
+  }
 
-        <div class="card-foot">
+  function editCardHtml(row) {
+    const refs = row.refs.length ? row.refs : [{ label: "", url: "" }];
+    return `
+      <article class="card editing" data-id="${attr(row.id)}">
+        <div class="edit-block">
+          <div><label class="field-label">Deliverable</label><input class="edit-input sans e-name" value="${attr(row.deliverable)}" placeholder="Deliverable name"></div>
+          <div><label class="field-label">Key specs</label><input class="edit-input e-specs" value="${attr(row.specs)}" placeholder='e.g. 24" × 36" · 300 dpi'></div>
+          <div class="date-row" style="border:none;padding:0">
+            <div><label class="field-label">First pass</label><input type="date" class="e-first" value="${attr(row.first || '')}"></div>
+            <div><label class="field-label">Final</label><input type="date" class="e-final" value="${attr(row.final || '')}"></div>
+          </div>
+          <div><label class="field-label">Status</label>${statusSelectHtml(row).replace('class="status-select', 'class="status-select e-status')}</div>
+          <div><label class="field-label">Notes (one per line)</label><textarea class="edit-textarea sans e-notes" placeholder="Bleed, copy direction, open questions…">${escapeHtml(row.notes.join("\n"))}</textarea></div>
+          <div>
+            <label class="field-label">Links</label>
+            <div class="link-list">
+              ${refs.map(r => `<div class="link-row">
+                <input class="edit-input sans e-link-label" value="${attr(r.label)}" placeholder="Label (e.g. Copy)">
+                <input class="edit-input e-link-url" value="${attr(r.url)}" placeholder="https://…">
+                <button class="icon-btn remove-link" aria-label="Remove link">${ICON_X}</button>
+              </div>`).join("")}
+            </div>
+            <button class="text-btn add-link">+ Add link</button>
+          </div>
+          <div class="edit-actions">
+            <button class="text-btn danger delete-btn">Remove deliverable</button>
+            <div style="display:flex;gap:8px">
+              <button class="btn cancel-btn">Cancel</button>
+              <button class="btn primary done-btn">Done</button>
+            </div>
+          </div>
           <span class="save-state"></span>
         </div>
-      </article>
-    `;
+      </article>`;
   }
 
   function render() {
     const groupsEl = document.getElementById("groups");
-    const sectionKeys = [...new Set(state.map(r => r.section))];
-    groupsEl.innerHTML = sectionKeys.map(key => {
+    groupsEl.innerHTML = SECTIONS.map(key => {
       const [num, title] = key.split("|");
-      const rows = state.filter(r => r.section === key);
+      const rows = visible().filter(r => r.section === key);
       return `
-        <section class="group">
-          <div class="group-title">
-            <span class="group-badge">${num}</span>
-            <h2>${escapeHtml(title)}</h2>
-          </div>
+        <section class="group" data-section="${attr(key)}">
+          <div class="group-title"><span class="group-badge">${num}</span><h2>${escapeHtml(title)}</h2></div>
           <div class="card-grid">
-            ${rows.map(cardHtml).join("")}
+            ${rows.map(r => editing.has(r.id) ? editCardHtml(r) : viewCardHtml(r)).join("")}
+            <button class="add-card" data-section="${attr(key)}">+ Add deliverable</button>
           </div>
-        </section>
-      `;
+        </section>`;
     }).join("");
-
-    state.forEach(row => {
-      const card = document.querySelector(`.card[data-id="${row.id}"]`);
-      if (!card) return;
-      card.querySelector(".first-input").addEventListener("change", e => updateField(row.id, "first", e.target.value));
-      card.querySelector(".final-input").addEventListener("change", e => updateField(row.id, "final", e.target.value));
-      card.querySelector(".status-select").addEventListener("change", e => updateField(row.id, "status", e.target.value));
-    });
-
+    wire();
     renderSummary();
   }
 
-  async function updateField(id, field, value) {
+  function wire() {
+    document.querySelectorAll(".card:not(.editing)").forEach(card => {
+      const id = card.dataset.id;
+      card.querySelector(".first-input").addEventListener("change", e => save(id, { first: e.target.value }));
+      card.querySelector(".final-input").addEventListener("change", e => save(id, { final: e.target.value }));
+      card.querySelector(".status-select").addEventListener("change", e => {
+        e.target.className = "status-select status-" + e.target.value;
+        card.classList.toggle("is-canceled", e.target.value === "canceled");
+        save(id, { status: e.target.value });
+      });
+      card.querySelector(".edit-btn").addEventListener("click", () => { editing.add(id); render(); });
+    });
+
+    document.querySelectorAll(".card.editing").forEach(card => {
+      const id = card.dataset.id;
+      const row = state.find(r => r.id === id);
+      const statusSel = card.querySelector(".e-status");
+      statusSel.addEventListener("change", e => { e.target.className = "status-select e-status status-" + e.target.value; });
+      card.querySelector(".add-link").addEventListener("click", () => {
+        const div = document.createElement("div"); div.className = "link-row";
+        div.innerHTML = `<input class="edit-input sans e-link-label" placeholder="Label (e.g. Copy)"><input class="edit-input e-link-url" placeholder="https://…"><button class="icon-btn remove-link" aria-label="Remove link">${ICON_X}</button>`;
+        card.querySelector(".link-list").appendChild(div);
+        div.querySelector(".remove-link").addEventListener("click", () => div.remove());
+        div.querySelector(".e-link-label").focus();
+      });
+      card.querySelectorAll(".remove-link").forEach(b => b.addEventListener("click", () => b.closest(".link-row").remove()));
+      card.querySelector(".cancel-btn").addEventListener("click", () => {
+        editing.delete(id);
+        if (row && row._isNew) state = state.filter(r => r.id !== id);
+        render();
+      });
+      card.querySelector(".delete-btn").addEventListener("click", () => {
+        if (!confirm(`Remove "${row.deliverable || "this deliverable"}" from the tracker?`)) return;
+        editing.delete(id);
+        if (row._isNew) { state = state.filter(r => r.id !== id); render(); return; }
+        row.deleted = true;
+        render();
+        save(id, { deleted: "true" });
+      });
+      card.querySelector(".done-btn").addEventListener("click", () => {
+        const refs = [...card.querySelectorAll(".link-row")].map(r => ({
+          label: r.querySelector(".e-link-label").value.trim(),
+          url: r.querySelector(".e-link-url").value.trim()
+        })).filter(r => r.label || r.url);
+        const fields = {
+          deliverable: card.querySelector(".e-name").value.trim() || "Untitled",
+          specs: card.querySelector(".e-specs").value.trim(),
+          first: card.querySelector(".e-first").value,
+          final: card.querySelector(".e-final").value,
+          status: statusSel.value,
+          notes: card.querySelector(".e-notes").value.split("\n").map(s => s.trim()).filter(Boolean).join("\n"),
+          refs: JSON.stringify(refs)
+        };
+        if (row._isNew) { fields.section = row.section; delete row._isNew; }
+        editing.delete(id);
+        Object.assign(row, normalize({ ...row, ...fields }));
+        render();
+        save(id, fields);
+      });
+      card.querySelector(".e-name").focus();
+    });
+
+    document.querySelectorAll(".add-card").forEach(btn => btn.addEventListener("click", () => {
+      const id = "custom-" + Date.now().toString(36);
+      state.push({ id, section: btn.dataset.section, deliverable: "", specs: "", first: "", final: "", status: "new", notes: [], refs: [], deleted: false, _isNew: true });
+      editing.add(id);
+      render();
+      document.querySelector(`.card[data-id="${id}"]`)?.scrollIntoView({ block: "center", behavior: "smooth" });
+    }));
+  }
+
+  async function save(id, fields) {
     const row = state.find(r => r.id === id);
     if (!row) return;
-    row[field] = value;
-
-    const card = document.querySelector(`.card[data-id="${id}"]`);
-    if (field === "status") {
-      const select = card.querySelector(".status-select");
-      select.className = "status-select status-" + value;
-      card.classList.toggle("is-canceled", value === "canceled");
-    }
-    saveLocal(state);
+    saveLocal(state.filter(r => !r._isNew));
     renderSummary();
+    const saveEl = document.querySelector(`.card[data-id="${id}"] .save-state`);
+    const set = (t, err) => { if (saveEl) { saveEl.textContent = t; saveEl.className = "save-state" + (err ? " error" : ""); } };
 
-    const saveEl = card.querySelector(".save-state");
-
-    if (!backendConfigured) {
-      if (saveEl) { saveEl.textContent = "Saved locally"; saveEl.className = "save-state"; }
-      return;
-    }
-
-    if (saveEl) { saveEl.textContent = "Saving…"; saveEl.className = "save-state"; }
+    if (!backendConfigured) { set("Saved locally"); return; }
+    set("Saving…");
     try {
-      const res = await fetch(SCRIPT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({ id, field, value })
-      });
-      if (!res.ok) throw new Error("bad response");
-      const now = new Date().toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
-      if (saveEl) { saveEl.textContent = "Saved " + now; saveEl.className = "save-state"; }
+      const res = await fetch(SCRIPT_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ id, fields }) });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || "bad response");
+      set("Saved " + new Date().toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" }));
     } catch (err) {
-      if (saveEl) { saveEl.textContent = "Failed to save — retry"; saveEl.className = "save-state error"; }
+      set("Failed to save — check connection and try again", true);
     }
   }
 
   async function init() {
     const banner = document.getElementById("connBanner");
-    if (!backendConfigured) {
-      banner.classList.add("show");
-      render();
-      return;
-    }
+    if (!backendConfigured) { banner.classList.add("show"); render(); return; }
     try {
       const res = await fetch(SCRIPT_URL);
       if (!res.ok) throw new Error("bad response");
