@@ -77,6 +77,14 @@
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 14px; transition: opacity 0.15s ease; position: relative; }
   .card.is-canceled { opacity: 0.62; }
   .card.editing { outline: 2px solid var(--accent); outline-offset: -1px; opacity: 1; }
+  .card.is-updated { border-color: var(--new); }
+  .updated-flag { display: flex; align-items: center; gap: 8px; margin: -18px -20px 0; padding: 8px 20px; border-radius: 13px 13px 0 0; background: var(--new-soft); color: var(--new); font-size: 12px; font-weight: 600; line-height: 1.4; }
+  .updated-flag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--new); flex-shrink: 0; }
+  .updated-flag .when { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 11px; opacity: 0.85; }
+  .updated-flag .what { font-weight: 500; color: var(--text); opacity: 0.85; }
+  .icon-btn.flag-btn.on { background: var(--new-soft); color: var(--new); border-color: transparent; }
+  .toggle-row { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; cursor: pointer; }
+  .toggle-row input { width: 16px; height: 16px; accent-color: var(--new); margin: 0; }
 
   .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
   .card-title { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex-grow: 1; }
@@ -232,6 +240,9 @@
     if (!Array.isArray(out.refs)) out.refs = [];
     out.refs = out.refs.map(x => typeof x === "string" ? { label: x, url: "" } : { label: x.label || "", url: x.url || "" });
     out.deleted = out.deleted === true || out.deleted === "true" || out.deleted === "TRUE";
+    out.updated = out.updated === true || out.updated === "true" || out.updated === "TRUE";
+    out.updatedOn = typeof out.updatedOn === "string" ? out.updatedOn.slice(0, 10) : "";
+    out.updatedNote = out.updatedNote == null ? "" : String(out.updatedNote);
     return out;
   }
 
@@ -251,13 +262,18 @@
 
   const ICON_PENCIL = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 2.5l2 2L5 13H3v-2z"/><path d="M10 4l2 2"/></svg>';
   const ICON_X = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>';
+  const ICON_FLAG = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 14V2.5"/><path d="M3.5 3h8.5l-2 3 2 3H3.5"/></svg>';
+  const fmtDay = iso => { if (!iso) return ""; const [y, m, d] = iso.split("-").map(Number); if (!y || !m || !d) return ""; return new Date(y, m - 1, d).toLocaleDateString(undefined, { month: "short", day: "numeric" }); };
+  const todayIso = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
   const ICON_EXT = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2H2v8h8V7"/><path d="M7 1h4v4"/><path d="M11 1L5.5 6.5"/></svg>';
 
   function renderSummary() {
     const counts = Object.fromEntries(STATUSES.map(s => [s, 0]));
     visible().forEach(r => { counts[r.status]++; });
+    const updatedCount = visible().filter(r => r.updated).length;
     document.getElementById("summary").innerHTML = STATUSES.map(s => `
-      <span class="count-chip"><span class="dot" style="background:var(--${s})"></span><strong>${counts[s]}</strong> ${STATUS_LABEL[s]}</span>`).join("");
+      <span class="count-chip"><span class="dot" style="background:var(--${s})"></span><strong>${counts[s]}</strong> ${STATUS_LABEL[s]}</span>`).join("")
+      + (updatedCount ? `<span class="count-chip" style="border-color:var(--new);color:var(--new)"><strong style="color:var(--new)">${updatedCount}</strong> Updated</span>` : "");
   }
 
   function statusSelectHtml(row) {
@@ -274,8 +290,10 @@
         ? `<a class="ref-pill" href="${attr(u)}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.label || "Link")}${ICON_EXT}</a>`
         : `<span class="ref-pill">${escapeHtml(r.label)}</span>`;
     }).join("")}</div>` : "";
+    const flagHtml = row.updated ? `<div class="updated-flag">Updated${row.updatedOn ? ` <span class="when">${escapeHtml(fmtDay(row.updatedOn))}</span>` : ""}${row.updatedNote ? ` <span class="what">&middot; ${escapeHtml(row.updatedNote)}</span>` : ""}</div>` : "";
     return `
-      <article class="card ${row.status === 'canceled' ? 'is-canceled' : ''}" data-id="${attr(row.id)}">
+      <article class="card ${row.status === 'canceled' ? 'is-canceled' : ''} ${row.updated ? 'is-updated' : ''}" data-id="${attr(row.id)}">
+        ${flagHtml}
         <div class="card-head">
           <div class="card-title">
             <span class="deliverable-name">${escapeHtml(row.deliverable)}</span>
@@ -283,6 +301,7 @@
           </div>
           <div class="head-controls">
             ${statusSelectHtml(row)}
+            <button class="icon-btn flag-btn ${row.updated ? 'on' : ''}" aria-pressed="${row.updated ? 'true' : 'false'}" aria-label="${row.updated ? 'Clear updated flag on' : 'Mark as updated:'} ${attr(row.deliverable)}" title="${row.updated ? 'Clear the Updated flag' : 'Flag this card as Updated'}">${ICON_FLAG}</button>
             <button class="icon-btn edit-btn" aria-label="Edit ${attr(row.deliverable)}" title="Edit details">${ICON_PENCIL}</button>
           </div>
         </div>
@@ -309,6 +328,11 @@
           </div>
           <div><label class="field-label">Status</label>${statusSelectHtml(row).replace('class="status-select', 'class="status-select e-status')}</div>
           <div><label class="field-label">Notes (one per line)</label><textarea class="edit-textarea sans e-notes" placeholder="Bleed, copy direction, open questions…">${escapeHtml(row.notes.join("\n"))}</textarea></div>
+          <div>
+            <label class="field-label">Updated flag</label>
+            <label class="toggle-row"><input type="checkbox" class="e-updated" ${row.updated ? "checked" : ""}> Show an &ldquo;Updated&rdquo; banner on this card</label>
+            <input class="edit-input sans e-updated-note" style="margin-top:8px" value="${attr(row.updatedNote || "")}" placeholder="What changed? (optional, e.g. Final date moved to Oct 13)">
+          </div>
           <div>
             <label class="field-label">Links</label>
             <div class="link-list">
@@ -361,6 +385,13 @@
         save(id, { status: e.target.value });
       });
       card.querySelector(".edit-btn").addEventListener("click", () => { editing.add(id); render(); });
+      card.querySelector(".flag-btn").addEventListener("click", () => {
+        const row = state.find(r => r.id === id); if (!row) return;
+        row.updated = !row.updated;
+        if (row.updated) row.updatedOn = todayIso(); else row.updatedNote = "";
+        render();
+        save(id, { updated: row.updated ? "true" : "false", updatedOn: row.updated ? row.updatedOn : "", updatedNote: row.updatedNote });
+      });
     });
 
     document.querySelectorAll(".card.editing").forEach(card => {
@@ -401,8 +432,12 @@
           final: card.querySelector(".e-final").value,
           status: statusSel.value,
           notes: card.querySelector(".e-notes").value.split("\n").map(s => s.trim()).filter(Boolean).join("\n"),
-          refs: JSON.stringify(refs)
+          refs: JSON.stringify(refs),
+          updated: card.querySelector(".e-updated").checked ? "true" : "false",
+          updatedNote: card.querySelector(".e-updated-note").value.trim()
         };
+        fields.updatedOn = fields.updated === "true" ? (row.updated && row.updatedOn ? row.updatedOn : todayIso()) : "";
+        if (fields.updated !== "true") fields.updatedNote = "";
         if (row._isNew) { fields.section = row.section; delete row._isNew; }
         editing.delete(id);
         Object.assign(row, normalize({ ...row, ...fields }));
