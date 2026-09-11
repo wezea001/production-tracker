@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand Commercialization Updates Creative Deliverables Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style id="app-style">
+  :root{
+    /* DCP Brand Guidelines v2.0: Cetacean Blue family + signature gradient */
+    --navy-950:#170B39; --navy-800:#2A1856; --navy-700:#4B2D9C;
+    --ink:#170B39; --ink-soft:#5B5570;
+    --paper:#FFFFFF; --surface:#FFFFFF; --surface-2:#F6F3FB;
+    --line:#E4E1EE; --line-strong:#D3CEE3;
+    --gold:#B8860B; --gold-soft:#FFF3D6;
+    --ok:#1E9E6B; --ok-soft:#E3F7EE;
+    --prog:#643ECE; --prog-soft:#EFE9FB;
+    --warn:#A66A00; --warn-soft:#FFF3D6;
+    --crit:#C81466; --crit-soft:#FFE1EC;
+    --neutral-soft:#EFEDF5;
+    --accent:#7F4FFF; --accent-soft:#EFE9FB;
+    --g1:#A5E6FF; --g2:#7F4FFF; --g3:#E91DF9; --g4:#FF3B89; --g5:#FFD24A;
+    --brand-gradient: linear-gradient(100deg, var(--g1) 0%, var(--g2) 32%, var(--g3) 58%, var(--g4) 78%, var(--g5) 100%);
+    --shadow: 0 1px 2px rgba(23,11,57,.06), 0 6px 20px -8px rgba(23,11,57,.14);
+    --radius: 10px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --navy-950:#0F0826; --navy-800:#1F1247; --navy-700:#4B2D9C;
+      --ink:#F1EDFA; --ink-soft:#B9AFDA;
+      --paper:#130A2E; --surface:#1B1040; --surface-2:#22134D;
+      --line:#3A2A66; --line-strong:#4B3785;
+      --gold:#FFD24A; --gold-soft:#3A2E12;
+      --ok:#5FD9A4; --ok-soft:#123326;
+      --prog:#A78BFF; --prog-soft:#241857;
+      --warn:#FFCB66; --warn-soft:#332510;
+      --crit:#FF7FAE; --crit-soft:#3A1330;
+      --neutral-soft:#241857;
+      --accent:#A78BFF; --accent-soft:#241857;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px -10px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --navy-950:#0F0826; --navy-800:#1F1247; --navy-700:#4B2D9C;
+    --ink:#F1EDFA; --ink-soft:#B9AFDA;
+    --paper:#130A2E; --surface:#1B1040; --surface-2:#22134D;
+    --line:#3A2A66; --line-strong:#4B3785;
+    --gold:#FFD24A; --gold-soft:#3A2E12;
+    --ok:#5FD9A4; --ok-soft:#123326;
+    --prog:#A78BFF; --prog-soft:#241857;
+    --warn:#FFCB66; --warn-soft:#332510;
+    --crit:#FF7FAE; --crit-soft:#3A1330;
+    --neutral-soft:#241857;
+    --accent:#A78BFF; --accent-soft:#241857;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px -10px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:"Archivo", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Poppins", ui-sans-serif, system-ui, sans-serif; font-weight:600; text-wrap:balance; margin:0;}
+  .mono{font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums;}
+  a{color:inherit;}
+  button{font:inherit;}
+  ::selection{background:var(--gold-soft);}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px 80px;}
+
+  /* ---------- Header ---------- */
+  header.top{
+    background: var(--navy-950);
+    color:#F3F1E8; padding:40px 0 32px; position:relative; overflow:hidden;
+  }
+  header.top::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:6px;
+    background: var(--brand-gradient); z-index:2;
+  }
+  header.top::after{
+    content:""; position:absolute; inset:0;
+    background:
+      radial-gradient(46% 80% at 98% -18%, rgba(233,29,249,.38), transparent 62%),
+      radial-gradient(52% 85% at 108% 22%, rgba(255,59,137,.28), transparent 58%),
+      radial-gradient(42% 75% at -4% 116%, rgba(127,79,255,.36), transparent 60%),
+      radial-gradient(30% 55% at 22% -25%, rgba(165,230,255,.22), transparent 60%),
+      repeating-linear-gradient(115deg, rgba(255,255,255,.05) 0px, rgba(255,255,255,.05) 1px, transparent 1px, transparent 58px);
+    pointer-events:none;
+  }
+  header.top .wrap{position:relative; z-index:1; text-align:center;}
+  .header-logo{ height:100px; width:auto; display:block; margin:0 auto 26px; position:relative; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    text-transform:uppercase; letter-spacing:.14em; font-size:11px; font-weight:700;
+    color:#FBF7EC; padding:6px 14px 6px 11px; border-radius:99px;
+    background-image: linear-gradient(rgba(255,255,255,.09), rgba(255,255,255,.09)), var(--brand-gradient);
+    background-origin: border-box; background-clip: padding-box, border-box;
+    border:1px solid transparent;
+  }
+  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--g5); flex-shrink:0;}
+  .top h1{font-size:clamp(26px,3.4vw,38px); color:#FBFAF5; margin-top:16px; font-weight:700;}
+  .top h1 .grad-text{
+    background:var(--brand-gradient); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .top .sub{color:#D9D2EE; font-size:14.5px; margin-top:10px; max-width:70ch;}
+  .event-meta{
+    color:#D9D2EE; font-size:15.5px; font-weight:500; margin-top:16px; letter-spacing:.01em;
+  }
+  .event-meta .sep{margin:0 10px; color:#8F84B8;}
+  .box-link{
+    display:inline-flex; align-items:center; gap:7px; margin-top:18px; font-size:12.5px; font-weight:600;
+    color:#FBF7EC; padding:8px 18px; border-radius:99px; text-decoration:none;
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.22);
+    transition:background .15s ease;
+  }
+  .box-link:hover{background:rgba(255,255,255,.16);}
+  .box-link svg{flex-shrink:0;}
+  .top-meta{
+    display:flex; flex-wrap:wrap; gap:10px 26px; margin-top:22px; font-size:12.5px; color:#C7BEE3;
+  }
+  .top-meta b{color:#F5F2FC; font-weight:600;}
+
+  .sync-pill{
+    display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:500;
+    padding:5px 12px; border-radius:99px; background:rgba(255,255,255,.08); color:#EDE9F7;
+    border:1px solid rgba(255,255,255,.16);
+  }
+  .sync-pill .dot{width:7px;height:7px;border-radius:50%;background:#5FD9A4;}
+  .sync-pill.warn .dot{background:var(--g5);}
+
+  /* ---------- Sticky control bar ---------- */
+  .controlbar{
+    position:sticky; top:0; z-index:40; background:var(--surface);
+    border-bottom:1px solid var(--line); box-shadow:var(--shadow);
+  }
+  .controlbar-inner{
+    max-width:1180px; margin:0 auto; padding:12px 24px;
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  }
+  .progress-ring-wrap{display:flex; align-items:center; gap:10px; flex-shrink:0;}
+  .progress-track{width:150px; height:8px; border-radius:99px; background:var(--neutral-soft); overflow:hidden;}
+  .progress-fill{height:100%; background:linear-gradient(90deg, var(--accent), var(--ok)); border-radius:99px; transition:width .3s ease;}
+  .progress-num{font-family:"IBM Plex Mono",monospace; font-weight:500; font-size:13px; color:var(--ink);}
+  .progress-num small{color:var(--ink-soft); font-weight:400;}
+
+  .search-box{
+    flex:1 1 220px; min-width:180px; display:flex; align-items:center; gap:8px;
+    border:1px solid var(--line-strong); border-radius:8px; padding:7px 12px; background:var(--surface-2);
+  }
+  .search-box input{
+    border:none; outline:none; background:transparent; color:var(--ink); font-size:13.5px; width:100%;
+  }
+  .search-box svg{flex-shrink:0; opacity:.55;}
+
+  .chip-row{display:flex; gap:6px; flex-wrap:wrap;}
+  .chip{
+    border:1px solid var(--line-strong); background:var(--surface); color:var(--ink-soft);
+    padding:6px 12px; border-radius:99px; font-size:12.5px; cursor:pointer; font-weight:500;
+    transition:all .15s ease; white-space:nowrap;
+  }
+  .chip:hover{border-color:var(--accent);}
+  .chip.active{background:var(--navy-800); color:#F3F1E8; border-color:var(--navy-800);}
+  .chip.active.flagged{background:var(--crit); border-color:var(--crit); color:#fff;}
+
+  .expand-btns{display:flex; gap:8px; flex-shrink:0;}
+  .ghost-btn{
+    border:1px solid var(--line-strong); background:transparent; color:var(--ink-soft);
+    padding:6px 12px; border-radius:8px; font-size:12.5px; cursor:pointer; font-weight:500;
+  }
+  .ghost-btn:hover{border-color:var(--accent); color:var(--ink);}
+
+  /* ---------- Section headings ---------- */
+  .section-title{
+    display:flex; align-items:baseline; gap:12px; margin:56px 0 6px;
+  }
+  .section-title h2{font-size:23px; font-weight:600;}
+  .section-title .count{font-size:13px; color:var(--ink-soft); font-family:"IBM Plex Mono",monospace;}
+  .section-lede{color:var(--ink-soft); font-size:14px; max-width:74ch; margin-bottom:20px;}
+
+
+  /* ---------- Flags panel ---------- */
+  .flags-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); gap:8px; margin-bottom:8px;
+  }
+  .flag-card{
+    display:flex; flex-direction:column; gap:4px; background:var(--surface); border:1px solid var(--line);
+    border-left:4px solid var(--crit); border-radius:8px; padding:9px 12px;
+    width:100%; text-align:left; font:inherit;
+    color:inherit; cursor:pointer; transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .flag-card:hover{transform:translateY(-1px); box-shadow:0 6px 18px -8px rgba(23,11,57,.24);}
+  .flag-card.sev-high{border-left-color:var(--warn);}
+  .flag-card.sev-medium{border-left-color:var(--gold);}
+  .flag-sev{
+    align-self:flex-start; flex-shrink:0; font-size:9.5px; text-transform:uppercase; letter-spacing:.06em; font-weight:700;
+    padding:2px 7px; border-radius:99px; white-space:nowrap;
+    background:var(--crit-soft); color:var(--crit);
+  }
+  .flag-card.sev-high .flag-sev{background:var(--warn-soft); color:var(--warn);}
+  .flag-card.sev-medium .flag-sev{background:var(--gold-soft); color:var(--gold);}
+  .flag-body{text-align:left;}
+  .flag-body h3{font-size:13px; font-weight:600; margin-bottom:2px; line-height:1.3;}
+  .flag-body p{font-size:11.5px; color:var(--ink-soft); margin:0; line-height:1.4;}
+
+  .risk-pill{
+    display:inline-block; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:99px;
+    text-transform:uppercase; letter-spacing:.04em; white-space:nowrap;
+    background:var(--crit-soft); color:var(--crit);
+  }
+  .risk-pill.sev-high{background:var(--warn-soft); color:var(--warn);}
+  .risk-pill.sev-medium{background:var(--gold-soft); color:var(--gold);}
+
+  /* ---------- Accordion sections ---------- */
+  details.section{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    margin-bottom:10px; box-shadow:var(--shadow); overflow:hidden;
+  }
+  details.section > summary{
+    list-style:none; cursor:pointer; padding:15px 18px; display:flex; align-items:center; gap:14px;
+  }
+  details.section > summary::-webkit-details-marker{display:none;}
+  .sum-caret{
+    width:18px; height:18px; flex-shrink:0; transition:transform .18s ease; color:var(--ink-soft);
+  }
+  details[open] > summary .sum-caret{transform:rotate(90deg);}
+  .sum-title{font-weight:600; font-size:15px; flex:1;}
+  .sum-title .part-tag{
+    font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; font-weight:700;
+    color:var(--accent); margin-right:9px;
+  }
+  .sum-title .location-tag{
+    font-size:10.5px; font-weight:700; color:var(--ink-soft); background:var(--neutral-soft);
+    padding:2px 9px; border-radius:99px; margin-left:9px; white-space:nowrap;
+  }
+  .sum-progress{display:flex; align-items:center; gap:8px; flex-shrink:0;}
+  .sum-track{width:74px; height:6px; border-radius:99px; background:var(--neutral-soft); overflow:hidden;}
+  .sum-fill{height:100%; background:var(--ok); border-radius:99px;}
+  .sum-count{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-soft); min-width:44px; text-align:right;}
+  .sum-flagcount{
+    font-size:11px; font-weight:700; color:var(--crit); background:var(--crit-soft);
+    padding:2px 8px; border-radius:99px;
+  }
+
+  .item-list{border-top:1px solid var(--line);}
+  .item-row{
+    display:grid; grid-template-columns:1.4fr 0.75fr 0.55fr 0.55fr 0.95fr 0.85fr; gap:14px; align-items:start;
+    padding:14px 18px; border-top:1px solid var(--line);
+  }
+  .item-row:first-child{border-top:none;}
+  .item-row.is-done{background:var(--surface-2);}
+  .item-row.hidden-row{display:none;}
+  @media (max-width:760px){.item-row{grid-template-columns:1fr;}}
+
+  .item-check{
+    appearance:none; width:19px; height:19px; border-radius:5px; border:1.6px solid var(--line-strong);
+    background:var(--surface); cursor:pointer; margin-top:2px; position:relative; flex-shrink:0;
+    transition:all .12s ease;
+  }
+  .item-check:hover{border-color:var(--accent);}
+  .item-check:checked{background:var(--ok); border-color:var(--ok);}
+  .item-check:checked::after{
+    content:""; position:absolute; left:5px; top:1px; width:5px; height:9px;
+    border:solid white; border-width:0 2px 2px 0; transform:rotate(45deg);
+  }
+  .item-check:focus-visible{outline:2px solid var(--prog); outline-offset:2px;}
+
+  .item-name{font-weight:600; font-size:14px; line-height:1.4;}
+  .item-row.is-done .item-name{color:var(--ink-soft); text-decoration:line-through; text-decoration-color:var(--line-strong);}
+  .item-specs{font-size:12.5px; color:var(--ink-soft); margin-top:3px;}
+  .item-notes{font-size:12.5px; color:var(--ink-soft); margin-top:6px; line-height:1.5;}
+  .artist-list{list-style:disc; margin:6px 0 0 18px; padding:0; font-size:12.5px; color:var(--ink-soft); line-height:1.55;}
+  .artist-list li{margin-bottom:1px;}
+  .col-owner, .col-fp, .col-fd, .col-dims{font-size:13px; color:var(--ink);}
+  .col-owner .lbl, .col-fp .lbl, .col-fd .lbl, .col-dims .lbl, .col-status .lbl{
+    display:block; font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft);
+    font-weight:600; margin-bottom:2px;
+  }
+  .col-fp .due-val, .col-fd .due-val{font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--ink);}
+  .col-fd .lbl{color:var(--navy-700);}
+  .col-fd .due-val{font-weight:600;}
+  .col-dims{font-size:12px; line-height:1.4;}
+  .dim-empty{color:var(--ink-soft); font-style:italic;}
+
+  .status-pill{
+    display:inline-block; font-size:11px; font-weight:600; padding:3px 9px; border-radius:99px; white-space:nowrap;
+  }
+  .status-Complete{background:var(--ok-soft); color:var(--ok);}
+  .status-InProgress{background:var(--prog-soft); color:var(--prog);}
+  .status-NotStarted{background:var(--warn-soft); color:var(--warn);}
+  .status-Other{background:var(--neutral-soft); color:var(--ink-soft);}
+
+  .status-select{
+    display:inline-block; font-family:inherit; font-size:11.5px; font-weight:600;
+    padding:4px 10px; border-radius:99px; border:1px solid var(--line-strong);
+    background:var(--surface-2); color:var(--ink); cursor:pointer; max-width:100%;
+  }
+  .status-select:focus-visible{outline:2px solid var(--prog); outline-offset:2px;}
+  .status-select.st-complete{background:var(--ok-soft); color:var(--ok); border-color:transparent;}
+  .status-select.st-inprogress{background:var(--prog-soft); color:var(--prog); border-color:transparent;}
+  .status-select.st-notstarted{background:var(--warn-soft); color:var(--warn); border-color:transparent;}
+
+  .readonly-banner{
+    display:none; background:var(--warn-soft); color:var(--warn); border:1px solid var(--warn);
+    border-radius:8px; padding:9px 14px; font-size:12.5px; margin:14px 0; font-weight:500;
+  }
+  .readonly-banner.show{display:block;}
+
+  footer{
+    margin-top:60px; padding-top:22px; border-top:1px solid var(--line);
+    font-size:12px; color:var(--ink-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  .empty-state{padding:30px; text-align:center; color:var(--ink-soft); font-size:13.5px;}
+
+  /* ---------- View tabs ---------- */
+  .view-tabs{display:flex; gap:4px; background:var(--neutral-soft); padding:3px; border-radius:10px; flex-shrink:0;}
+  .view-tab{border:none; background:transparent; color:var(--ink-soft); padding:7px 14px; border-radius:8px; font-size:12.5px; font-weight:600; cursor:pointer;}
+  .view-tab:hover{color:var(--ink);}
+  .view-tab.active{background:var(--surface); color:var(--navy-800); box-shadow:var(--shadow);}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .view-tab.active{color:#EDEAE0;}}
+  :root[data-theme="dark"] .view-tab.active{color:#EDEAE0;}
+  .view-panel{display:none;}
+  .view-panel.active{display:block;}
+
+  /* ---------- Chronological view ---------- */
+  .week-header{display:flex; align-items:baseline; gap:10px; margin:34px 0 10px;}
+  .week-header h3{font-size:15px; font-weight:600; font-family:"IBM Plex Sans",sans-serif; color:var(--ink);}
+  .week-header .week-count{font-size:12px; color:var(--ink-soft); font-family:"IBM Plex Mono",monospace;}
+  .chrono-list{display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);}
+  .chrono-list .item-row:first-child{border-top:none;}
+  .today-divider{
+    display:flex; align-items:center; gap:10px; padding:9px 4px; margin:26px 0 8px; color:var(--prog);
+    font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.09em;
+  }
+  .today-divider::before, .today-divider::after{content:""; flex:1; height:1px; background:var(--prog); opacity:.45;}
+  .area-tag{font-size:10.5px; color:var(--accent); text-transform:uppercase; letter-spacing:.05em; font-weight:700; margin-bottom:3px;}
+  .item-row.highlight-flash{animation:flashRow 1.7s ease;}
+  @keyframes flashRow{0%{background:var(--gold-soft);}100%{background:transparent;}}
+  .undated-note{font-size:13px; color:var(--ink-soft); padding:16px 18px;}
+
+  /* ---------- Calendar view ---------- */
+  .cal-month{margin-bottom:36px;}
+  .cal-month-title{font-family:"Poppins",sans-serif; font-size:19px; font-weight:600; margin-bottom:10px;}
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px;}
+  .cal-dow{font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); font-weight:700; text-align:center; padding-bottom:4px;}
+  .cal-cell{
+    min-height:96px; background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:6px;
+    display:flex; flex-direction:column; gap:4px;
+  }
+  .cal-cell.cal-empty{background:transparent; border:none;}
+  .cal-cell.cal-today{border-color:var(--accent); border-width:2px;}
+  .cal-daynum{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-soft); font-weight:600;}
+  .cal-today .cal-daynum{color:var(--accent);}
+  .cal-chips{display:flex; flex-direction:column; gap:3px; overflow:hidden;}
+  .cal-chip{
+    all:unset; display:block; font-size:10px; line-height:1.3; padding:2px 5px; border-radius:4px;
+    background:var(--prog-soft); color:var(--prog); cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    font-weight:500;
+  }
+  .cal-chip:hover{outline:1px solid var(--prog);}
+  .cal-chip:focus-visible{outline:2px solid var(--prog);}
+  .cal-chip-fp{background:transparent; border:1px dashed var(--line-strong); color:var(--ink-soft);}
+  .cal-chip-done{background:var(--ok-soft); color:var(--ok); text-decoration:line-through;}
+  .cal-chip-flag{background:var(--crit-soft); color:var(--crit); font-weight:700;}
+  .cal-chip.dim{opacity:.2;}
+  .cal-chip-extra{display:none;}
+  .cal-cell.expanded .cal-chip-extra{display:block;}
+  .cal-more{all:unset; display:block; font-size:9.5px; color:var(--prog); cursor:pointer; padding-left:2px; font-weight:600;}
+  .cal-legend{display:flex; gap:18px; flex-wrap:wrap; margin-bottom:18px; font-size:12px; color:var(--ink-soft);}
+  .cal-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .tl-swatch{width:12px; height:12px; border-radius:3px; display:inline-block;}
+  @media (max-width:700px){.cal-cell{min-height:70px; padding:4px;} .cal-chip{font-size:9px;}}
+
+  .sync-pill{ display:none; margin:14px auto 0; width:fit-content; max-width:100%; font-size:12px; font-weight:500; color:#D9D2EE; padding:5px 12px; border-radius:99px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16); }
+  .sync-pill.show{ display:inline-block; }
+  .sync-pill.ok{ color:#BFF3DA; border-color:rgba(95,217,164,.45); }
+  .sync-pill.err{ color:#FFD1E2; border-color:rgba(255,127,174,.55); background:rgba(200,20,102,.18); }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script id="app-data" type="application/json">{"sections":[{"key":"a1","part":"A","title":"1:1 Meeting Space: Entry","items":[{"id":"a1-1","name":"Overall Signage – Future of Fandom Tagline Story","owner":"George McClements","fp":"9/23","fd":"9/29","specs":"47\" L x 84\" H w/ 48\" M Stand","notes":"Cleared tagline: “The Future of Fandom: Where Storytelling, Culture and Commerce Meet.” Lives at entrance to 1:1 meeting space; same size as last year’s Artist Bio sign. Pivoted to digital per the Events Grid; consolidated from that duplicate line.","flag":0,"status":"Complete","done":true}]},{"key":"a2","part":"A","title":"1:1 Meeting Space: Room-Sized Inflatable Characters","items":[{"id":"a2-1","name":"Standing Inflatables (3D models)","owner":"John Quinn, Mark McIntyre (3D Team)","fp":"8/26","fd":"9/4","specs":"(2) 12'H Mickey & Stitch w/12\" risers · (2) 14'H Elsa & Spider-Man · (1) 16'H Darth Vader","notes":"Build models to scale; call out fur on Stitch; risers built as separate creative wrap, 12\" high/round. Vendor: Mears. Needs clean static-mesh 3D models (.OBJ/.FBX), final pose, hi-res texture/UV maps, Pantone callouts.","flag":0,"status":"Complete","done":true}]},{"key":"a3","part":"A","title":"Live Artist Mural","location":"1:1 Meeting Room","items":[{"id":"a3-1","name":"Purchase Materials + Ship to Jules (FL)","owner":"Jeff Shelly","fp":"TBD","fd":"9/18","specs":"N/A","notes":"Jeff to purchase materials and send tracking info; confirm Jules receives everything in FL. Purchases must be reconciled to FY26.","flag":0,"status":"In Progress","done":false},{"id":"a3-2","name":"POV Approval","owner":"Stef Kardos / Marcus","fp":"N/A","fd":"9/4","specs":"N/A","notes":"Stef provided POV; Marcus approved.","flag":0,"status":"Complete","done":true},{"id":"a3-3","name":"Artists Book Flights + Reconcile to FY26","owner":"Artists (see roster)","fp":"TBD","fd":"Mid-Sept 2026","specs":"N/A","notes":"All artists must book flights and reconcile expenses to FY26 by mid-September.","flag":0,"status":"In Progress","done":false},{"id":"a3-4","name":"Overview Signage (Standing Frame, Qty 1)","owner":"George McClements","fp":"10/6","fd":"10/13","specs":"24\" x 36\"","notes":"Discussed in meeting on 8/26. Overview copy due 9/29. Consolidated with the Events Grid's “Artist Sketch Wall – Overview” line; dates updated to match its production lead time.","flag":0,"status":"Complete","done":true},{"id":"a3-5","name":"Artist Bio Submitted","owner":"Stef Kardos","fp":"9/4","fd":"9/4","specs":"N/A","notes":"One bio received; send to George & team to finalize.","flag":0,"status":"Complete","done":true,"artists":["Matt Dewater (Orlando)","Rosana Iaruuso (Orlando)","Kenneth Tryal (Orlando)","Jeff Shelly (Glendale)","Hannah Meyer (Glendale)","Ian Truong (Glendale)"]},{"id":"a3-6","name":"Artist Bio Signage Finalized","owner":"George McClements","fp":"9/23","fd":"9/23","specs":"24\" x 36\", 1/2\" bleed","notes":"Same artists as above.","flag":0,"status":"Complete","done":true},{"id":"a3-7","name":"Artist Bio Signage (Standing Frame, Qty 1)","owner":"Andy","fp":"10/6","fd":"10/13","specs":"24\" x 36\"","notes":"Bios forthcoming by 9/29 + headshots. Consolidated with the Events Grid's “Artist Sketch Wall – Bios” line; dates updated to match its production lead time.","flag":0,"status":"In Progress","done":false},{"id":"a3-8","name":"Develop On-Site Artist Shift Schedule","owner":"Stef Kardos / Meg Youngblood","fp":"TBD","fd":"11/5","specs":"N/A","notes":"Shifts for Matt Dewater, Rosana Iaruuso, Kenneth Tryal (Orlando); Jeff Shelly, Hannah Meyer, Ian Truong (Glendale).","flag":0,"status":"Not Started","done":false}]},{"key":"a4","part":"A","title":"Sticker Shop","location":"1:1 Meeting Room","items":[{"id":"a4-1","name":"Sticker Dispenser – Machine Wrap","owner":"Andy / Flo","fp":"9/21","fd":"10/6","specs":"36\" H x 28\" W x 18\" D","notes":"Mad Fab to provide schematic 3D model to insert creative files. Mad Fab shop drawings due within 2 weeks of contract execution.","flag":0,"status":"In Progress","done":false},{"id":"a4-2","name":"Sticker Back Walls","owner":"Andy","fp":"9/21","fd":"10/6","specs":"(2) 9.8' x 9.8' w/ light-up elements","notes":"Aligned to Mad Fab’s SEG fabric spec (previously listed here as 10' x 10'; now matches the Events Grid).","flag":0,"status":"In Progress","done":false},{"id":"a4-3","name":"Sticker Flooring","owner":"Andy","fp":"9/21","fd":"10/6","specs":"10' x 10' event high-gloss floor","notes":"Vinyl stickers can be added to flooring at added cost.","flag":0,"status":"In Progress","done":false},{"id":"a4-4","name":"Sticker Kiosk","owner":"Andy & Dana","fp":"9/21","fd":"10/6","specs":"3' x 2' x 10' (Events Grid lists 8'H x 5'W x 2.5'D)","notes":"Mad Fab to provide schematic 3D model. Consolidated from a duplicate Events Grid line; the two dimension sets don't match. Confirm the correct kiosk size with Andy / Mad Fab.","flag":0,"status":"Not Started","done":false},{"id":"a4-5","name":"Sticker Designs Due (5)","owner":"5 FL Designers","fp":"9/22","fd":"9/28","specs":"~3\" (round or square, TBD)","notes":"V1 artwork due 9/28 and routes to Legal/BA the same day. V2 revision due 10/12; final print files due 10/19 (see Legal / BA Clearance).","flag":0,"status":"In Progress","done":false,"artists":["Darth Vader – Ashley Woodrum","Elsa – Stacey Aoyama","Mickey – Krista Staggs","Stitch – Caley Hicks","Spider-Man – Tyler Keshner"]},{"id":"a4-6","name":"Overview Signage","owner":"George McClements","fp":"9/23","fd":"9/29","specs":"24\" x 36\", 1/2\" bleed","notes":"Signage telling the story of the activation.","flag":0,"status":"Complete","done":true},{"id":"a4-7","name":"Wall Call-Outs","owner":"George McClements","fp":"9/23","fd":"9/29","specs":"N/A","notes":"Call-outs related to overall storytelling.","flag":0,"status":"Complete","done":true}]},{"key":"a5","part":"A","title":"Collector Card Studio","location":"1:1 Meeting Room","items":[{"id":"a5-1","name":"Card Collector Kiosk – Machine Wrap","owner":"Andy / Flo","fp":"9/16","fd":"9/30","specs":"78\" H x 30\" W x 24\" D","notes":"Photo-moment vendor coordination; machine dimensions received.","flag":0,"status":"In Progress","done":false},{"id":"a5-2","name":"Card Machine Back Walls","owner":"Andy","fp":"9/21","fd":"10/6","specs":"(2) 10' x 10' w/ light-up elements","notes":"","flag":0,"status":"In Progress","done":false},{"id":"a5-3","name":"Card Machine Floor","owner":"Andy","fp":"9/21","fd":"10/6","specs":"10' x 10' event high-gloss floor","notes":"Vinyl stickers can be added at added cost.","flag":0,"status":"In Progress","done":false},{"id":"a5-4","name":"Cards (5 designs)","owner":"Andy / Flo","fp":"9/16","fd":"9/30","specs":"2.5\" x 3\"","notes":"One card per character.","flag":0,"status":"In Progress","done":false},{"id":"a5-5","name":"Overview Signage (Standing Frame, Qty 1)","owner":"George McClements","fp":"10/6","fd":"10/13","specs":"24\" x 36\"","notes":"Overview copy due 9/21. Consolidated with the Events Grid's “Card Collector Kiosk – Overview Sign” line; dates updated to match its production lead time.","flag":0,"status":"In Progress","done":false}]},{"key":"a6","part":"A","title":"Lithograph Gallery","location":"Rotunda","items":[{"id":"a6-1","name":"Lithograph Art (5 designs)","owner":"5 FL Designers","fp":"9/22","fd":"9/28","specs":"24\" x 36\"","notes":"Same 5 artists as Stickers. Designer roster finalized 9/4. V1 artwork due 9/28 and routes to Legal/BA the same day; V2 revision due 10/12; final print files due 10/19.","flag":0,"status":"Not Started","done":false,"artists":["Darth Vader – Ashley Woodrum","Elsa – Stacey Aoyama","Mickey – Krista Staggs","Stitch – Caley Hicks","Spider-Man – Tyler Keshner"]},{"id":"a6-2","name":"Artist Signing Area","owner":"Andy","fp":"9/21","fd":"10/6","specs":"4' x 9' (6 walls, per Events Grid)","notes":"5 colored plexiglass panels between walls. Aligned to the Events Grid's build spec (previously listed here as 5 walls / 4 panels).","flag":0,"status":"In Progress","done":false},{"id":"a6-3","name":"Artist Headshots & Bios Submitted","owner":"Alexia","fp":"9/11","fd":"9/18","specs":"N/A","notes":"(5) headshots needed.","flag":0,"status":"Not Started","done":false},{"id":"a6-4","name":"Artist Bio Finalized","owner":"George McClements","fp":"9/23","fd":"9/29","specs":"47\" L x 84\" H w/ 48\" M Stand","notes":"5 artist bios needed; frame format/specs TBD.","flag":0,"status":"In Progress","done":false},{"id":"a6-5","name":"Artist Bio Signage","owner":"Andy","fp":"10/6","fd":"10/13","specs":"47\" L x 84\" H w/ 48\" M Stand","notes":"Standing frame, like last year’s Artist Bio sign; pivoted to digital per the Events Grid. Bios/overview by 9/29 + headshots. Consolidated from a duplicate Events Grid line; dates updated to match its production lead time.","flag":0,"status":"In Progress","done":false},{"id":"a6-6","name":"Overview Signage (On Wall)","owner":"George McClements","fp":"10/6","fd":"10/13","specs":"On wall – 4'L x 5'H","notes":"Add on wall as first poster; pivoted to digital per the Events Grid. Overview copy by 9/21. Consolidated from a duplicate Events Grid line; dates updated to match its production lead time.","flag":0,"status":"Complete","done":true},{"id":"a6-7","name":"Lithograph Gifting Tickets","owner":"Andy","fp":"TBD","fd":"9/29","specs":"~2\" x 3\"","notes":"One ticket per guest for lithograph pickup.","flag":0,"status":"In Progress","done":false},{"id":"a6-8","name":"Custom Table Wrap","owner":"Andy","fp":"9/16","fd":"9/30","specs":"Custom 10' x 2.5' table","notes":"Custom fabric design needed. Mad Fab dye-sublimated stretch fabric cover, fitted to table.","flag":0,"status":"In Progress","done":false},{"id":"a6-9","name":"Identify 5 Local FL Designers","owner":"Jacci Hendershott","fp":"N/A","fd":"9/4","specs":"N/A","notes":"Stef proposed 3 designers + 2 character artists; roster shared across Stickers & Lithograph.","flag":0,"status":"Complete","done":true},{"id":"a6-10","name":"POV Approval (Character Art)","owner":"Stef Kardos / Marcus","fp":"N/A","fd":"9/12","specs":"N/A","notes":"Blocks artists from finalizing both Sticker and Lithograph designs. Target sign-off set for 9/12 to protect the 3-week artist minimum.","flag":0,"status":"Complete","done":true},{"id":"a6-11","name":"Legal / BA Clearance for Sticker & Lithograph Artwork","owner":"Donna Brodsky","fp":"9/28","fd":"10/19","specs":"N/A","notes":"Combined review covering both Sticker and Lithograph artwork, since both use the same 5 character designs. Review begins on V1 artwork (routed 9/28) and must clear by the 10/19 final print files deadline, accounting for the V2 revision on 10/12. Donna supported this process last year.","flag":0,"status":"Not Started","done":false},{"id":"a6-14","name":"Creative Ops Routes V1 Artwork to Legal/BA","owner":"Donna Brodsky","fp":"9/28","fd":"9/28","specs":"N/A","notes":"Hand-off of V1 Sticker & Lithograph artwork to Legal/BA for clearance review.","flag":0,"status":"Not Started","done":false},{"id":"a6-15","name":"V2 Artwork Due (Sticker & Lithograph)","owner":"5 FL Designers","fp":"10/3","fd":"10/12","specs":"N/A","notes":"Revised artwork incorporating Legal/BA and creative feedback on V1.","flag":0,"status":"Not Started","done":false,"artists":["Darth Vader – Ashley Woodrum","Elsa – Stacey Aoyama","Mickey – Krista Staggs","Stitch – Caley Hicks","Spider-Man – Tyler Keshner"]},{"id":"a6-12","name":"Final Print Files Due for Vendor Production","owner":"Alexia / Jules","fp":"10/19","fd":"10/19","specs":"N/A","notes":"Final print-ready files for Sticker & Lithograph artwork, sequenced to follow Legal / BA Clearance.","flag":0,"status":"Not Started","done":false},{"id":"a6-13","name":"Develop On-Site Artist Signing Schedule","owner":"Stef Kardos / Meg Youngblood","fp":"TBD","fd":"11/5","specs":"N/A","notes":"Shifts for artists signing posters on-site.","flag":0,"status":"Not Started","done":false}]},{"key":"a7","part":"A","title":"Theater: Projection Icon Elements","items":[{"id":"a7-1","name":"Obtain Projection Specs/Deadline from Event Tech","owner":"Jules / Chris (AV Tech)","fp":"10/21","fd":"11/4","specs":"TBD","notes":"Workstream cannot start until Event Tech provides specs and deadline.","flag":0,"status":"In Progress","done":false},{"id":"a7-2","name":"Develop Projection Icon Elements","owner":"Andy (partnership)","fp":"10/21","fd":"11/4","specs":"Specs/file types forthcoming","notes":"For the back-wall screen behind the stage; cannot begin until specs received. Tracked as “Animated Projection Files” on the Events Grid; consolidated from that duplicate line.","flag":0,"status":"In Progress","done":false}]},{"key":"a8","part":"A","title":"Presentation","items":[{"id":"a8-1","name":"Andy to Make Suggestion Regarding Deck Template for Marcus’ Review","owner":"Andy / Jacci","fp":"9/14","fd":"9/14","specs":"N/A","notes":"","flag":0,"status":"Not Started","done":false},{"id":"a8-2","name":"Pre-Show Loop – Lithograph Sign","owner":"Andy","fp":"9/21","fd":"TBD","specs":"1920 x 1080","notes":"Last year’s copy: “BCU Exclusive: stop by the West Rotunda to collect a Lithograph with bespoke designs by Disney artists!”","flag":0,"status":"In Progress","done":false},{"id":"a8-3","name":"Presentation: Mickey & Friends – Stage","owner":"Andy","fp":"N/A","fd":"10/30","specs":"1920 x 1080","notes":"Stage version.","flag":0,"status":"Not Started","done":false},{"id":"a8-4","name":"Presentation: Mickey & Friends – Deep Dive","owner":"Andy","fp":"N/A","fd":"11/13","specs":"1920 x 1080","notes":"Deep Dive version.","flag":0,"status":"Not Started","done":false},{"id":"a8-5","name":"Presentation: Disney Classics – Stage","owner":"Andy","fp":"N/A","fd":"10/30","specs":"1920 x 1080","notes":"Stage version.","flag":0,"status":"Not Started","done":false},{"id":"a8-6","name":"Presentation: Disney Classics – Deep Dive","owner":"Andy","fp":"N/A","fd":"11/13","specs":"1920 x 1080","notes":"Deep Dive version.","flag":0,"status":"Not Started","done":false},{"id":"a8-7","name":"Presentation: Disney Princess – Stage","owner":"Andy","fp":"N/A","fd":"10/30","specs":"1920 x 1080","notes":"Stage version.","flag":0,"status":"Not Started","done":false},{"id":"a8-8","name":"Presentation: Disney Princess – Deep Dive","owner":"Andy","fp":"N/A","fd":"11/13","specs":"1920 x 1080","notes":"Deep Dive version.","flag":0,"status":"Not Started","done":false},{"id":"a8-9","name":"Presentation: Lucasfilm – Stage","owner":"Andy","fp":"N/A","fd":"10/30","specs":"1920 x 1080","notes":"Stage version.","flag":0,"status":"Not Started","done":false},{"id":"a8-10","name":"Presentation: Lucasfilm – Deep Dive","owner":"Andy","fp":"N/A","fd":"11/13","specs":"1920 x 1080","notes":"Deep Dive version.","flag":0,"status":"Not Started","done":false},{"id":"a8-11","name":"Presentation: Disney Branded Television – Stage","owner":"Andy","fp":"N/A","fd":"10/30","specs":"1920 x 1080","notes":"Stage version.","flag":0,"status":"Not Started","done":false},{"id":"a8-12","name":"Presentation: Disney Branded Television – Deep Dive","owner":"Andy","fp":"N/A","fd":"11/13","specs":"1920 x 1080","notes":"Deep Dive version.","flag":0,"status":"Not Started","done":false},{"id":"a8-13","name":"Presentation: Marvel – Stage","owner":"Andy","fp":"N/A","fd":"10/30","specs":"1920 x 1080","notes":"Stage version.","flag":0,"status":"Not Started","done":false},{"id":"a8-14","name":"Presentation: Marvel – Deep Dive","owner":"Andy","fp":"N/A","fd":"11/13","specs":"1920 x 1080","notes":"Deep Dive version.","flag":0,"status":"Not Started","done":false},{"id":"a8-15","name":"Presentation: Pixar – Stage","owner":"Andy","fp":"N/A","fd":"10/30","specs":"1920 x 1080","notes":"Stage version.","flag":0,"status":"Not Started","done":false},{"id":"a8-16","name":"Presentation: Pixar – Deep Dive","owner":"Andy","fp":"N/A","fd":"11/13","specs":"1920 x 1080","notes":"Deep Dive version.","flag":0,"status":"Not Started","done":false},{"id":"a8-17","name":"Presentation: WDAS + Frozen – Stage","owner":"Andy","fp":"N/A","fd":"10/30","specs":"1920 x 1080","notes":"Stage version.","flag":0,"status":"Not Started","done":false},{"id":"a8-18","name":"Presentation: WDAS + Frozen – Deep Dive","owner":"Andy","fp":"N/A","fd":"11/13","specs":"1920 x 1080","notes":"Deep Dive version.","flag":0,"status":"Not Started","done":false}]},{"key":"b1","part":"B","title":"Digital & Email Creative","items":[{"id":"b1-1","name":"Invitation (Digital)","owner":"Andy / Jules","fp":"8/6","fd":"8/14","specs":"Sized to 700px wide email body","notes":"Refer to Comms Doc. Include RSVP + Travel buttons; mirror BCU 2025 structure.","flag":0,"status":"Complete","done":true},{"id":"b1-2","name":"Invitation – Digital Button","owner":"Andy","fp":"N/A","fd":"N/A","specs":"Sized to 700px wide email body","notes":"Copy from Stephen; embed into email format.","flag":0,"status":"Complete","done":true},{"id":"b1-3","name":"Reminder Email","owner":"Andy / Jules","fp":"N/A","fd":"N/A","specs":"Sized to 700px wide email body","notes":"Refer to Comms Doc. Include Microsite button + full schedule.","flag":0,"status":"Complete","done":true},{"id":"b1-4","name":"Microsite – Digital Button (View Event Map)","owner":"Andy / Jules","fp":"9/14","fd":"9/21","specs":"Sized to 700px wide email body","notes":"","flag":0,"status":"In Progress","done":false},{"id":"b1-5","name":"Microsite (Digital)","owner":"Andy / Jules","fp":"9/14","fd":"9/21","specs":"Sized to 700px wide email body","notes":"Refer to Comms Doc; mirror BCU 2025 tabs & info.","flag":0,"status":"In Progress","done":false},{"id":"b1-6","name":"KBYG Email (Digital)","owner":"Andy / Jules","fp":"10/21","fd":"11/2","specs":"Sized to 700px wide email body","notes":"Refer to Comms Doc.","flag":0,"status":"Not Started","done":false},{"id":"b1-7","name":"KBYG Email – Digital Button","owner":"Andy / Jules","fp":"10/21","fd":"11/2","specs":"Sized to 700px wide email body","notes":"View Event Details / Microsite.","flag":0,"status":"Not Started","done":false},{"id":"b1-8","name":"Event Site Map","owner":"Andy / Jules","fp":"10/21","fd":"11/2","specs":"Sized to 700px wide email body","notes":"Overall event site map for microsite.","flag":0,"status":"Not Started","done":false},{"id":"b1-9","name":"Shuttle Map (Digital)","owner":"Andy / Jules","fp":"10/21","fd":"11/2","specs":"Sized to 700px wide email body","notes":"Rachel Lin working on shuttles (FYI).","flag":0,"status":"Not Started","done":false},{"id":"b1-10","name":"Survey Email – Digital Button","owner":"Andy / Jules","fp":"10/29","fd":"11/17","specs":"Sized to 700px wide email body","notes":"Complete Survey CTA.","flag":0,"status":"Not Started","done":false},{"id":"b1-11","name":"Survey Email (Digital)","owner":"Andy / Jules","fp":"10/29","fd":"11/17","specs":"Sized to 700px wide email body","notes":"Refer to Comms Doc.","flag":0,"status":"Not Started","done":false},{"id":"b1-12","name":"Digital Parking Signage","owner":"Andy / Jules","fp":"TBD","fd":"11/2","specs":"Dims TBC","notes":"Outside parking.","flag":0,"status":"Not Started","done":false},{"id":"b1-13","name":"Stylized Event Schedule (Digital Screens)","owner":"Andy / Jules","fp":"TBD","fd":"10/29","specs":"Specs TBC","notes":"For digital screens in Foyer/Lobby; Events to provide copy.","flag":0,"status":"Not Started","done":false},{"id":"b1-15","name":"Pre-Show Loop (Digital)","owner":"Andy / Jules","fp":"TBD","fd":"10/29","specs":"1920 x 1080","notes":"Similar to Licensing Expo pre-show loop.","flag":0,"status":"In Progress","done":false},{"id":"b1-16","name":"Pre-Show Loop – SIP Slide","owner":"Andy / Jules","fp":"TBD","fd":"10/29","specs":"1920 x 1080","notes":"Heather to provide slide; redesign to match overall theme/key art.","flag":0,"status":"Not Started","done":false},{"id":"b1-17","name":"Pre-Show Loop – Lithograph Slide","owner":"Andy / Jules","fp":"TBD","fd":"10/29","specs":"1920 x 1080","notes":"“BCU Exclusive: stop by the West Rotunda to collect a Lithograph…”","flag":0,"status":"Not Started","done":false},{"id":"b1-18","name":"Screen Slide (Lunch)","owner":"Andy / Jules","fp":"TBD","fd":"10/29","specs":"1920 x 1080","notes":"Lunch location & timing copy.","flag":0,"status":"Not Started","done":false}]},{"key":"b2","part":"B","title":"Digital Kiosks (all due 11/11)","items":[{"id":"b2-1","name":"Check-In Digital Kiosk","owner":"Andy / Jules","fp":"TBD","fd":"11/11","specs":"Qty 1","notes":"Rotate: scan-for-details QR + sustainability QR (reuse last year’s copy/QR).","flag":0,"status":"Not Started","done":false},{"id":"b2-2","name":"Help Desk / Luggage Check Digital Kiosk","owner":"Andy / Jules","fp":"TBD","fd":"11/11","specs":"Qty 1","notes":"Rotate Help Desk with Luggage Check (2nd day only).","flag":0,"status":"Not Started","done":false},{"id":"b2-3","name":"Lunch & Breakouts Digital Kiosk","owner":"Andy / Jules","fp":"TBD","fd":"11/11","specs":"Qty 1","notes":"Rotates lunch, event schedule/floor plan, breakout schedule.","flag":0,"status":"Not Started","done":false},{"id":"b2-4","name":"Directional Lunch & Breakouts Digital Kiosk","owner":"Andy / Jules","fp":"TBD","fd":"11/11","specs":"Qty 1","notes":"Same rotation, directional placement.","flag":0,"status":"Not Started","done":false},{"id":"b2-5","name":"Directional – Theatre Entrance Digital Kiosk","owner":"Andy / Jules","fp":"TBD","fd":"11/11","specs":"Qty 1","notes":"Theatre entrance, device check, private rooms directional; rotates w/ Artist Bios & Lithograph info.","flag":0,"status":"Not Started","done":false},{"id":"b2-6","name":"Theatre Digital Kiosk","owner":"Andy / Jules","fp":"TBD","fd":"11/11","specs":"Qty 1","notes":"Device check + queue entrance + device-storage notice, rotating.","flag":0,"status":"Not Started","done":false},{"id":"b2-7","name":"Event 1:1 Space Digital Kiosk","owner":"Andy / Jules","fp":"TBD","fd":"11/11","specs":"Qty 2","notes":"Rotates stylized floor plan, creative overview, survey CTA.","flag":0,"status":"Not Started","done":false}]},{"key":"b3","part":"B","title":"Entrance Area & Outside Venue","items":[{"id":"b3-1","name":"Porte-Cochere Entrance – Vinyl Cling","owner":"Andy / Jules","fp":"9/23","fd":"10/19","specs":"Dims TBC","notes":"DCP logo & tagline + Key Art characters. Vendor: EdgeFactory. Noted: “will cut this if we can’t afford.”","flag":0,"status":"Not Started","done":false},{"id":"b3-2","name":"Rideshare A-Frame (Qty 2)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b3-3","name":"Directional – Rideshare A-Frame (Qty 2)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Leave space for arrow. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b3-4","name":"Shuttle A-Frame (Qty 2)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b3-5","name":"Directional – Shuttle A-Frame (Qty 2)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Leave space for arrow. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b3-6","name":"Shuttle Dash Passes (Qty 5)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"11\" x 13\" cardstock","notes":"Mears likely produces; Heather to provide DCP logo.","flag":0,"status":"Not Started","done":false},{"id":"b3-7","name":"Directional – Event Parking A-Frame (Qty 6)","owner":"Andy / Jules","fp":"10/2","fd":"10/14","specs":"24\" x 36\"","notes":"Vendor: Atwater.","flag":0,"status":"Not Started","done":false}]},{"key":"b4","part":"B","title":"Activation Branding: Production Elements","items":[{"id":"b4-2","name":"Riser Wrap – Mickey","owner":"Andy / Jules","fp":"TBD","fd":"TBD","specs":"12\" round riser","notes":"Consolidated with the Creative Tracker's “Creative Platform Wrap” line.","flag":0,"status":"Not Started","done":false},{"id":"b4-3","name":"Riser Wrap – Stitch","owner":"Andy / Jules","fp":"TBD","fd":"TBD","specs":"12\" round riser","notes":"Consolidated with the Creative Tracker's “Creative Platform Wrap” line.","flag":0,"status":"Not Started","done":false},{"id":"b4-4","name":"Riser Wrap – Spider-Man","owner":"Andy / Jules","fp":"TBD","fd":"TBD","specs":"12\" round riser","notes":"Pose TBC. No Creative Tracker counterpart.","flag":0,"status":"Not Started","done":false},{"id":"b4-11","name":"Sticker Machine – Overview (Standing Frame, Qty 1)","owner":"Andy / Jules","fp":"10/6","fd":"10/13","specs":"24\" x 36\"","notes":"Bios/overview by 9/21 + headshots (same artists as Lithograph).","flag":0,"status":"Not Started","done":false},{"id":"b4-14","name":"PVC Cards – Photo IDs","owner":"Andy / Jules","fp":"9/16","fd":"9/30","specs":"3 1/4\" x 2\"","notes":"1 design (front/back) or 3 designs; template forthcoming.","flag":0,"status":"Not Started","done":false},{"id":"b4-15","name":"Digital Screen Content – Photo Booth","owner":"Andy / Jules","fp":"9/16","fd":"9/30","specs":"N/A","notes":"Guest browses ID card design options.","flag":0,"status":"Not Started","done":false},{"id":"b4-16","name":"Photo ID Card Kiosk – Machine Wrap","owner":"Andy / Jules","fp":"9/16","fd":"9/30","specs":"38\" L x 30\" W x 111\" H","notes":"Template forthcoming.","flag":0,"status":"Not Started","done":false},{"id":"b4-17","name":"Marquee Sign – Photo Booth","owner":"Andy / Jules","fp":"9/16","fd":"9/30","specs":"N/A","notes":"Black sign, white lettering, LED backlit; call out font/logo needs.","flag":0,"status":"Not Started","done":false},{"id":"b4-18","name":"Marquee / Light Wall","owner":"Andy / Jules","fp":"9/21","fd":"10/6","specs":"(2) 9.8' x 9.8'","notes":"Same Mad Fab SEG fabric spec as Sticker Back Walls.","flag":0,"status":"Not Started","done":false}]},{"key":"b5","part":"B","title":"Lobby & Check-In Desk","items":[{"id":"b5-1","name":"Credentials (5 designs, Qty 1,150 total)","owner":"Andy / Jules","fp":"9/21","fd":"10/9","specs":"3.5\" x 4.75\", slot punch .5\" x .125\"","notes":"Staff/Presenter/Disney/Meetings Only/Attendee + QR to microsite. Same shape as Expo. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b5-2","name":"Parks Ticket Info Sheet (Qty 900)","owner":"Andy / Jules","fp":"10/7","fd":"10/29","specs":"8.5\" x 11\"","notes":"Double-sided print. Vendor: Taylor Print.","flag":0,"status":"Not Started","done":false},{"id":"b5-3","name":"Envelope – Parks Tickets / Parking Pass Info (Qty 900)","owner":"Andy / Jules","fp":"10/7","fd":"10/29","specs":"4.125\" x 9.5\"","notes":"Vendor: Taylor Print.","flag":0,"status":"Not Started","done":false},{"id":"b5-4","name":"Parking Pass (Qty 900)","owner":"Andy / Jules","fp":"10/7","fd":"10/29","specs":"Dims TBC","notes":"Copy corrected to remove the 2025 reference; now reads “Wednesday, November 18” pending final confirmation of the 2026 event date with Events.","flag":0,"status":"Not Started","done":false},{"id":"b5-5","name":"Check-In Table Tent Cards (Qty 15)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"4.5\" x 15.5\"","notes":"QR to microsite. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b5-6","name":"Sustainability Table Tent Cards (Qty 4)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"4.5\" x 15.5\"","notes":"Reuse last year’s copy/QR.","flag":0,"status":"Not Started","done":false},{"id":"b5-7","name":"Check-In Signage (Standing Frame, Qty 4)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Pivoted to digital.","flag":0,"status":"In Progress","done":false},{"id":"b5-8","name":"Help Desk Signage (Standing Frame, Qty 1)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Pivoted to digital.","flag":0,"status":"In Progress","done":false},{"id":"b5-9","name":"Luggage Check (Standing Frame, Qty 1)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Pivoted to digital.","flag":0,"status":"In Progress","done":false},{"id":"b5-10","name":"Lunch Signage (Standing Frame, Qty 2)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Pivoted to digital.","flag":0,"status":"In Progress","done":false}]},{"key":"b6","part":"B","title":"Theater, Stage & Meeting Space","items":[{"id":"b6-1","name":"Podium Branding – Vinyl Cling (Qty 2)","owner":"Andy / Jules","fp":"9/23","fd":"10/19","specs":"47.5\" H x 23.625\" W top, 19.125\" W bottom","notes":"DCP logo. Vendor TBC.","flag":0,"status":"Not Started","done":false},{"id":"b6-2","name":"Directional Signage – Stylized Floor Plan (Qty 2)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\", double-sided","notes":"Refer to CAD; place in 1:1 meeting area. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b6-3","name":"Public Notice of Filming (Qty 2)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Standard verbiage; check-in, theater entrance, main room entrance. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b6-4","name":"Theater – Device Check Signage (Qty 1)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Pivoted to digital.","flag":0,"status":"In Progress","done":false},{"id":"b6-5","name":"Theater – Queue Entrance Signage (Qty 1)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Pivoted to digital.","flag":0,"status":"In Progress","done":false},{"id":"b6-6","name":"Theater – Entrance Signage (Qty 1)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Pivoted to digital.","flag":0,"status":"In Progress","done":false},{"id":"b6-7","name":"Theater / Device Check Signage (Qty 4)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"No-recording / device-storage notice. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b6-8","name":"Reserved Tent Cards (Qty 20)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"9\" L x 6\" H","notes":"Front-row theater seating. Vendor: Atwater.","flag":0,"status":"Not Started","done":false}]},{"key":"b7","part":"B","title":"Private Meeting Rooms","items":[{"id":"b7-1","name":"Private Meeting Room Signage + Arrow (Qty 4)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\", double-sided","notes":"Lobby areas. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b7-2","name":"Private Meeting Room 1 (Qty 1)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Pastoral 1. PDF, .25\" bleed, outlined fonts. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b7-3","name":"Private Meeting Room 2 (Qty 1)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Pastoral 2. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b7-4","name":"Private Meeting Room 3 (Qty 1)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Pastoral 3. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b7-5","name":"Tech Support / Wi-Fi Table Tent Cards (Qty 16)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"4.5\" x 15.5\"","notes":"Inside the 3 private meeting rooms. Vendor: Atwater.","flag":0,"status":"Not Started","done":false}]},{"key":"b8","part":"B","title":"Arena & Green Room Signage","items":[{"id":"b8-1","name":"Private Signage (Qty 3)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b8-2","name":"No Entry / Directional Signage (Qty 2)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b8-3","name":"Wellness Room Signage (Qty 2)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"8.5\" x 5.5\" cardstock","notes":"Location TBC. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b8-4","name":"Talent Green Room (Qty 2)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"8.5\" x 5.5\" cardstock","notes":"Location TBC. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b8-5","name":"Character Green Room (Qty 2)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"8.5\" x 5.5\" cardstock","notes":"Location TBC. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b8-6","name":"DCP Green Room (Qty 2)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"8.5\" x 5.5\" cardstock","notes":"Location TBC. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b8-7","name":"Private Signage – Cardstock (Qty 10)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"8.5\" x 5.5\"","notes":"Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b8-8","name":"1:1 Meeting Table Numbers (Qty 65)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"4.5\" x 15.5\"","notes":"Table numbers 1–65 + Wi-Fi info. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b8-9","name":"Wi-Fi Table Tent Cards (Qty 16)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"4.5\" x 15.5\"","notes":"1:1 meeting room + communal tables. Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b8-10","name":"Open Table Tent Cards (Qty 10)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"4.5\" x 15.5\"","notes":"“Open Table – First Come, First Served.” Vendor: Atwater.","flag":0,"status":"Not Started","done":false},{"id":"b8-11","name":"Survey Signage (Qty 4)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Pivoted to digital.","flag":0,"status":"In Progress","done":false},{"id":"b8-12","name":"Arrows (Qty 25)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"5.5\" L x 3.6\" H","notes":"Color to complement signage. Vendor: Atwater.","flag":0,"status":"Not Started","done":false}]},{"key":"b9","part":"B","title":"Coronado Reception","items":[{"id":"b9-1","name":"Bar Wrap Branding – Vinyl Cling","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"15.5\" H x 107\" L","notes":"Half-moon bar branding.","flag":0,"status":"Not Started","done":false},{"id":"b9-2","name":"Bar Menu (Cardstock)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"5\" x 7\"","notes":"Menu content pending from Rana.","flag":0,"status":"Not Started","done":false},{"id":"b9-3","name":"Food Tent Cards (Cardstock)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"Dims TBD","notes":"Menu content pending from Rana.","flag":0,"status":"Not Started","done":false},{"id":"b9-4","name":"Directional Signage","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"Dims TBD","notes":"Needs pending from Rana.","flag":0,"status":"Not Started","done":false},{"id":"b9-5","name":"Character Backdrop","owner":"Andy / Jules","fp":"TBD","fd":"TBD","specs":"Dims TBD","notes":"TBC with DEG.","flag":0,"status":"Not Started","done":false}]},{"key":"b10","part":"B","title":"Hotel Signage","items":[{"id":"b10-1","name":"Shuttle Signage at Hotels (A-Frame, Qty 8)","owner":"Andy / Jules","fp":"9/25","fd":"10/13","specs":"24\" x 36\"","notes":"Shuttle drop-off/pick-up + arrow. Vendor: Atwater.","flag":0,"status":"Not Started","done":false}]}],"meta":{"sourceUpdated":"August 26, 2026","lastEdited":"2026-09-10T23:12:11.740Z"}}</script>
+<script>(async function appLogic(){
+  const ROW_KEYS = ['id','name','owner','fp','fd','specs','notes','flag','status','done','artists'];
+  const STATUS_VALUES = ['Not Started','In Progress','Complete'];
+  function partLabel(part){ return part==='A' ? 'Creative' : 'Events'; }
+  function mk(rows){ return rows.map(r => { const o={}; ROW_KEYS.forEach((k,i)=>o[k]=r[i]); return o; }); }
+  
+  const SECTIONS = [
+    {key:'a1', part:'A', title:'1:1 Meeting Space: Entry', items: mk([
+      ["a1-1","Overall Signage \u2013 Future of Fandom Tagline Story","George McClements","9/23","9/29","47\" L x 84\" H w/ 48\" M Stand","Cleared tagline: \u201cThe Future of Fandom: Where Storytelling, Culture and Commerce Meet.\u201d Lives at entrance to 1:1 meeting space; same size as last year\u2019s Artist Bio sign. Pivoted to digital per the Events Grid; consolidated from that duplicate line.",0,"In Progress",false]
+    ])},
+    {key:'a2', part:'A', title:'1:1 Meeting Space: Room-Sized Inflatable Characters', items: mk([
+      ["a2-1","Standing Inflatables (3D models)","John Quinn, Mark McIntyre (3D Team)","8/26","9/4","(2) 12'H Mickey & Stitch w/12\" risers \u00b7 (2) 14'H Elsa & Spider-Man \u00b7 (1) 16'H Darth Vader","Build models to scale; call out fur on Stitch; risers built as separate creative wrap, 12\" high/round. Vendor: Mears. Needs clean static-mesh 3D models (.OBJ/.FBX), final pose, hi-res texture/UV maps, Pantone callouts.",0,"In Progress",false]
+    ])},
+    {key:'a3', part:'A', title:'Live Artist Mural', location:'1:1 Meeting Room', items: mk([
+      ["a3-1","Purchase Materials + Ship to Jules (FL)","Jeff Shelly","TBD","9/18","N/A","Jeff to purchase materials and send tracking info; confirm Jules receives everything in FL. Purchases must be reconciled to FY26.",0,"In Progress",false],
+      ["a3-2","POV Approval","Stef Kardos / Marcus","N/A","9/4","N/A","Stef provided POV; Marcus approved.",0,"Complete",true],
+      ["a3-3","Artists Book Flights + Reconcile to FY26","Artists (see roster)","TBD","Mid-Sept 2026","N/A","All artists must book flights and reconcile expenses to FY26 by mid-September.",0,"In Progress",false],
+      ["a3-4","Overview Signage (Standing Frame, Qty 1)","George McClements","10/6","10/13","24\" x 36\"","Discussed in meeting on 8/26. Overview copy due 9/29. Consolidated with the Events Grid's “Artist Sketch Wall – Overview” line; dates updated to match its production lead time.",0,"In Progress",false],
+      ["a3-5","Artist Bio Submitted","Stef Kardos","9/4","9/4","N/A","One bio received; send to George & team to finalize.",0,"In Progress",false,["Matt Dewater (Orlando)","Rosana Iaruuso (Orlando)","Kenneth Tryal (Orlando)","Jeff Shelly (Glendale)","Hannah Meyer (Glendale)","Ian Truong (Glendale)"]],
+      ["a3-6","Artist Bio Signage Finalized","George McClements","9/23","9/23","24\" x 36\", 1/2\" bleed","Same artists as above.",0,"In Progress",false],
+      ["a3-7","Artist Bio Signage (Standing Frame, Qty 1)","Andy","10/6","10/13","24\" x 36\"","Bios forthcoming by 9/29 + headshots. Consolidated with the Events Grid's “Artist Sketch Wall – Bios” line; dates updated to match its production lead time.",0,"In Progress",false],
+      ["a3-8","Develop On-Site Artist Shift Schedule","Stef Kardos / Meg Youngblood","TBD","11/5","N/A","Shifts for Matt Dewater, Rosana Iaruuso, Kenneth Tryal (Orlando); Jeff Shelly, Hannah Meyer, Ian Truong (Glendale).",0,"Not Started",false]
+    ])},
+    {key:'a4', part:'A', title:'Sticker Shop', location:'1:1 Meeting Room', items: mk([
+      ["a4-1","Sticker Dispenser \u2013 Machine Wrap","Andy / Flo","9/21","10/6","36\" H x 28\" W x 18\" D","Mad Fab to provide schematic 3D model to insert creative files. Mad Fab shop drawings due within 2 weeks of contract execution.",0,"In Progress",false],
+      ["a4-2","Sticker Back Walls","Andy","9/21","10/6","(2) 9.8' x 9.8' w/ light-up elements","Aligned to Mad Fab\u2019s SEG fabric spec (previously listed here as 10' x 10'; now matches the Events Grid).",0,"In Progress",false],
+      ["a4-3","Sticker Flooring","Andy","9/21","10/6","10' x 10' event high-gloss floor","Vinyl stickers can be added to flooring at added cost.",0,"In Progress",false],
+      ["a4-4","Sticker Kiosk","Andy & Dana","9/21","10/6","3' x 2' x 10' (Events Grid lists 8'H x 5'W x 2.5'D)","Mad Fab to provide schematic 3D model. Consolidated from a duplicate Events Grid line; the two dimension sets don't match. Confirm the correct kiosk size with Andy / Mad Fab.",0,"Not Started",false],
+      ["a4-5","Sticker Designs Due (5)","5 FL Designers","9/22","9/28","~3\" (round or square, TBD)","V1 artwork due 9/28 and routes to Legal/BA the same day. V2 revision due 10/12; final print files due 10/19 (see Legal / BA Clearance).",0,"In Progress",false,["Darth Vader \u2013 Ashley Woodrum","Elsa \u2013 Stacey Aoyama","Mickey \u2013 Krista Staggs","Stitch \u2013 Caley Hicks","Spider-Man \u2013 Tyler Keshner"]],
+      ["a4-6","Overview Signage","George McClements","9/23","9/29","24\" x 36\", 1/2\" bleed","Signage telling the story of the activation.",0,"In Progress",false],
+      ["a4-7","Wall Call-Outs","George McClements","9/23","9/29","N/A","Call-outs related to overall storytelling.",0,"In Progress",false]
+    ])},
+    {key:'a5', part:'A', title:'Collector Card Studio', location:'1:1 Meeting Room', items: mk([
+      ["a5-1","Card Collector Kiosk \u2013 Machine Wrap","Andy / Flo","9/16","9/30","78\" H x 30\" W x 24\" D","Photo-moment vendor coordination; machine dimensions received.",0,"In Progress",false],
+      ["a5-2","Card Machine Back Walls","Andy","9/21","10/6","(2) 10' x 10' w/ light-up elements","",0,"In Progress",false],
+      ["a5-3","Card Machine Floor","Andy","9/21","10/6","10' x 10' event high-gloss floor","Vinyl stickers can be added at added cost.",0,"In Progress",false],
+      ["a5-4","Cards (5 designs)","Andy / Flo","9/16","9/30","2.5\" x 3\"","One card per character.",0,"In Progress",false],
+      ["a5-5","Overview Signage (Standing Frame, Qty 1)","George McClements","10/6","10/13","24\" x 36\"","Overview copy due 9/21. Consolidated with the Events Grid's “Card Collector Kiosk – Overview Sign” line; dates updated to match its production lead time.",0,"In Progress",false]
+    ])},
+    {key:'a6', part:'A', title:'Lithograph Gallery', location:'Rotunda', items: mk([
+      ["a6-1","Lithograph Art (5 designs)","5 FL Designers","9/22","9/28","24\" x 36\"","Same 5 artists as Stickers. Designer roster finalized 9/4. V1 artwork due 9/28 and routes to Legal/BA the same day; V2 revision due 10/12; final print files due 10/19.",0,"Not Started",false,["Darth Vader – Ashley Woodrum","Elsa – Stacey Aoyama","Mickey – Krista Staggs","Stitch – Caley Hicks","Spider-Man – Tyler Keshner"]],
+      ["a6-2","Artist Signing Area","Andy","9/21","10/6","4' x 9' (6 walls, per Events Grid)","5 colored plexiglass panels between walls. Aligned to the Events Grid's build spec (previously listed here as 5 walls / 4 panels).",0,"In Progress",false],
+      ["a6-3","Artist Headshots & Bios Submitted","Alexia","9/11","9/18","N/A","(5) headshots needed.",0,"Not Started",false],
+      ["a6-4","Artist Bio Finalized","George McClements","9/23","9/29","47\" L x 84\" H w/ 48\" M Stand","5 artist bios needed; frame format/specs TBD.",0,"In Progress",false],
+      ["a6-5","Artist Bio Signage","Andy","10/6","10/13","47\" L x 84\" H w/ 48\" M Stand","Standing frame, like last year\u2019s Artist Bio sign; pivoted to digital per the Events Grid. Bios/overview by 9/29 + headshots. Consolidated from a duplicate Events Grid line; dates updated to match its production lead time.",0,"In Progress",false],
+      ["a6-6","Overview Signage (On Wall)","George McClements","10/6","10/13","On wall \u2013 4'L x 5'H","Add on wall as first poster; pivoted to digital per the Events Grid. Overview copy by 9/21. Consolidated from a duplicate Events Grid line; dates updated to match its production lead time.",0,"In Progress",false],
+      ["a6-7","Lithograph Gifting Tickets","Andy","TBD","9/29","~2\" x 3\"","One ticket per guest for lithograph pickup.",0,"In Progress",false],
+      ["a6-8","Custom Table Wrap","Andy","9/16","9/30","Custom 10' x 2.5' table","Custom fabric design needed. Mad Fab dye-sublimated stretch fabric cover, fitted to table.",0,"In Progress",false],
+      ["a6-9","Identify 5 Local FL Designers","Jacci Hendershott","N/A","9/4","N/A","Stef proposed 3 designers + 2 character artists; roster shared across Stickers & Lithograph.",0,"In Progress",false],
+      ["a6-10","POV Approval (Character Art)","Stef Kardos / Marcus","N/A","9/12","N/A","Blocks artists from finalizing both Sticker and Lithograph designs. Target sign-off set for 9/12 to protect the 3-week artist minimum.",0,"Not Started",false],
+      ["a6-11","Legal / BA Clearance for Sticker & Lithograph Artwork","Donna Brodsky","9/28","10/19","N/A","Combined review covering both Sticker and Lithograph artwork, since both use the same 5 character designs. Review begins on V1 artwork (routed 9/28) and must clear by the 10/19 final print files deadline, accounting for the V2 revision on 10/12. Donna supported this process last year.",0,"Not Started",false],
+      ["a6-14","Creative Ops Routes V1 Artwork to Legal/BA","Donna Brodsky","9/28","9/28","N/A","Hand-off of V1 Sticker & Lithograph artwork to Legal/BA for clearance review.",0,"Not Started",false],
+      ["a6-15","V2 Artwork Due (Sticker & Lithograph)","5 FL Designers","10/3","10/12","N/A","Revised artwork incorporating Legal/BA and creative feedback on V1.",0,"Not Started",false,["Darth Vader – Ashley Woodrum","Elsa – Stacey Aoyama","Mickey – Krista Staggs","Stitch – Caley Hicks","Spider-Man – Tyler Keshner"]],
+      ["a6-12","Final Print Files Due for Vendor Production","Alexia / Jules","10/19","10/19","N/A","Final print-ready files for Sticker & Lithograph artwork, sequenced to follow Legal / BA Clearance.",0,"Not Started",false],
+      ["a6-13","Develop On-Site Artist Signing Schedule","Stef Kardos / Meg Youngblood","TBD","11/5","N/A","Shifts for artists signing posters on-site.",0,"Not Started",false]
+    ])},
+    {key:'a7', part:'A', title:'Theater: Projection Icon Elements', items: mk([
+      ["a7-1","Obtain Projection Specs/Deadline from Event Tech","Jules / Chris (AV Tech)","10/21","11/4","TBD","Workstream cannot start until Event Tech provides specs and deadline.",0,"In Progress",false],
+      ["a7-2","Develop Projection Icon Elements","Andy (partnership)","10/21","11/4","Specs/file types forthcoming","For the back-wall screen behind the stage; cannot begin until specs received. Tracked as “Animated Projection Files” on the Events Grid; consolidated from that duplicate line.",0,"In Progress",false],
+    ])},
+    {key:'a8', part:'A', title:'Presentation', items: mk([
+      ["a8-1","Andy to Make Suggestion Regarding Deck Template for Marcus\u2019 Review","Andy / Jacci","9/14","9/14","N/A","",0,"Not Started",false],
+      ["a8-2","Pre-Show Loop \u2013 Lithograph Sign","Andy","9/21","TBD","1920 x 1080","Last year\u2019s copy: \u201cBCU Exclusive: stop by the West Rotunda to collect a Lithograph with bespoke designs by Disney artists!\u201d",0,"In Progress",false],
+      ["a8-3","Presentation: Mickey & Friends \u2013 Stage","Andy","N/A","10/30","1920 x 1080","Stage version.",0,"Not Started",false],
+      ["a8-4","Presentation: Mickey & Friends \u2013 Deep Dive","Andy","N/A","11/13","1920 x 1080","Deep Dive version.",0,"Not Started",false],
+      ["a8-5","Presentation: Disney Classics \u2013 Stage","Andy","N/A","10/30","1920 x 1080","Stage version.",0,"Not Started",false],
+      ["a8-6","Presentation: Disney Classics \u2013 Deep Dive","Andy","N/A","11/13","1920 x 1080","Deep Dive version.",0,"Not Started",false],
+      ["a8-7","Presentation: Disney Princess \u2013 Stage","Andy","N/A","10/30","1920 x 1080","Stage version.",0,"Not Started",false],
+      ["a8-8","Presentation: Disney Princess \u2013 Deep Dive","Andy","N/A","11/13","1920 x 1080","Deep Dive version.",0,"Not Started",false],
+      ["a8-9","Presentation: Lucasfilm \u2013 Stage","Andy","N/A","10/30","1920 x 1080","Stage version.",0,"Not Started",false],
+      ["a8-10","Presentation: Lucasfilm \u2013 Deep Dive","Andy","N/A","11/13","1920 x 1080","Deep Dive version.",0,"Not Started",false],
+      ["a8-11","Presentation: Disney Branded Television \u2013 Stage","Andy","N/A","10/30","1920 x 1080","Stage version.",0,"Not Started",false],
+      ["a8-12","Presentation: Disney Branded Television \u2013 Deep Dive","Andy","N/A","11/13","1920 x 1080","Deep Dive version.",0,"Not Started",false],
+      ["a8-13","Presentation: Marvel \u2013 Stage","Andy","N/A","10/30","1920 x 1080","Stage version.",0,"Not Started",false],
+      ["a8-14","Presentation: Marvel \u2013 Deep Dive","Andy","N/A","11/13","1920 x 1080","Deep Dive version.",0,"Not Started",false],
+      ["a8-15","Presentation: Pixar \u2013 Stage","Andy","N/A","10/30","1920 x 1080","Stage version.",0,"Not Started",false],
+      ["a8-16","Presentation: Pixar \u2013 Deep Dive","Andy","N/A","11/13","1920 x 1080","Deep Dive version.",0,"Not Started",false],
+      ["a8-17","Presentation: WDAS + Frozen \u2013 Stage","Andy","N/A","10/30","1920 x 1080","Stage version.",0,"Not Started",false],
+      ["a8-18","Presentation: WDAS + Frozen \u2013 Deep Dive","Andy","N/A","11/13","1920 x 1080","Deep Dive version.",0,"Not Started",false]
+    ])},
+    {key:'b1', part:'B', title:'Digital & Email Creative', items: mk([
+      ["b1-1","Invitation (Digital)","Andy / Jules","8/6","8/14","Sized to 700px wide email body","Refer to Comms Doc. Include RSVP + Travel buttons; mirror BCU 2025 structure.",0,"Complete",true],      ["b1-2","Invitation \u2013 Digital Button","Andy","N/A","N/A","Sized to 700px wide email body","Copy from Stephen; embed into email format.",0,"Complete",true],
+      ["b1-3","Reminder Email","Andy / Jules","N/A","N/A","Sized to 700px wide email body","Refer to Comms Doc. Include Microsite button + full schedule.",0,"Complete",true],      ["b1-4","Microsite \u2013 Digital Button (View Event Map)","Andy / Jules","9/14","9/21","Sized to 700px wide email body","",0,"In Progress",false],      ["b1-5","Microsite (Digital)","Andy / Jules","9/14","9/21","Sized to 700px wide email body","Refer to Comms Doc; mirror BCU 2025 tabs & info.",0,"In Progress",false],      ["b1-6","KBYG Email (Digital)","Andy / Jules","10/21","11/2","Sized to 700px wide email body","Refer to Comms Doc.",0,"Not Started",false],      ["b1-7","KBYG Email \u2013 Digital Button","Andy / Jules","10/21","11/2","Sized to 700px wide email body","View Event Details / Microsite.",0,"Not Started",false],      ["b1-8","Event Site Map","Andy / Jules","10/21","11/2","Sized to 700px wide email body","Overall event site map for microsite.",0,"Not Started",false],      ["b1-9","Shuttle Map (Digital)","Andy / Jules","10/21","11/2","Sized to 700px wide email body","Rachel Lin working on shuttles (FYI).",0,"Not Started",false],      ["b1-10","Survey Email \u2013 Digital Button","Andy / Jules","10/29","11/17","Sized to 700px wide email body","Complete Survey CTA.",0,"Not Started",false],      ["b1-11","Survey Email (Digital)","Andy / Jules","10/29","11/17","Sized to 700px wide email body","Refer to Comms Doc.",0,"Not Started",false],      ["b1-12","Digital Parking Signage","Andy / Jules","TBD","11/2","Dims TBC","Outside parking.",0,"Not Started",false],      ["b1-13","Stylized Event Schedule (Digital Screens)","Andy / Jules","TBD","10/29","Specs TBC","For digital screens in Foyer/Lobby; Events to provide copy.",0,"Not Started",false],      ["b1-15","Pre-Show Loop (Digital)","Andy / Jules","TBD","10/29","1920 x 1080","Similar to Licensing Expo pre-show loop.",0,"In Progress",false],      ["b1-16","Pre-Show Loop \u2013 SIP Slide","Andy / Jules","TBD","10/29","1920 x 1080","Heather to provide slide; redesign to match overall theme/key art.",0,"Not Started",false],      ["b1-17","Pre-Show Loop \u2013 Lithograph Slide","Andy / Jules","TBD","10/29","1920 x 1080","\u201cBCU Exclusive: stop by the West Rotunda to collect a Lithograph\u2026\u201d",0,"Not Started",false],      ["b1-18","Screen Slide (Lunch)","Andy / Jules","TBD","10/29","1920 x 1080","Lunch location & timing copy.",0,"Not Started",false]    ])},
+    {key:'b2', part:'B', title:'Digital Kiosks (all due 11/11)', items: mk([
+      ["b2-1","Check-In Digital Kiosk","Andy / Jules","TBD","11/11","Qty 1","Rotate: scan-for-details QR + sustainability QR (reuse last year\u2019s copy/QR).",0,"Not Started",false],      ["b2-2","Help Desk / Luggage Check Digital Kiosk","Andy / Jules","TBD","11/11","Qty 1","Rotate Help Desk with Luggage Check (2nd day only).",0,"Not Started",false],      ["b2-3","Lunch & Breakouts Digital Kiosk","Andy / Jules","TBD","11/11","Qty 1","Rotates lunch, event schedule/floor plan, breakout schedule.",0,"Not Started",false],      ["b2-4","Directional Lunch & Breakouts Digital Kiosk","Andy / Jules","TBD","11/11","Qty 1","Same rotation, directional placement.",0,"Not Started",false],      ["b2-5","Directional \u2013 Theatre Entrance Digital Kiosk","Andy / Jules","TBD","11/11","Qty 1","Theatre entrance, device check, private rooms directional; rotates w/ Artist Bios & Lithograph info.",0,"Not Started",false],      ["b2-6","Theatre Digital Kiosk","Andy / Jules","TBD","11/11","Qty 1","Device check + queue entrance + device-storage notice, rotating.",0,"Not Started",false],      ["b2-7","Event 1:1 Space Digital Kiosk","Andy / Jules","TBD","11/11","Qty 2","Rotates stylized floor plan, creative overview, survey CTA.",0,"Not Started",false]    ])},
+    {key:'b3', part:'B', title:'Entrance Area & Outside Venue', items: mk([
+      ["b3-1","Porte-Cochere Entrance \u2013 Vinyl Cling","Andy / Jules","9/23","10/19","Dims TBC","DCP logo & tagline + Key Art characters. Vendor: EdgeFactory. Noted: \u201cwill cut this if we can\u2019t afford.\u201d",0,"Not Started",false],      ["b3-2","Rideshare A-Frame (Qty 2)","Andy / Jules","9/25","10/13","24\" x 36\"","Vendor: Atwater.",0,"Not Started",false],      ["b3-3","Directional \u2013 Rideshare A-Frame (Qty 2)","Andy / Jules","9/25","10/13","24\" x 36\"","Leave space for arrow. Vendor: Atwater.",0,"Not Started",false],      ["b3-4","Shuttle A-Frame (Qty 2)","Andy / Jules","9/25","10/13","24\" x 36\"","Vendor: Atwater.",0,"Not Started",false],      ["b3-5","Directional \u2013 Shuttle A-Frame (Qty 2)","Andy / Jules","9/25","10/13","24\" x 36\"","Leave space for arrow. Vendor: Atwater.",0,"Not Started",false],      ["b3-6","Shuttle Dash Passes (Qty 5)","Andy / Jules","9/25","10/13","11\" x 13\" cardstock","Mears likely produces; Heather to provide DCP logo.",0,"Not Started",false],      ["b3-7","Directional \u2013 Event Parking A-Frame (Qty 6)","Andy / Jules","10/2","10/14","24\" x 36\"","Vendor: Atwater.",0,"Not Started",false]    ])},
+    {key:'b4', part:'B', title:'Activation Branding: Production Elements', items: mk([
+      ["b4-2","Riser Wrap \u2013 Mickey","Andy / Jules","TBD","TBD","12\" round riser","Consolidated with the Creative Tracker's \u201cCreative Platform Wrap\u201d line.",0,"Not Started",false],      ["b4-3","Riser Wrap \u2013 Stitch","Andy / Jules","TBD","TBD","12\" round riser","Consolidated with the Creative Tracker's \u201cCreative Platform Wrap\u201d line.",0,"Not Started",false],      ["b4-4","Riser Wrap \u2013 Spider-Man","Andy / Jules","TBD","TBD","12\" round riser","Pose TBC. No Creative Tracker counterpart.",0,"Not Started",false],      ["b4-11","Sticker Machine \u2013 Overview (Standing Frame, Qty 1)","Andy / Jules","10/6","10/13","24\" x 36\"","Bios/overview by 9/21 + headshots (same artists as Lithograph).",0,"Not Started",false],      ["b4-14","PVC Cards \u2013 Photo IDs","Andy / Jules","9/16","9/30","3 1/4\" x 2\"","1 design (front/back) or 3 designs; template forthcoming.",0,"Not Started",false],      ["b4-15","Digital Screen Content \u2013 Photo Booth","Andy / Jules","9/16","9/30","N/A","Guest browses ID card design options.",0,"Not Started",false],      ["b4-16","Photo ID Card Kiosk \u2013 Machine Wrap","Andy / Jules","9/16","9/30","38\" L x 30\" W x 111\" H","Template forthcoming.",0,"Not Started",false],      ["b4-17","Marquee Sign \u2013 Photo Booth","Andy / Jules","9/16","9/30","N/A","Black sign, white lettering, LED backlit; call out font/logo needs.",0,"Not Started",false],      ["b4-18","Marquee / Light Wall","Andy / Jules","9/21","10/6","(2) 9.8' x 9.8'","Same Mad Fab SEG fabric spec as Sticker Back Walls.",0,"Not Started",false]    ])},
+    {key:'b5', part:'B', title:'Lobby & Check-In Desk', items: mk([
+      ["b5-1","Credentials (5 designs, Qty 1,150 total)","Andy / Jules","9/21","10/9","3.5\" x 4.75\", slot punch .5\" x .125\"","Staff/Presenter/Disney/Meetings Only/Attendee + QR to microsite. Same shape as Expo. Vendor: Atwater.",0,"Not Started",false],      ["b5-2","Parks Ticket Info Sheet (Qty 900)","Andy / Jules","10/7","10/29","8.5\" x 11\"","Double-sided print. Vendor: Taylor Print.",0,"Not Started",false],      ["b5-3","Envelope \u2013 Parks Tickets / Parking Pass Info (Qty 900)","Andy / Jules","10/7","10/29","4.125\" x 9.5\"","Vendor: Taylor Print.",0,"Not Started",false],      ["b5-4","Parking Pass (Qty 900)","Andy / Jules","10/7","10/29","Dims TBC","Copy corrected to remove the 2025 reference; now reads \u201cWednesday, November 18\u201d pending final confirmation of the 2026 event date with Events.",0,"Not Started",false],      ["b5-5","Check-In Table Tent Cards (Qty 15)","Andy / Jules","9/25","10/13","4.5\" x 15.5\"","QR to microsite. Vendor: Atwater.",0,"Not Started",false],      ["b5-6","Sustainability Table Tent Cards (Qty 4)","Andy / Jules","9/25","10/13","4.5\" x 15.5\"","Reuse last year\u2019s copy/QR.",0,"Not Started",false],      ["b5-7","Check-In Signage (Standing Frame, Qty 4)","Andy / Jules","9/25","10/13","24\" x 36\"","Pivoted to digital.",0,"In Progress",false],      ["b5-8","Help Desk Signage (Standing Frame, Qty 1)","Andy / Jules","9/25","10/13","24\" x 36\"","Pivoted to digital.",0,"In Progress",false],      ["b5-9","Luggage Check (Standing Frame, Qty 1)","Andy / Jules","9/25","10/13","24\" x 36\"","Pivoted to digital.",0,"In Progress",false],      ["b5-10","Lunch Signage (Standing Frame, Qty 2)","Andy / Jules","9/25","10/13","24\" x 36\"","Pivoted to digital.",0,"In Progress",false]    ])},
+    {key:'b6', part:'B', title:'Theater, Stage & Meeting Space', items: mk([
+      ["b6-1","Podium Branding \u2013 Vinyl Cling (Qty 2)","Andy / Jules","9/23","10/19","47.5\" H x 23.625\" W top, 19.125\" W bottom","DCP logo. Vendor TBC.",0,"Not Started",false],      ["b6-2","Directional Signage \u2013 Stylized Floor Plan (Qty 2)","Andy / Jules","9/25","10/13","24\" x 36\", double-sided","Refer to CAD; place in 1:1 meeting area. Vendor: Atwater.",0,"Not Started",false],      ["b6-3","Public Notice of Filming (Qty 2)","Andy / Jules","9/25","10/13","24\" x 36\"","Standard verbiage; check-in, theater entrance, main room entrance. Vendor: Atwater.",0,"Not Started",false],      ["b6-4","Theater \u2013 Device Check Signage (Qty 1)","Andy / Jules","9/25","10/13","24\" x 36\"","Pivoted to digital.",0,"In Progress",false],      ["b6-5","Theater \u2013 Queue Entrance Signage (Qty 1)","Andy / Jules","9/25","10/13","24\" x 36\"","Pivoted to digital.",0,"In Progress",false],      ["b6-6","Theater \u2013 Entrance Signage (Qty 1)","Andy / Jules","9/25","10/13","24\" x 36\"","Pivoted to digital.",0,"In Progress",false],      ["b6-7","Theater / Device Check Signage (Qty 4)","Andy / Jules","9/25","10/13","24\" x 36\"","No-recording / device-storage notice. Vendor: Atwater.",0,"Not Started",false],      ["b6-8","Reserved Tent Cards (Qty 20)","Andy / Jules","9/25","10/13","9\" L x 6\" H","Front-row theater seating. Vendor: Atwater.",0,"Not Started",false]    ])},
+    {key:'b7', part:'B', title:'Private Meeting Rooms', items: mk([
+      ["b7-1","Private Meeting Room Signage + Arrow (Qty 4)","Andy / Jules","9/25","10/13","24\" x 36\", double-sided","Lobby areas. Vendor: Atwater.",0,"Not Started",false],      ["b7-2","Private Meeting Room 1 (Qty 1)","Andy / Jules","9/25","10/13","24\" x 36\"","Pastoral 1. PDF, .25\" bleed, outlined fonts. Vendor: Atwater.",0,"Not Started",false],      ["b7-3","Private Meeting Room 2 (Qty 1)","Andy / Jules","9/25","10/13","24\" x 36\"","Pastoral 2. Vendor: Atwater.",0,"Not Started",false],      ["b7-4","Private Meeting Room 3 (Qty 1)","Andy / Jules","9/25","10/13","24\" x 36\"","Pastoral 3. Vendor: Atwater.",0,"Not Started",false],      ["b7-5","Tech Support / Wi-Fi Table Tent Cards (Qty 16)","Andy / Jules","9/25","10/13","4.5\" x 15.5\"","Inside the 3 private meeting rooms. Vendor: Atwater.",0,"Not Started",false]    ])},
+    {key:'b8', part:'B', title:'Arena & Green Room Signage', items: mk([
+      ["b8-1","Private Signage (Qty 3)","Andy / Jules","9/25","10/13","24\" x 36\"","Vendor: Atwater.",0,"Not Started",false],      ["b8-2","No Entry / Directional Signage (Qty 2)","Andy / Jules","9/25","10/13","24\" x 36\"","Vendor: Atwater.",0,"Not Started",false],      ["b8-3","Wellness Room Signage (Qty 2)","Andy / Jules","9/25","10/13","8.5\" x 5.5\" cardstock","Location TBC. Vendor: Atwater.",0,"Not Started",false],      ["b8-4","Talent Green Room (Qty 2)","Andy / Jules","9/25","10/13","8.5\" x 5.5\" cardstock","Location TBC. Vendor: Atwater.",0,"Not Started",false],      ["b8-5","Character Green Room (Qty 2)","Andy / Jules","9/25","10/13","8.5\" x 5.5\" cardstock","Location TBC. Vendor: Atwater.",0,"Not Started",false],      ["b8-6","DCP Green Room (Qty 2)","Andy / Jules","9/25","10/13","8.5\" x 5.5\" cardstock","Location TBC. Vendor: Atwater.",0,"Not Started",false],      ["b8-7","Private Signage \u2013 Cardstock (Qty 10)","Andy / Jules","9/25","10/13","8.5\" x 5.5\"","Vendor: Atwater.",0,"Not Started",false],      ["b8-8","1:1 Meeting Table Numbers (Qty 65)","Andy / Jules","9/25","10/13","4.5\" x 15.5\"","Table numbers 1\u201365 + Wi-Fi info. Vendor: Atwater.",0,"Not Started",false],      ["b8-9","Wi-Fi Table Tent Cards (Qty 16)","Andy / Jules","9/25","10/13","4.5\" x 15.5\"","1:1 meeting room + communal tables. Vendor: Atwater.",0,"Not Started",false],      ["b8-10","Open Table Tent Cards (Qty 10)","Andy / Jules","9/25","10/13","4.5\" x 15.5\"","\u201cOpen Table \u2013 First Come, First Served.\u201d Vendor: Atwater.",0,"Not Started",false],      ["b8-11","Survey Signage (Qty 4)","Andy / Jules","9/25","10/13","24\" x 36\"","Pivoted to digital.",0,"In Progress",false],      ["b8-12","Arrows (Qty 25)","Andy / Jules","9/25","10/13","5.5\" L x 3.6\" H","Color to complement signage. Vendor: Atwater.",0,"Not Started",false]    ])},
+    {key:'b9', part:'B', title:'Coronado Reception', items: mk([
+      ["b9-1","Bar Wrap Branding \u2013 Vinyl Cling","Andy / Jules","9/25","10/13","15.5\" H x 107\" L","Half-moon bar branding.",0,"Not Started",false],      ["b9-2","Bar Menu (Cardstock)","Andy / Jules","9/25","10/13","5\" x 7\"","Menu content pending from Rana.",0,"Not Started",false],      ["b9-3","Food Tent Cards (Cardstock)","Andy / Jules","9/25","10/13","Dims TBD","Menu content pending from Rana.",0,"Not Started",false],      ["b9-4","Directional Signage","Andy / Jules","9/25","10/13","Dims TBD","Needs pending from Rana.",0,"Not Started",false],      ["b9-5","Character Backdrop","Andy / Jules","TBD","TBD","Dims TBD","TBC with DEG.",0,"Not Started",false]    ])},
+    {key:'b10', part:'B', title:'Hotel Signage', items: mk([
+      ["b10-1","Shuttle Signage at Hotels (A-Frame, Qty 8)","Andy / Jules","9/25","10/13","24\" x 36\"","Shuttle drop-off/pick-up + arrow. Vendor: Atwater.",0,"Not Started",false]    ])}
+  ];
+
+  const WORKFLOW_ORDER = [
+    'Character Inflatables & Entry Signage',
+    'Presentation',
+    'Lithograph Gallery',
+    'Sticker Shop',
+    'Collector Card Studio',
+    'Live Artist Mural',
+    '1:1 Meeting Room Setup',
+    'Theater, Stage & Projection',
+    'Digital & Email Creative',
+    'Digital Kiosks',
+    'Entrance, Parking & Outside Venue',
+    'Lobby & Check-In Desk',
+    'Private Meeting Rooms',
+    'Arena & Green Room Signage',
+    'Coronado Reception',
+    'Hotel Signage',
+  ];
+  const WORKFLOW_MAP = {
+    'a1-1':'Character Inflatables & Entry Signage',
+    'a2-1':'Character Inflatables & Entry Signage',
+    'a3-1':'Live Artist Mural',
+    'a3-2':'Live Artist Mural',
+    'a3-3':'Live Artist Mural',
+    'a3-4':'Live Artist Mural',
+    'a3-5':'Live Artist Mural',
+    'a3-6':'Live Artist Mural',
+    'a3-7':'Live Artist Mural',
+    'a3-8':'Live Artist Mural',
+    'a4-1':'Sticker Shop',
+    'a4-2':'Sticker Shop',
+    'a4-3':'Sticker Shop',
+    'a4-4':'Sticker Shop',
+    'a4-5':'Sticker Shop',
+    'a4-6':'Sticker Shop',
+    'a4-7':'Sticker Shop',
+    'a5-1':'Collector Card Studio',
+    'a5-2':'Collector Card Studio',
+    'a5-3':'Collector Card Studio',
+    'a5-4':'Collector Card Studio',
+    'a5-5':'Collector Card Studio',
+    'a6-1':'Lithograph Gallery',
+    'a6-2':'Lithograph Gallery',
+    'a6-3':'Lithograph Gallery',
+    'a6-4':'Lithograph Gallery',
+    'a6-5':'Lithograph Gallery',
+    'a6-6':'Lithograph Gallery',
+    'a6-7':'Lithograph Gallery',
+    'a6-8':'Lithograph Gallery',
+    'a6-9':'Lithograph Gallery',
+    'a6-10':'Lithograph Gallery',
+    'a6-11':['Lithograph Gallery','Sticker Shop'],
+    'a6-12':['Lithograph Gallery','Sticker Shop'],
+    'a6-13':'Lithograph Gallery',
+    'a6-14':['Lithograph Gallery','Sticker Shop'],
+    'a6-15':['Lithograph Gallery','Sticker Shop'],
+    'a7-1':'Theater, Stage & Projection',
+    'a7-2':'Theater, Stage & Projection',
+    'a8-1':'Presentation',
+    'a8-2':'Presentation',
+    'a8-3':'Presentation',
+    'a8-4':'Presentation',
+    'a8-5':'Presentation',
+    'a8-6':'Presentation',
+    'a8-7':'Presentation',
+    'a8-8':'Presentation',
+    'a8-9':'Presentation',
+    'a8-10':'Presentation',
+    'a8-11':'Presentation',
+    'a8-12':'Presentation',
+    'a8-13':'Presentation',
+    'a8-14':'Presentation',
+    'a8-15':'Presentation',
+    'a8-16':'Presentation',
+    'a8-17':'Presentation',
+    'a8-18':'Presentation',
+    'b1-1':'Digital & Email Creative',
+    'b1-2':'Digital & Email Creative',
+    'b1-3':'Digital & Email Creative',
+    'b1-4':'Digital & Email Creative',
+    'b1-5':'Digital & Email Creative',
+    'b1-6':'Digital & Email Creative',
+    'b1-7':'Digital & Email Creative',
+    'b1-8':'Digital & Email Creative',
+    'b1-9':'Digital & Email Creative',
+    'b1-10':'Digital & Email Creative',
+    'b1-11':'Digital & Email Creative',
+    'b1-12':'Digital & Email Creative',
+    'b1-13':'Digital & Email Creative',
+    'b1-15':'Digital & Email Creative',
+    'b1-16':'Digital & Email Creative',
+    'b1-17':'Lithograph Gallery',
+    'b1-18':'Digital & Email Creative',
+    'b2-1':'Digital Kiosks',
+    'b2-2':'Digital Kiosks',
+    'b2-3':'Digital Kiosks',
+    'b2-4':'Digital Kiosks',
+    'b2-5':'Digital Kiosks',
+    'b2-6':'Digital Kiosks',
+    'b2-7':'Digital Kiosks',
+    'b3-1':'Entrance, Parking & Outside Venue',
+    'b3-2':'Entrance, Parking & Outside Venue',
+    'b3-3':'Entrance, Parking & Outside Venue',
+    'b3-4':'Entrance, Parking & Outside Venue',
+    'b3-5':'Entrance, Parking & Outside Venue',
+    'b3-6':'Entrance, Parking & Outside Venue',
+    'b3-7':'Entrance, Parking & Outside Venue',
+    'b4-2':'Character Inflatables & Entry Signage',
+    'b4-3':'Character Inflatables & Entry Signage',
+    'b4-4':'Character Inflatables & Entry Signage',
+    'b4-11':'Sticker Shop',
+    'b4-14':'Collector Card Studio',
+    'b4-15':'Collector Card Studio',
+    'b4-16':'Collector Card Studio',
+    'b4-17':'Collector Card Studio',
+    'b4-18':'Sticker Shop',
+    'b5-1':'Lobby & Check-In Desk',
+    'b5-2':'Lobby & Check-In Desk',
+    'b5-3':'Lobby & Check-In Desk',
+    'b5-4':'Lobby & Check-In Desk',
+    'b5-5':'Lobby & Check-In Desk',
+    'b5-6':'Lobby & Check-In Desk',
+    'b5-7':'Lobby & Check-In Desk',
+    'b5-8':'Lobby & Check-In Desk',
+    'b5-9':'Lobby & Check-In Desk',
+    'b5-10':'Lobby & Check-In Desk',
+    'b6-1':'1:1 Meeting Room Setup',
+    'b6-2':'1:1 Meeting Room Setup',
+    'b6-3':'Theater, Stage & Projection',
+    'b6-4':'Theater, Stage & Projection',
+    'b6-5':'Theater, Stage & Projection',
+    'b6-6':'Theater, Stage & Projection',
+    'b6-7':'Theater, Stage & Projection',
+    'b6-8':'Theater, Stage & Projection',
+    'b7-1':'Private Meeting Rooms',
+    'b7-2':'Private Meeting Rooms',
+    'b7-3':'Private Meeting Rooms',
+    'b7-4':'Private Meeting Rooms',
+    'b7-5':'Private Meeting Rooms',
+    'b8-1':'Arena & Green Room Signage',
+    'b8-2':'Arena & Green Room Signage',
+    'b8-3':'Arena & Green Room Signage',
+    'b8-4':'Arena & Green Room Signage',
+    'b8-5':'Arena & Green Room Signage',
+    'b8-6':'Arena & Green Room Signage',
+    'b8-7':'Arena & Green Room Signage',
+    'b8-8':'1:1 Meeting Room Setup',
+    'b8-9':'Arena & Green Room Signage',
+    'b8-10':'Arena & Green Room Signage',
+    'b8-11':'Arena & Green Room Signage',
+    'b8-12':'Arena & Green Room Signage',
+    'b9-1':'Coronado Reception',
+    'b9-2':'Coronado Reception',
+    'b9-3':'Coronado Reception',
+    'b9-4':'Coronado Reception',
+    'b9-5':'Coronado Reception',
+    'b10-1':'Hotel Signage',
+  };
+  const WORKFLOW_LOCATIONS = {
+    'Live Artist Mural':'1:1 Meeting Room',
+    'Sticker Shop':'1:1 Meeting Room',
+    'Collector Card Studio':'1:1 Meeting Room',
+    'Lithograph Gallery':'Rotunda',
+    'Character Inflatables & Entry Signage':'1:1 Meeting Room',
+    '1:1 Meeting Room Setup':'1:1 Meeting Room',
+  };
+  const EVENTS_WORKFLOWS = [
+    '1:1 Meeting Room Setup',
+    'Theater, Stage & Projection',
+    'Digital Kiosks',
+    'Entrance, Parking & Outside Venue',
+    'Lobby & Check-In Desk',
+    'Private Meeting Rooms',
+    'Arena & Green Room Signage',
+    'Coronado Reception',
+    'Hotel Signage',
+  ];
+
+  const META_DEFAULT = { sourceUpdated:'August 26, 2026', lastEdited:null };
+
+  const LOGO_INVERT = 'data:image/png;base64,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YWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSAxMC4wLWMwMDAgNzkuZDIwZTQ2NjMwLCAyMDI1LzEyLzA5LTAyOjExOjIzICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjcuNSAoTWFjaW50b3NoKSIgeG1wOkNyZWF0ZURhdGU9IjIwMjYtMDQtMjJUMTY6MjU6MjUtMDQ6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDI2LTA3LTE2VDE1OjI2OjQ1LTA3OjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDI2LTA3LTE2VDE1OjI2OjQ1LTA3OjAwIiBkYzpmb3JtYXQ9ImltYWdlL3BuZyIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozZWNiZThhZi02ZDc4LTRhOWMtYmZiZC02NjdjZTZkNzlhMTEiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYjg5M2ZiZS0zNTVmLWViNDktOGYxYy1mMTRhY2UyMzYzZGMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo5MjIyMWY0YS02NGY1LTQxZmYtOWVkOS0wZTcyNDQ5ZDAxZTIiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJjcmVhdGVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjkyMjIxZjRhLTY0ZjUtNDFmZi05ZWQ5LTBlNzI0NDlkMDFlMiIgc3RFdnQ6d2hlbj0iMjAyNi0wNC0yMlQxNjoyNToyNS0wNDowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIDI3LjUgKE1hY2ludG9zaCkiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNvbnZlcnRlZCIgc3RFdnQ6cGFyYW1ldGVycz0iZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6OWFiZWM2ZjUtMzYwMC00OTkxLWFjMWEtN2UyOWM5YTM3MTZkIiBzdEV2dDp3aGVuPSIyMDI2LTA0LTIyVDE2OjI2OjQ3LTA0OjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuNSAoTWFjaW50b3NoKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6M2VjYmU4YWYtNmQ3OC00YTljLWJmYmQtNjY3Y2U2ZDc5YTExIiBzdEV2dDp3aGVuPSIyMDI2LTA3LTE2VDE1OjI2OjQ1LTA3OjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuNCAoTWFjaW50b3NoKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5qhDhxAABw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';
+  const HEAD_STATIC_UNUSED = '<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+    + '<title>Brand Commercialization Updates Creative Deliverables Tracker</title>'
+    + '<link rel="preconnect" href="https://fonts.googleapis.com">'
+    + '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+    + '<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">';
+
+  const dataEl = document.getElementById('app-data');
+  const DATA = dataEl ? JSON.parse(dataEl.textContent) : { sections: SECTIONS, meta: META_DEFAULT };
+
+  // Shared backend: Google Apps Script in front of a Google Sheet (tab "BCU").
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTTTV9r8eGhH4xBrcfP0gMgwnLdOkqjt8kOl6IJbukF0rpa5iHiDfPZd0VXmyZ8of9/exec";
+  const SHEET = "BCU";
+  const LOCAL_KEY = "bcu-tracker-status-v1";
+  function loadLocal(){ try{ const raw=localStorage.getItem(LOCAL_KEY); return raw? JSON.parse(raw) : null; }catch(e){ return null; } }
+  function saveLocal(){ try{ const m={}; allItems().forEach(it=>{ m[it.id]={status:it.status,done:!!it.done}; }); localStorage.setItem(LOCAL_KEY, JSON.stringify({items:m, meta:DATA.meta})); }catch(e){} }
+  function applyRows(rows){
+    let latest = DATA.meta && DATA.meta.lastEdited ? DATA.meta.lastEdited : null;
+    (rows||[]).forEach(r=>{
+      const it = findItem(String(r.id||'')); if(!it) return;
+      if(r.status && STATUS_VALUES.includes(r.status)){ it.status = r.status; it.done = (r.status==='Complete'); }
+      if(r.updatedAt && (!latest || String(r.updatedAt) > latest)) latest = String(r.updatedAt);
+    });
+    DATA.meta = DATA.meta || {}; if(latest) DATA.meta.lastEdited = latest;
+  }
+  function setSync(text, kind){
+    const el = document.getElementById('sync-pill'); if(!el) return;
+    el.textContent = text || ''; el.className = 'sync-pill' + (kind? ' '+kind : '') + (text? ' show' : '');
+  }
+
+  function esc(s){
+    return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function statusClass(st){
+    if(!st) return 'status-Other';
+    if(st==='Complete') return 'status-Complete';
+    if(st==='In Progress') return 'status-InProgress';
+    if(st==='Not Started') return 'status-NotStarted';
+    return 'status-Other';
+  }
+  function allItems(){
+    const out=[];
+    DATA.sections.forEach(s => s.items.forEach(it => out.push(it)));
+    return out;
+  }
+  function findItem(id){
+    for(const s of DATA.sections){ for(const it of s.items){ if(it.id===id) return it; } }
+    return null;
+  }
+  function counts(items){
+    const total = items.length;
+    const done = items.filter(i=>i.done).length;
+    return {total, done, pct: total? Math.round(done/total*100):0};
+  }
+
+  function findSectionFor(id){
+    for(const s of DATA.sections){ if(s.items.some(i=>i.id===id)) return s; }
+    return null;
+  }
+
+  function parseDate(str){
+    if(!str) return null;
+    const m = /^(\d{1,2})\/(\d{1,2})$/.exec(String(str).trim());
+    if(!m) return null;
+    const mo = parseInt(m[1],10), da = parseInt(m[2],10);
+    if(mo<1||mo>12||da<1||da>31) return null;
+    return new Date(2026, mo-1, da);
+  }
+  function itemDueInfo(it){
+    if(it.fd === 'Mid-Sept 2026') return {date:new Date(2026,8,15), approx:true};
+    let d = parseDate(it.fd);
+    if(d) return {date:d, approx:false};
+    d = parseDate(it.fp);
+    if(d) return {date:d, approx:false};
+    return {date:null, approx:false};
+  }
+  function sortByFinalDue(a, b){
+    const da = itemDueInfo(a).date, db = itemDueInfo(b).date;
+    if(!da && !db) return 0;
+    if(!da) return 1;
+    if(!db) return -1;
+    return da - db;
+  }
+  const _now = new Date(); const TODAY = new Date(_now.getFullYear(), _now.getMonth(), _now.getDate());
+  function riskLabel(diffDays){
+    if(diffDays < 0) return Math.abs(diffDays)+(Math.abs(diffDays)===1?' day overdue':' days overdue');
+    if(diffDays === 0) return 'Due today';
+    if(diffDays === 1) return 'Due tomorrow';
+    return 'Due in '+diffDays+' days';
+  }
+  function riskInfo(it){
+    if(it.done) return null;
+    const due = itemDueInfo(it);
+    if(!due || !due.date) return null;
+    const diffDays = Math.round((due.date - TODAY) / 86400000);
+    if(diffDays < 0) return {sev:'critical', label:riskLabel(diffDays), days:diffDays, date:due.date};
+    if(diffDays <= 3) return {sev:'high', label:riskLabel(diffDays), days:diffDays, date:due.date};
+    if(diffDays <= 14) return {sev:'medium', label:riskLabel(diffDays), days:diffDays, date:due.date};
+    return null;
+  }
+  function computeTimelineRisks(){
+    return allItems()
+      .map(it=>({it, risk:riskInfo(it)}))
+      .filter(x=>x.risk && x.risk.days <= 5)
+      .sort((a,b)=>a.risk.days-b.risk.days);
+  }
+  let currentView = 'chrono';
+  let currentFilter = 'all';
+  let currentSearch = '';
+  let openSections = new Set(DATA.sections.map(s=>s.key).concat(workflowGroups().map(w=>w.key)));
+
+  function captureOpenSections(){
+    document.querySelectorAll('details.section').forEach(d=>{
+      const k = d.getAttribute('data-key');
+      if(d.open) openSections.add(k); else openSections.delete(k);
+    });
+  }
+  function rerender(){
+    captureOpenSections();
+    const scrollY = window.scrollY;
+    render();
+    try{ window.scrollTo(0, scrollY); }catch(e){}
+  }
+
+  function renderItemRow(it, opts){
+    opts = opts || {};
+    const risk = riskInfo(it);
+    const areaInfo = opts.showArea ? findSectionFor(it.id) : null;
+    const artistsHtml = (it.artists && it.artists.length)
+      ? '<ul class="artist-list">' + it.artists.map(a=>'<li>'+esc(a)+'</li>').join('') + '</ul>'
+      : '';
+    const statusModClass = it.status==='Complete' ? 'st-complete' : (it.status==='In Progress' ? 'st-inprogress' : 'st-notstarted');
+    const statusSelect =
+      '<select class="status-select '+statusModClass+'" data-id="'+it.id+'" aria-label="Status for '+esc(it.name)+'">'
+        + STATUS_VALUES.map(s=>'<option value="'+esc(s)+'"'+(s===it.status?' selected':'')+'>'+esc(s)+'</option>').join('')
+      + '</select>';
+    return (
+      '<div id="item-'+it.id+'" class="item-row'+(it.done?' is-done':'')+'" data-id="'+it.id+'" data-status="'+esc(it.status)+'" data-flag="'+(risk?'1':'0')+'" data-search="'+esc((it.name+' '+it.owner+' '+it.notes).toLowerCase())+'">'
+      + '<div class="col-main">'
+        + (areaInfo? '<div class="area-tag">'+esc(partLabel(areaInfo.part))+' \u00b7 '+esc(areaInfo.title)+'</div>' : '')
+        + '<div class="item-name">'+esc(it.name)+'</div>'
+        + artistsHtml
+        + (it.notes? '<div class="item-notes">'+esc(it.notes)+'</div>' : '')
+      + '</div>'
+      + '<div class="col-owner"><span class="lbl">Owner</span>'+esc(it.owner)+'</div>'
+      + '<div class="col-fp"><span class="lbl">First Pass Due</span><span class="due-val">'+esc(it.fp)+'</span></div>'
+      + '<div class="col-fd"><span class="lbl">Final Delivery Date</span><span class="due-val">'+esc(it.fd)+'</span></div>'
+      + '<div class="col-dims"><span class="lbl">Dimensions</span>'+(it.specs? esc(it.specs) : '<span class="dim-empty">N/A</span>')+'</div>'
+      + '<div class="col-status">'+statusSelect+(risk?'<div style="margin-top:6px;"><span class="risk-pill sev-'+risk.sev+'">'+esc(risk.label)+'</span></div>':'')+'</div>'
+      + '</div>'
+    );
+  }
+
+  function renderSection(sec){
+    const c = counts(sec.items);
+    const flagCount = sec.items.filter(i=>i.flag).length;
+    return (
+      '<details class="section" data-key="'+sec.key+'"'+(openSections.has(sec.key)?' open':'')+'>'
+      + '<summary>'
+        + '<svg class="sum-caret" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        + '<div class="sum-title"><span class="part-tag">'+esc(partLabel(sec.part))+'</span>'+esc(sec.title)+(sec.location? '<span class="location-tag">'+esc(sec.location)+'</span>' : '')+'</div>'
+        + (flagCount? '<span class="sum-flagcount">'+flagCount+' flagged</span>' : '')
+        + '<div class="sum-progress"><div class="sum-track"><div class="sum-fill" style="width:'+c.pct+'%"></div></div><span class="sum-count">'+c.done+'/'+c.total+'</span></div>'
+      + '</summary>'
+      + '<div class="item-list">' + sec.items.slice().sort(sortByFinalDue).map(renderItemRow).join('') + '</div>'
+      + '</details>'
+    );
+  }
+
+  function workflowGroups(){
+    const items = allItems();
+    const byWf = {};
+    items.forEach(it=>{
+      let wf = WORKFLOW_MAP[it.id] || 'Other';
+      if(!Array.isArray(wf)) wf = [wf];
+      wf.forEach(w => { (byWf[w] = byWf[w] || []).push(it); });
+    });
+    const order = WORKFLOW_ORDER.concat(Object.keys(byWf).filter(k=>WORKFLOW_ORDER.indexOf(k)===-1));
+    return order.filter(k=>byWf[k] && byWf[k].length).map(k=>({key:'wf-'+k.toLowerCase().replace(/[^a-z0-9]+/g,'-'), title:k, items:byWf[k]}));
+  }
+
+  function renderWorkflowSection(wf){
+    const c = counts(wf.items);
+    const flagCount = wf.items.filter(i=>i.flag).length;
+    const teamTag = EVENTS_WORKFLOWS.indexOf(wf.title)!==-1 ? 'Events' : 'Creative';
+    const loc = WORKFLOW_LOCATIONS[wf.title];
+    return (
+      '<details class="section" data-key="'+wf.key+'"'+(openSections.has(wf.key)?' open':'')+'>'
+      + '<summary>'
+        + '<svg class="sum-caret" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        + '<div class="sum-title"><span class="part-tag">'+esc(teamTag)+'</span>'+esc(wf.title)+(loc? '<span class="location-tag">'+esc(loc)+'</span>' : '')+'</div>'
+        + (flagCount? '<span class="sum-flagcount">'+flagCount+' flagged</span>' : '')
+        + '<div class="sum-progress"><div class="sum-track"><div class="sum-fill" style="width:'+c.pct+'%"></div></div><span class="sum-count">'+c.done+'/'+c.total+'</span></div>'
+      + '</summary>'
+      + '<div class="item-list">' + wf.items.slice().sort(sortByFinalDue).map(it=>renderItemRow(it,{showArea:true})).join('') + '</div>'
+      + '</details>'
+    );
+  }
+
+  function renderRiskFlags(risks){
+    if(!risks.length){
+      return '<div class="empty-state">Nothing is overdue or due in the next 5 days.</div>';
+    }
+    const cards = risks.map(({it,risk})=>{
+      const areaInfo = findSectionFor(it.id);
+      const dueLabel = it.fd!=='TBD' ? it.fd : (it.fp!=='TBD' ? it.fp+' (first pass)' : '');
+      return (
+        '<button type="button" class="flag-card sev-'+risk.sev+'" data-jump="'+it.id+'">'
+        + '<span class="flag-sev">'+esc(risk.label)+'</span>'
+        + '<div class="flag-body">'
+          + '<h3>'+esc(it.name)+'</h3>'
+          + '<p>'+(areaInfo? esc(areaInfo.title)+' \u00b7 ' : '')+'Owner: '+esc(it.owner)+' \u00b7 Due '+esc(dueLabel)+' \u00b7 '+esc(it.status)+'</p>'
+        + '</div>'
+        + '</button>'
+      );
+    }).join('');
+    return '<div class="flags-grid">' + cards + '</div>';
+  }
+
+  function weekMonday(d){
+    const dt = new Date(d);
+    const day = dt.getDay();
+    const diff = (day===0? -6 : 1-day);
+    dt.setDate(dt.getDate()+diff);
+    dt.setHours(0,0,0,0);
+    return dt;
+  }
+  function weekKey(d){ const m = weekMonday(d); return m.getFullYear()+'-'+m.getMonth()+'-'+m.getDate(); }
+  function weekLabel(d){ return 'Week of ' + weekMonday(d).toLocaleDateString('en-US',{month:'short',day:'numeric'}); }
+
+  function renderChronoView(){
+    const items = allItems().map(it => { const o = Object.assign({}, it); o._due = itemDueInfo(it); return o; });
+    const dated = items.filter(i=>i._due.date).sort((a,b)=>a._due.date-b._due.date);
+    const undated = items.filter(i=>!i._due.date);
+
+    let html = '';
+    let currentWeek = null;
+    let todayInserted = false;
+    let buffer = [];
+
+    function flush(){
+      if(buffer.length){
+        html += '<div class="week-header"><h3>'+esc(weekLabel(buffer[0]._due.date))+'</h3><span class="week-count">'+buffer.length+' item'+(buffer.length===1?'':'s')+'</span></div>';
+        html += '<div class="chrono-list">' + buffer.map(it=>renderItemRow(it,{showArea:true, dueInfo:it._due})).join('') + '</div>';
+        buffer = [];
+      }
+    }
+
+    dated.forEach(it=>{
+      if(!todayInserted && it._due.date >= TODAY){
+        flush();
+        html += '<div class="today-divider">Today · Sep 8, 2026</div>';
+        todayInserted = true;
+        currentWeek = null;
+      }
+      const wk = weekKey(it._due.date);
+      if(wk !== currentWeek){ flush(); currentWeek = wk; }
+      buffer.push(it);
+    });
+    flush();
+    if(!todayInserted) html += '<div class="today-divider">Today · Sep 8, 2026</div>';
+
+    if(undated.length){
+      html += '<div class="section-title" style="margin-top:44px;"><h2 style="font-size:19px;">Undated / TBD</h2><span class="count">'+undated.length+' items waiting on a date</span></div>';
+      html += '<div class="chrono-list">' + undated.map(it=>renderItemRow(it,{showArea:true, dueInfo:it._due})).join('') + '</div>';
+    }
+    return html;
+  }
+
+  function renderCalendarView(){
+    const items = allItems();
+    function key(d){ return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate(); }
+    const byDate = {};
+    items.forEach(it=>{
+      const fd = it.fd==='Mid-Sept 2026' ? new Date(2026,8,15) : parseDate(it.fd);
+      const fp = parseDate(it.fp);
+      if(fd){ (byDate[key(fd)] = byDate[key(fd)]||[]).push({it,kind:'final'}); }
+      if(fp && (!fd || fp.getTime()!==fd.getTime())){ (byDate[key(fp)] = byDate[key(fp)]||[]).push({it,kind:'fp'}); }
+    });
+
+    const months = [{y:2026,m:8},{y:2026,m:9},{y:2026,m:10}];
+    const todayKey = key(TODAY);
+
+    const monthsHtml = months.map(({y,m})=>{
+      const first = new Date(y,m,1);
+      const daysInMonth = new Date(y,m+1,0).getDate();
+      const startOffset = first.getDay();
+      const monthLabel = first.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+      let cells = '';
+      for(let i=0;i<startOffset;i++) cells += '<div class="cal-cell cal-empty"></div>';
+      for(let d=1; d<=daysInMonth; d++){
+        const dObj = new Date(y,m,d);
+        const k = key(dObj);
+        const dayItems = byDate[k]||[];
+        const isToday = k===todayKey;
+        const chipsHtml = dayItems.map(({it,kind},idx)=>{
+          const cls = ['cal-chip'];
+          const risk = riskInfo(it);
+          if(kind==='fp') cls.push('cal-chip-fp');
+          if(it.done) cls.push('cal-chip-done');
+          if(risk) cls.push('cal-chip-flag');
+          if(idx>=3) cls.push('cal-chip-extra');
+          const label = (kind==='fp'?'FP: ':'') + it.name;
+          return '<button type="button" class="'+cls.join(' ')+'" data-jump="'+it.id+'" data-status="'+esc(it.status)+'" data-flag="'+(risk?'1':'0')+'" data-done="'+(it.done?'1':'0')+'" data-search="'+esc((it.name+' '+it.owner+' '+it.notes).toLowerCase())+'" title="'+esc((kind==='fp'?'First pass: ':'Due: ')+it.name)+'">'+esc(label)+'</button>';
+        }).join('');
+        const overflow = dayItems.length - 3;
+        cells += '<div class="cal-cell'+(isToday?' cal-today':'')+'">'
+          + '<div class="cal-daynum">'+d+'</div>'
+          + '<div class="cal-chips">' + chipsHtml + (overflow>0? '<button type="button" class="cal-more" data-count="'+overflow+'">+'+overflow+' more</button>' : '') + '</div>'
+          + '</div>';
+      }
+      const trailing = (7-((startOffset+daysInMonth)%7))%7;
+      for(let i=0;i<trailing;i++) cells += '<div class="cal-cell cal-empty"></div>';
+      return '<div class="cal-month"><div class="cal-month-title">'+monthLabel+'</div><div class="cal-grid">'
+        + ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d=>'<div class="cal-dow">'+d+'</div>').join('')
+        + cells + '</div></div>';
+    }).join('');
+
+    return (
+      '<div class="cal-legend">'
+        + '<span><span class="tl-swatch" style="background:var(--prog-soft); border:1px solid var(--prog);"></span>Final delivery due</span>'
+        + '<span><span class="tl-swatch" style="background:transparent; border:1px dashed var(--line-strong);"></span>First pass due</span>'
+        + '<span><span class="tl-swatch" style="background:var(--crit-soft); border:1px solid var(--crit);"></span>Flagged item</span>'
+        + '<span><span class="tl-swatch" style="background:var(--ok-soft); border:1px solid var(--ok);"></span>Complete</span>'
+        + '<span><span class="tl-swatch" style="background:transparent; border:2px solid var(--accent);"></span>Today</span>'
+      + '</div>'
+      + monthsHtml
+    );
+  }
+
+  function render(){
+    const items = allItems();
+    const c = counts(items);
+    const risks = computeTimelineRisks();
+
+    const html =
+      '<header class="top"><div class="wrap">'
+        + '<img class="header-logo" src="'+LOGO_INVERT+'" alt="Disney Consumer Products Creative">'
+        + '<div class="eyebrow"><span class="dot"></span>Global Creative</div>'
+        + '<h1>Brand Commercialization Updates<br/><span class="grad-text">Creative Deliverables Tracker</span></h1>'
+        + '<p class="event-meta">November 18\u201319, 2026<span class="sep">\u00b7</span>Orlando, FL</p>'
+        + '<a class="box-link" href="https://disney.box.com/s/jnqis2b51iyd1h5vl41ch404wbrkeugw" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>View Project Box Folder</a>'
+        + '<div id="sync-pill" class="sync-pill"></div>'
+      + '</div></header>'
+
+      + '<div class="controlbar"><div class="controlbar-inner">'
+        + '<div class="view-tabs" id="view-tabs">'
+          + '<button class="view-tab'+(currentView==='chrono'?' active':'')+'" data-view="chrono">Chronological</button>'
+          + '<button class="view-tab'+(currentView==='calendar'?' active':'')+'" data-view="calendar">Calendar</button>'
+          + '<button class="view-tab'+(currentView==='team'?' active':'')+'" data-view="team">By Team</button>'
+          + '<button class="view-tab'+(currentView==='workflow'?' active':'')+'" data-view="workflow">By Workflow</button>'
+        + '</div>'
+        + '<div class="progress-ring-wrap"><div class="progress-track"><div class="progress-fill" style="width:'+c.pct+'%"></div></div>'
+          + '<span class="progress-num">'+c.pct+'%<small> \u00b7 '+c.done+'/'+c.total+'</small></span></div>'
+        + '<div class="search-box"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+          + '<input id="search-input" type="text" value="'+esc(currentSearch)+'" placeholder="Search deliverables, owners, notes\u2026"></div>'
+        + '<div class="chip-row" id="filter-chips">'
+          + '<button class="chip'+(currentFilter==='all'?' active':'')+'" data-filter="all">All</button>'
+          + '<button class="chip'+(currentFilter==='open'?' active':'')+'" data-filter="open">Open</button>'
+          + '<button class="chip'+(currentFilter==='done'?' active':'')+'" data-filter="done">Complete</button>'
+          + '<button class="chip flagged'+(currentFilter==='flag'?' active':'')+'" data-filter="flag">Flagged</button>'
+        + '</div>'
+        + '<div class="expand-btns" id="expand-btns" style="display:'+((currentView==='team'||currentView==='workflow')?'':'none')+';"><button class="ghost-btn" id="expand-all">Expand all</button><button class="ghost-btn" id="collapse-all">Collapse all</button></div>'
+      + '</div></div>'
+
+      + '<div class="wrap">'
+        + '<div id="readonly-banner" class="readonly-banner">You have view-only access to this tracker; checklist changes here won\u2019t be saved for others.</div>'
+
+        + '<div class="section-title"><h2>Timeline Risk Flags</h2><span class="count">'+risks.length+(risks.length===1?' item':' items')+'</span></div>'
+        + '<p class="section-lede">Anything already overdue, or due in the next 5 days, and not yet checked off. Click a card to jump to it in the Chronological view.</p>'
+        + renderRiskFlags(risks)
+
+        + '<div class="view-panel active" data-view="chrono">'
+          + '<div class="section-title"><h2>Chronological Timeline</h2><span class="count">'+c.total+' items, earliest to latest</span></div>'
+          + '<p class="section-lede">Every deliverable from both trackers, ordered by the date it\u2019s actually due, grouped by week, with a marker for today so it\u2019s obvious what\u2019s already overdue.</p>'
+          + renderChronoView()
+        + '</div>'
+
+        + '<div class="view-panel" data-view="calendar">'
+          + '<div class="section-title"><h2>Calendar View</h2><span class="count">Sep \u2013 Nov 2026</span></div>'
+          + '<p class="section-lede">Solid chips mark a final delivery date; dashed outlines mark a first-pass date. Click any chip to jump to it in the Chronological view.</p>'
+          + renderCalendarView()
+        + '</div>'
+
+        + '<div class="view-panel" data-view="team">'
+          + '<div class="section-title"><h2>Creative Team Deliverables</h2><span class="count">Source: BCU Creative Activation Deliverable Tracker</span></div>'
+          + '<p class="section-lede">Owned deliverables from the Creative team\u2019s activation-by-activation tracker.</p>'
+          + '<div id="part-a">' + DATA.sections.filter(s=>s.part==='A').map(renderSection).join('') + '</div>'
+
+          + '<div class="section-title"><h2>Events Team Deliverables</h2><span class="count">Source: BCU 2026 Creative Grid</span></div>'
+          + '<p class="section-lede">Print, digital, and signage deliverables from the Events team\u2019s grid, included here so both teams are checking off the same master list.</p>'
+          + '<div id="part-b">' + DATA.sections.filter(s=>s.part==='B').map(renderSection).join('') + '</div>'
+        + '</div>'
+
+        + '<div class="view-panel" data-view="workflow">'
+          + '<div class="section-title"><h2>By Workflow</h2><span class="count">'+c.total+' items across '+workflowGroups().length+' activations</span></div>'
+          + '<p class="section-lede">Every deliverable grouped by the physical activation it belongs to, not by which team owns it, so a full activation (like Stickers or Lithograph) shows in one place across both the Creative and Events trackers.</p>'
+          + '<div id="part-wf">' + workflowGroups().map(renderWorkflowSection).join('') + '</div>'
+        + '</div>'
+
+        + '<footer>'
+          + '<span>Sources: BCU_Creative_Activation_Deliverable_Tracker (Creative), BCU 2026 Creative Grid (Events) \u00b7 synthesized '+new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})+'</span>'
+          + '<span>Prepared for Marcus Rosie &amp; Bobby Kim by Jacci Hendershott</span>'
+        + '</footer>'
+      + '</div>';
+
+    document.getElementById('app').innerHTML = html;
+    applyFilters();
+    updateEditPill();
+    document.querySelectorAll('#view-tabs .view-tab').forEach(t=>t.classList.toggle('active', t.getAttribute('data-view')===currentView));
+    document.querySelectorAll('.view-panel').forEach(p=>p.classList.toggle('active', p.getAttribute('data-view')===currentView));
+    const eb = document.getElementById('expand-btns');
+    if(eb) eb.style.display = (currentView==='team'||currentView==='workflow') ? '' : 'none';
+  }
+
+  function applyFilters(){
+    document.querySelectorAll('.item-row').forEach(row=>{
+      const isDone = row.classList.contains('is-done');
+      const isFlagged = row.getAttribute('data-flag')==='1';
+      const search = row.getAttribute('data-search')||'';
+      let show = true;
+      if(currentFilter==='open') show = !isDone;
+      else if(currentFilter==='done') show = isDone;
+      else if(currentFilter==='flag') show = isFlagged;
+      if(show && currentSearch) show = search.indexOf(currentSearch)!==-1;
+      row.classList.toggle('hidden-row', !show);
+    });
+    document.querySelectorAll('details.section').forEach(sec=>{
+      const visible = sec.querySelectorAll('.item-row:not(.hidden-row)').length;
+      sec.style.display = visible===0 ? 'none' : '';
+    });
+    document.querySelectorAll('.cal-chip').forEach(chip=>{
+      const isDone = chip.getAttribute('data-done')==='1';
+      const isFlagged = chip.getAttribute('data-flag')==='1';
+      const search = chip.getAttribute('data-search')||'';
+      let show = true;
+      if(currentFilter==='open') show = !isDone;
+      else if(currentFilter==='done') show = isDone;
+      else if(currentFilter==='flag') show = isFlagged;
+      if(show && currentSearch) show = search.indexOf(currentSearch)!==-1;
+      chip.classList.toggle('dim', !show);
+    });
+  }
+
+  function updateEditPill(){
+    if(DATA.meta && DATA.meta.lastEdited){
+      const d = new Date(DATA.meta.lastEdited);
+      setSync('Last status update: '+d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}));
+    }
+  }
+
+  async function saveItem(it){
+    saveLocal();
+    setSync('Saving\u2026');
+    try{
+      const res = await fetch(SCRIPT_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({ sheet:SHEET, id:it.id, fields:{ status:it.status, done: it.done? 'true':'false', name: it.name } }) });
+      const out = await res.json();
+      if(!res.ok || !out.ok) throw new Error(out.error || 'bad response');
+      DATA.meta = DATA.meta || {}; DATA.meta.lastEdited = out.updatedAt || new Date().toISOString();
+      saveLocal(); updateEditPill();
+      setSync('Saved for everyone \u00b7 '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}), 'ok');
+      setTimeout(()=>{ const el=document.getElementById('sync-pill'); if(el && el.classList.contains('ok')) updateEditPill(); }, 2500);
+    }catch(e){
+      setSync('Failed to save \u2014 check connection and change the status again', 'err');
+    }
+  }
+
+  async function syncFromBackend(){
+    setSync('Syncing latest changes\u2026');
+    try{
+      const res = await fetch(SCRIPT_URL + '?sheet=' + encodeURIComponent(SHEET));
+      if(!res.ok) throw new Error('bad response');
+      const rows = await res.json();
+      applyRows(rows);
+      saveLocal();
+      rerender();
+      updateEditPill();
+    }catch(e){
+      setSync('Could not reach the shared tracker \u2014 showing the last copy saved on this device', 'err');
+    }
+  }
+
+  function jumpToItem(id){
+    currentView = 'chrono';
+    document.querySelectorAll('#view-tabs .view-tab').forEach(t=>t.classList.toggle('active', t.getAttribute('data-view')==='chrono'));
+    document.querySelectorAll('.view-panel').forEach(p=>p.classList.toggle('active', p.getAttribute('data-view')==='chrono'));
+    const eb = document.getElementById('expand-btns');
+    if(eb) eb.style.display = 'none';
+    requestAnimationFrame(()=>{
+      const row = document.getElementById('item-'+id);
+      if(row){
+        row.classList.add('highlight-flash');
+        setTimeout(()=>row.classList.remove('highlight-flash'), 1700);
+        try{ row.scrollIntoView({behavior:'smooth', block:'center'}); }catch(e){}
+      }
+    });
+  }
+
+  function attachHandlers(){
+    const app = document.getElementById('app');
+    app.addEventListener('change', (e)=>{
+      const sel = e.target.closest('.status-select');
+      if(sel){
+        const id = sel.getAttribute('data-id');
+        const it = findItem(id);
+        if(it){
+          it.status = sel.value;
+          it.done = (sel.value === 'Complete');
+          rerender();
+          saveItem(it);
+        }
+        return;
+      }
+    });
+    app.addEventListener('click', (e)=>{
+      const tab = e.target.closest('.view-tab');
+      if(tab){
+        currentView = tab.getAttribute('data-view');
+        document.querySelectorAll('#view-tabs .view-tab').forEach(t=>t.classList.toggle('active', t===tab));
+        document.querySelectorAll('.view-panel').forEach(p=>p.classList.toggle('active', p.getAttribute('data-view')===currentView));
+        const eb = document.getElementById('expand-btns');
+        if(eb) eb.style.display = (currentView==='team'||currentView==='workflow') ? '' : 'none';
+        return;
+      }
+      const calChip = e.target.closest('.cal-chip');
+      if(calChip){
+        jumpToItem(calChip.getAttribute('data-jump'));
+        return;
+      }
+      const flagJump = e.target.closest('.flag-card[data-jump]');
+      if(flagJump){
+        jumpToItem(flagJump.getAttribute('data-jump'));
+        return;
+      }
+      const calMore = e.target.closest('.cal-more');
+      if(calMore){
+        const cell = calMore.closest('.cal-cell');
+        cell.classList.toggle('expanded');
+        calMore.textContent = cell.classList.contains('expanded') ? 'Show less' : ('+'+calMore.getAttribute('data-count')+' more');
+        return;
+      }
+      const chip = e.target.closest('#filter-chips .chip');
+      if(chip){
+        document.querySelectorAll('#filter-chips .chip').forEach(c=>c.classList.remove('active'));
+        chip.classList.add('active');
+        currentFilter = chip.getAttribute('data-filter');
+        applyFilters();
+        return;
+      }
+      if(e.target.id==='expand-all'){
+        document.querySelectorAll('.view-panel.active details.section').forEach(d=>{d.open=true;});
+        captureOpenSections();
+        return;
+      }
+      if(e.target.id==='collapse-all'){
+        document.querySelectorAll('.view-panel.active details.section').forEach(d=>{d.open=false;});
+        captureOpenSections();
+        return;
+      }
+    });
+    app.addEventListener('input', (e)=>{
+      if(e.target.id==='search-input'){
+        currentSearch = e.target.value.trim().toLowerCase();
+        applyFilters();
+      }
+    });
+  }
+
+  // Paint immediately from the built-in data plus this device's last copy, then pull the shared state.
+  (function(){ const local = loadLocal(); if(local && local.items){ allItems().forEach(it=>{ const l=local.items[it.id]; if(l && STATUS_VALUES.includes(l.status)){ it.status=l.status; it.done=(l.status==='Complete'); } }); if(local.meta && local.meta.lastEdited) DATA.meta.lastEdited = local.meta.lastEdited; } })();
+  render();
+  attachHandlers();
+  syncFromBackend();
+})();</script>
+</body>
+</html>
