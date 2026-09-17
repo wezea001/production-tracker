@@ -191,7 +191,8 @@
     "1|Sticker Dispenser",
     "2|Photo ID Card Collector Kiosk",
     "3|Artist Signing & Lithograph Area",
-    "4|Center Stage & Motion"
+    "4|Center Stage & Motion",
+    "5|Coronado Reception"
   ];
 
   const BOX = s => "https://disney.box.com/s/" + s;
@@ -221,7 +222,9 @@
     { id: "artist-lithowalls", section: SECTIONS[2], deliverable: "Lithograph walls", specs: '6 walls (previously 9) · 24" × 36" each', first: "2026-10-02", final: "2026-10-19", status: "canceled", notes: ["Bleed: 0.5”", "Design direction: forthcoming"], refs: [] },
 
     { id: "stage-preshow", section: SECTIONS[3], deliverable: "Pre-show motion loop", specs: "1920 × 1080 · Seamless loop", first: "2026-10-21", final: "2026-10-29", status: "proceed", notes: [], refs: [{ label: "Storyboard & inspiration", url: BOX("dlhvs6vbjbwg0jw2e3q6non1ii6l9b2n") }, { label: "Assets", url: BOX("90dphyzqj8lejnmv20fejgaru38yfwej") }] },
-    { id: "stage-projection", section: SECTIONS[3], deliverable: "Projection motion", specs: '576” × 240” center wall', first: "2026-10-21", final: "2026-11-04", status: "proceed", notes: [], refs: [{ label: "Storyboard & inspiration", url: BOX("dlhvs6vbjbwg0jw2e3q6non1ii6l9b2n") }, { label: "Assets", url: BOX("90dphyzqj8lejnmv20fejgaru38yfwej") }] }
+    { id: "stage-projection", section: SECTIONS[3], deliverable: "Projection motion", specs: '576” × 240” center wall', first: "2026-10-21", final: "2026-11-04", status: "proceed", notes: [], refs: [{ label: "Storyboard & inspiration", url: BOX("dlhvs6vbjbwg0jw2e3q6non1ii6l9b2n") }, { label: "Assets", url: BOX("90dphyzqj8lejnmv20fejgaru38yfwej") }] },
+
+    { id: "coronado-barwrap", section: SECTIONS[4], deliverable: "Bar wrap – branding", specs: 'Vinyl cling · 15.5" H × 107" L · inside bar area (center)', first: "2026-09-25", final: "2026-10-13", status: "new", notes: ["Creative to brand the half-moon white bar (center area)"], refs: [{ label: "Napa curved bar (Gala Rental)", url: "https://www.galarental.com/bars/napa-curved" }] }
   ];
 
   const LOCAL_KEY = "production-tracker-state-v3";
