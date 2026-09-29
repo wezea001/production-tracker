@@ -25,6 +25,7 @@
     --complete: #0f7a8c; --complete-soft: #dff3f5;
     --canceled: #c23b3b; --canceled-soft: #fbe7e7;
     --approved: #1d5fd1; --approved-soft: #e4edfd;
+    --revision: #b0267d; --revision-soft: #fbe4f2;
     --urgent: #d9480f; --urgent-soft: #ffeadd;
   }
 
@@ -38,6 +39,7 @@
       --hold: #e2a13f; --hold-soft: #3a2c14; --complete: #5cd0e6; --complete-soft: #123137;
       --canceled: #f18888; --canceled-soft: #3a1c1c;
       --approved: #7fb0ff; --approved-soft: #16284a;
+      --revision: #f08cc8; --revision-soft: #3a1630;
       --urgent: #ff9a5c; --urgent-soft: #3d2110;
     }
   }
@@ -50,6 +52,7 @@
     --hold: #e2a13f; --hold-soft: #3a2c14; --complete: #5cd0e6; --complete-soft: #123137;
     --canceled: #f18888; --canceled-soft: #3a1c1c;
     --approved: #7fb0ff; --approved-soft: #16284a;
+    --revision: #f08cc8; --revision-soft: #3a1630;
     --urgent: #ff9a5c; --urgent-soft: #3d2110;
   }
 
@@ -151,6 +154,7 @@
   select.status-proceed  { background-color: var(--proceed-soft);  color: var(--proceed);  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231f8a5f' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
   select.status-hold     { background-color: var(--hold-soft);     color: var(--hold);     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a8690f' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
   select.status-complete { background-color: var(--complete-soft); color: var(--complete); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%230f7a8c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
+  select.status-revision { background-color: var(--revision-soft); color: var(--revision); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23b0267d' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
   select.status-approved { background-color: var(--approved-soft); color: var(--approved); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231d5fd1' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
   select.status-canceled { background-color: var(--canceled-soft); color: var(--canceled); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23c23b3b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
 
@@ -229,6 +233,7 @@
     <span class="item"><span class="swatch" style="background:var(--new)"></span>New</span>
     <span class="item"><span class="swatch" style="background:var(--proceed)"></span>Proceed</span>
     <span class="item"><span class="swatch" style="background:var(--hold)"></span>Hold</span>
+    <span class="item"><span class="swatch" style="background:var(--revision)"></span>Revision</span>
     <span class="item"><span class="swatch" style="background:var(--urgent)"></span>Urgent</span>
     <span class="item"><span class="swatch" style="background:var(--approved)"></span>Approved</span>
     <span class="item"><span class="swatch" style="background:var(--complete)"></span>Complete</span>
@@ -240,8 +245,8 @@
 <script>
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTTTV9r8eGhH4xBrcfP0gMgwnLdOkqjt8kOl6IJbukF0rpa5iHiDfPZd0VXmyZ8of9/exec";
 
-  const STATUSES = ["new", "proceed", "hold", "approved", "complete", "canceled"];
-  const STATUS_LABEL = { new: "New", proceed: "Proceed", hold: "Hold", approved: "Approved", complete: "Complete", canceled: "Canceled" };
+  const STATUSES = ["new", "proceed", "hold", "revision", "approved", "complete", "canceled"];
+  const STATUS_LABEL = { new: "New", proceed: "Proceed", hold: "Hold", revision: "Revision", approved: "Approved", complete: "Complete", canceled: "Canceled" };
 
   const SECTIONS = [
     "1|Sticker Dispenser",
