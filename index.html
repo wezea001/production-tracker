@@ -24,6 +24,7 @@
     --hold: #a8690f;     --hold-soft: #faf0dd;
     --complete: #0f7a8c; --complete-soft: #dff3f5;
     --canceled: #c23b3b; --canceled-soft: #fbe7e7;
+    --approved: #1d5fd1; --approved-soft: #e4edfd;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -35,6 +36,7 @@
       --new: #b28aff; --new-soft: #2a2140; --proceed: #5fd39c; --proceed-soft: #16302a;
       --hold: #e2a13f; --hold-soft: #3a2c14; --complete: #5cd0e6; --complete-soft: #123137;
       --canceled: #f18888; --canceled-soft: #3a1c1c;
+      --approved: #7fb0ff; --approved-soft: #16284a;
     }
   }
   :root[data-theme="dark"] {
@@ -45,6 +47,7 @@
     --new: #b28aff; --new-soft: #2a2140; --proceed: #5fd39c; --proceed-soft: #16302a;
     --hold: #e2a13f; --hold-soft: #3a2c14; --complete: #5cd0e6; --complete-soft: #123137;
     --canceled: #f18888; --canceled-soft: #3a1c1c;
+    --approved: #7fb0ff; --approved-soft: #16284a;
   }
 
   * { box-sizing: border-box; }
@@ -78,6 +81,27 @@
   .card.is-canceled { opacity: 0.62; }
   .card.editing { outline: 2px solid var(--accent); outline-offset: -1px; opacity: 1; }
   .card.is-updated { border-color: var(--new); }
+  /* Approved: the whole card is lifted so sign-off is visible while scanning the board. */
+  .card.is-approved { border: 2px solid var(--approved); padding: 17px 19px 15px; background: color-mix(in srgb, var(--approved-soft) 60%, var(--surface)); box-shadow: 0 0 0 4px color-mix(in srgb, var(--approved) 16%, transparent), var(--shadow); }
+  .card.is-approved::after { content: "\2713  Approved"; position: absolute; top: -11px; right: 16px; background: var(--approved); color: var(--surface); font-family: 'Work Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 3px 11px; border-radius: 999px; white-space: pre; }
+  .card.is-approved.editing::after { display: none; }
+
+  /* Reference image (16:9, matches the 1920 x 1080 spec) */
+  .card-image { display: block; width: 100%; aspect-ratio: 16 / 9; padding: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--surface-2); cursor: zoom-in; }
+  .card-image img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .card-image:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .card.drop-target { outline: 2px dashed var(--accent); outline-offset: 3px; }
+  .image-drop { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 100%; aspect-ratio: 16 / 9; border: 1.5px dashed var(--border); border-radius: 10px; background: var(--surface-2); color: var(--text-muted); font-size: 12.5px; text-align: center; padding: 10px; overflow: hidden; position: relative; }
+  .image-drop.has-image { border-style: solid; padding: 0; }
+  .image-drop.over { border-color: var(--accent); color: var(--text); }
+  .image-drop img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .image-drop .hint { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text-faint); }
+  .image-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 6px; }
+  .image-error { font-size: 12px; color: var(--canceled); font-weight: 500; }
+  .lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(12,12,16,0.84); display: flex; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
+  .lightbox[hidden] { display: none; }
+  .lightbox img { max-width: 100%; max-height: 100%; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); background: #fff; }
+  .lightbox .cap { position: fixed; left: 0; right: 0; bottom: 14px; text-align: center; color: #fff; font-size: 13px; font-weight: 500; text-shadow: 0 1px 3px rgba(0,0,0,0.6); pointer-events: none; }
   .updated-flag { display: flex; align-items: center; gap: 8px; margin: -18px -20px 0; padding: 8px 20px; border-radius: 13px 13px 0 0; background: var(--new-soft); color: var(--new); font-size: 12px; font-weight: 600; line-height: 1.4; }
   .updated-flag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--new); flex-shrink: 0; }
   .updated-flag .when { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 11px; opacity: 0.85; }
@@ -99,6 +123,7 @@
   select.status-proceed  { background-color: var(--proceed-soft);  color: var(--proceed);  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231f8a5f' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
   select.status-hold     { background-color: var(--hold-soft);     color: var(--hold);     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a8690f' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
   select.status-complete { background-color: var(--complete-soft); color: var(--complete); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%230f7a8c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
+  select.status-approved { background-color: var(--approved-soft); color: var(--approved); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231d5fd1' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
   select.status-canceled { background-color: var(--canceled-soft); color: var(--canceled); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23c23b3b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
 
   .icon-btn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text-muted); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; }
@@ -176,16 +201,18 @@
     <span class="item"><span class="swatch" style="background:var(--new)"></span>New</span>
     <span class="item"><span class="swatch" style="background:var(--proceed)"></span>Proceed</span>
     <span class="item"><span class="swatch" style="background:var(--hold)"></span>Hold</span>
+    <span class="item"><span class="swatch" style="background:var(--approved)"></span>Approved</span>
     <span class="item"><span class="swatch" style="background:var(--complete)"></span>Complete</span>
     <span class="item"><span class="swatch" style="background:var(--canceled)"></span>Canceled</span>
   </footer>
 </div>
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image preview"><img id="lightboxImg" alt=""><div class="cap" id="lightboxCap"></div></div>
 
 <script>
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTTTV9r8eGhH4xBrcfP0gMgwnLdOkqjt8kOl6IJbukF0rpa5iHiDfPZd0VXmyZ8of9/exec";
 
-  const STATUSES = ["new", "proceed", "hold", "complete", "canceled"];
-  const STATUS_LABEL = { new: "New", proceed: "Proceed", hold: "Hold", complete: "Complete", canceled: "Canceled" };
+  const STATUSES = ["new", "proceed", "hold", "approved", "complete", "canceled"];
+  const STATUS_LABEL = { new: "New", proceed: "Proceed", hold: "Hold", approved: "Approved", complete: "Complete", canceled: "Canceled" };
 
   const SECTIONS = [
     "1|Sticker Dispenser",
@@ -232,7 +259,66 @@
   const editing = new Set();
 
   function loadLocal() { try { const raw = localStorage.getItem(LOCAL_KEY); return raw ? JSON.parse(raw) : null; } catch (e) { return null; } }
-  function saveLocal(rows) { try { localStorage.setItem(LOCAL_KEY, JSON.stringify(rows)); } catch (e) {} }
+  function saveLocal(rows) {
+    try { localStorage.setItem(LOCAL_KEY, JSON.stringify(rows)); }
+    catch (e) { try { localStorage.setItem(LOCAL_KEY, JSON.stringify(rows.map(r => ({ ...r, image: "" })))); } catch (e2) {} }
+  }
+
+  // Images: stored in the sheet as up to 10 text cells, because the backend accepts at most 20,000 characters
+  // per field. Each chunk is prefixed with "~" so the spreadsheet never mistakes base64 that starts with "+"
+  // or "=" for a formula.
+  const IMAGE_KEYS = ["image", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10"];
+  const IMAGE_CHUNK = 19000;
+  const IMAGE_MAX = IMAGE_KEYS.length * IMAGE_CHUNK;
+  function safeImage(s) {
+    s = String(s == null ? "" : s).trim();
+    if (/^data:image\/(jpeg|png|webp|gif);base64,[A-Za-z0-9+\/=]+$/.test(s)) return s;
+    return /^https:\/\//i.test(s) ? s : "";
+  }
+  function joinImage(r) { return safeImage(IMAGE_KEYS.map(k => String(r[k] == null ? "" : r[k]).replace(/^~/, "")).join("")); }
+  function imageFields(url) {
+    const f = {};
+    IMAGE_KEYS.forEach((k, i) => { const part = (url || "").slice(i * IMAGE_CHUNK, (i + 1) * IMAGE_CHUNK); f[k] = part ? "~" + part : ""; });
+    return f;
+  }
+  function loadImageFile(file) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file); const img = new Image();
+      img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("That file could not be read as an image.")); };
+      img.src = url;
+    });
+  }
+  // Scales the picture down (1920 x 1080 becomes 1280 x 720) and compresses it until it fits the storage limit.
+  async function fileToImage(file) {
+    if (!file || !/^image\/(png|jpe?g|webp|gif)$/i.test(file.type)) throw new Error("Use a PNG, JPG, WebP or GIF image.");
+    const img = await loadImageFile(file);
+    const canvas = document.createElement("canvas"); const ctx = canvas.getContext("2d");
+    for (const w of [1280, 1120, 960, 800, 640]) {
+      const scale = Math.min(1, w / img.naturalWidth);
+      canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+      canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      for (const q of [0.82, 0.72, 0.62, 0.52]) {
+        const out = canvas.toDataURL("image/jpeg", q);
+        if (out.length <= IMAGE_MAX) return out;
+      }
+    }
+    throw new Error("That image is too detailed to store here. Try a simpler or smaller version.");
+  }
+  const pendingImage = new Map(); // card id -> image chosen in the editor but not saved yet ("" means remove)
+  function openLightbox(src, caption) {
+    const box = document.getElementById("lightbox");
+    document.getElementById("lightboxImg").src = src;
+    document.getElementById("lightboxImg").alt = caption || "";
+    document.getElementById("lightboxCap").textContent = caption || "";
+    box.hidden = false;
+  }
+  function closeLightbox() { const box = document.getElementById("lightbox"); box.hidden = true; document.getElementById("lightboxImg").removeAttribute("src"); }
+  document.getElementById("lightbox").addEventListener("click", closeLightbox);
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+  const hasImageFile = e => !!(e.dataTransfer && [...(e.dataTransfer.types || [])].includes("Files"));
 
   // Backend rows store notes as newline-joined text and refs as JSON text.
   function normalize(r) {
@@ -246,6 +332,8 @@
     out.updated = out.updated === true || out.updated === "true" || out.updated === "TRUE";
     out.updatedOn = typeof out.updatedOn === "string" ? out.updatedOn.slice(0, 10) : "";
     out.updatedNote = out.updatedNote == null ? "" : String(out.updatedNote);
+    out.image = joinImage(out);
+    IMAGE_KEYS.slice(1).forEach(k => { delete out[k]; });
     return out;
   }
 
@@ -295,7 +383,7 @@
     }).join("")}</div>` : "";
     const flagHtml = row.updated ? `<div class="updated-flag">Updated${row.updatedOn ? ` <span class="when">${escapeHtml(fmtDay(row.updatedOn))}</span>` : ""}${row.updatedNote ? ` <span class="what">&middot; ${escapeHtml(row.updatedNote)}</span>` : ""}</div>` : "";
     return `
-      <article class="card ${row.status === 'canceled' ? 'is-canceled' : ''} ${row.updated ? 'is-updated' : ''}" data-id="${attr(row.id)}">
+      <article class="card ${row.status === 'canceled' ? 'is-canceled' : ''} ${row.status === 'approved' ? 'is-approved' : ''} ${row.updated ? 'is-updated' : ''}" data-id="${attr(row.id)}">
         ${flagHtml}
         <div class="card-head">
           <div class="card-title">
@@ -308,6 +396,7 @@
             <button class="icon-btn edit-btn" aria-label="Edit ${attr(row.deliverable)}" title="Edit details">${ICON_PENCIL}</button>
           </div>
         </div>
+        ${row.image ? `<button type="button" class="card-image" aria-label="View the image for ${attr(row.deliverable)}"><img src="${attr(row.image)}" alt="Reference image for ${attr(row.deliverable)}" loading="lazy"></button>` : ""}
         <div class="date-row">
           <div><label class="field-label">First pass</label><input type="date" class="first-input" value="${attr(row.first || '')}" aria-label="First pass date for ${attr(row.deliverable)}"></div>
           <div><label class="field-label">Final</label><input type="date" class="final-input" value="${attr(row.final || '')}" aria-label="Final date for ${attr(row.deliverable)}"></div>
@@ -335,6 +424,16 @@
             <label class="field-label">Updated flag</label>
             <label class="toggle-row"><input type="checkbox" class="e-updated" ${row.updated ? "checked" : ""}> Show an &ldquo;Updated&rdquo; banner on this card</label>
             <input class="edit-input sans e-updated-note" style="margin-top:8px" value="${attr(row.updatedNote || "")}" placeholder="What changed? (optional, e.g. Final date moved to Oct 13)">
+          </div>
+          <div>
+            <label class="field-label">Image</label>
+            <div class="image-drop ${row.image ? "has-image" : ""}">${row.image ? `<img src="${attr(row.image)}" alt="">` : `<span>Drop an image here</span><span class="hint">1920 × 1080 fits exactly</span>`}</div>
+            <div class="image-actions">
+              <button type="button" class="text-btn choose-image">Choose a file…</button>
+              <button type="button" class="text-btn danger remove-image" ${row.image ? "" : "hidden"}>Remove image</button>
+              <input type="file" class="e-image-file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+              <span class="image-error" role="alert"></span>
+            </div>
           </div>
           <div>
             <label class="field-label">Links</label>
@@ -385,7 +484,26 @@
       card.querySelector(".status-select").addEventListener("change", e => {
         e.target.className = "status-select status-" + e.target.value;
         card.classList.toggle("is-canceled", e.target.value === "canceled");
+        card.classList.toggle("is-approved", e.target.value === "approved");
+        const row = state.find(r => r.id === id); if (row) row.status = e.target.value;
         save(id, { status: e.target.value });
+      });
+      const imgBtn = card.querySelector(".card-image");
+      if (imgBtn) imgBtn.addEventListener("click", () => { const row = state.find(r => r.id === id); if (row && row.image) openLightbox(row.image, row.deliverable); });
+      // Dropping a picture on a card attaches it straight away.
+      card.addEventListener("dragover", e => { if (hasImageFile(e)) { e.preventDefault(); card.classList.add("drop-target"); } });
+      card.addEventListener("dragleave", e => { if (!card.contains(e.relatedTarget)) card.classList.remove("drop-target"); });
+      card.addEventListener("drop", async e => {
+        if (!hasImageFile(e)) return;
+        e.preventDefault(); card.classList.remove("drop-target");
+        const row = state.find(r => r.id === id); if (!row) return;
+        const note = card.querySelector(".save-state");
+        try {
+          if (note) { note.textContent = "Preparing image…"; note.className = "save-state"; }
+          row.image = await fileToImage(e.dataTransfer.files[0]);
+          if (editing.size === 0) render();
+          save(id, imageFields(row.image));
+        } catch (err) { if (note) { note.textContent = err.message; note.className = "save-state error"; } }
       });
       card.querySelector(".edit-btn").addEventListener("click", () => { editing.add(id); render(); });
       card.querySelector(".flag-btn").addEventListener("click", () => {
@@ -410,14 +528,34 @@
         div.querySelector(".e-link-label").focus();
       });
       card.querySelectorAll(".remove-link").forEach(b => b.addEventListener("click", () => b.closest(".link-row").remove()));
+      const drop = card.querySelector(".image-drop"), fileInput = card.querySelector(".e-image-file");
+      const removeBtn = card.querySelector(".remove-image"), imgErr = card.querySelector(".image-error");
+      const showImage = src => {
+        drop.classList.toggle("has-image", !!src);
+        drop.innerHTML = src ? `<img src="${attr(src)}" alt="">` : `<span>Drop an image here</span><span class="hint">1920 × 1080 fits exactly</span>`;
+        removeBtn.hidden = !src;
+      };
+      const takeFile = async file => {
+        imgErr.textContent = "";
+        try { drop.innerHTML = "<span>Preparing image…</span>"; const src = await fileToImage(file); pendingImage.set(id, src); showImage(src); }
+        catch (err) { imgErr.textContent = err.message; showImage(pendingImage.has(id) ? pendingImage.get(id) : (row.image || "")); }
+      };
+      card.querySelector(".choose-image").addEventListener("click", () => fileInput.click());
+      fileInput.addEventListener("change", () => { if (fileInput.files[0]) takeFile(fileInput.files[0]); fileInput.value = ""; });
+      removeBtn.addEventListener("click", () => { pendingImage.set(id, ""); imgErr.textContent = ""; showImage(""); });
+      card.addEventListener("dragover", e => { if (hasImageFile(e)) { e.preventDefault(); drop.classList.add("over"); } });
+      card.addEventListener("dragleave", e => { if (!card.contains(e.relatedTarget)) drop.classList.remove("over"); });
+      card.addEventListener("drop", e => { if (!hasImageFile(e)) return; e.preventDefault(); drop.classList.remove("over"); takeFile(e.dataTransfer.files[0]); });
+      if (pendingImage.has(id)) showImage(pendingImage.get(id));
       card.querySelector(".cancel-btn").addEventListener("click", () => {
-        editing.delete(id);
+        editing.delete(id); pendingImage.delete(id);
         if (row && row._isNew) state = state.filter(r => r.id !== id);
         render();
       });
       card.querySelector(".delete-btn").addEventListener("click", () => {
         if (!confirm(`Remove "${row.deliverable || "this deliverable"}" from the tracker?`)) return;
         editing.delete(id);
+        pendingImage.delete(id);
         if (row._isNew) { state = state.filter(r => r.id !== id); render(); return; }
         row.deleted = true;
         render();
@@ -442,8 +580,11 @@
         fields.updatedOn = fields.updated === "true" ? (row.updated && row.updatedOn ? row.updatedOn : todayIso()) : "";
         if (fields.updated !== "true") fields.updatedNote = "";
         if (row._isNew) { fields.section = row.section; delete row._isNew; }
+        const newImage = pendingImage.has(id) ? pendingImage.get(id) : null;
+        pendingImage.delete(id);
         editing.delete(id);
-        Object.assign(row, normalize({ ...row, ...fields }));
+        Object.assign(row, normalize({ ...row, ...fields, image: row.image }));
+        if (newImage !== null) { row.image = newImage; Object.assign(fields, imageFields(newImage)); }
         render();
         save(id, fields);
       });
