@@ -25,6 +25,7 @@
     --complete: #0f7a8c; --complete-soft: #dff3f5;
     --canceled: #c23b3b; --canceled-soft: #fbe7e7;
     --approved: #1d5fd1; --approved-soft: #e4edfd;
+    --urgent: #d9480f; --urgent-soft: #ffeadd;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -37,6 +38,7 @@
       --hold: #e2a13f; --hold-soft: #3a2c14; --complete: #5cd0e6; --complete-soft: #123137;
       --canceled: #f18888; --canceled-soft: #3a1c1c;
       --approved: #7fb0ff; --approved-soft: #16284a;
+      --urgent: #ff9a5c; --urgent-soft: #3d2110;
     }
   }
   :root[data-theme="dark"] {
@@ -48,6 +50,7 @@
     --hold: #e2a13f; --hold-soft: #3a2c14; --complete: #5cd0e6; --complete-soft: #123137;
     --canceled: #f18888; --canceled-soft: #3a1c1c;
     --approved: #7fb0ff; --approved-soft: #16284a;
+    --urgent: #ff9a5c; --urgent-soft: #3d2110;
   }
 
   * { box-sizing: border-box; }
@@ -85,6 +88,14 @@
   .card.is-approved { border: 2px solid var(--approved); padding: 17px 19px 15px; background: color-mix(in srgb, var(--approved-soft) 60%, var(--surface)); box-shadow: 0 0 0 4px color-mix(in srgb, var(--approved) 16%, transparent), var(--shadow); }
   .card.is-approved::after { content: "\2713  Approved"; position: absolute; top: -11px; right: 16px; background: var(--approved); color: var(--surface); font-family: 'Work Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 3px 11px; border-radius: 999px; white-space: pre; }
   .card.is-approved.editing::after { display: none; }
+  /* Urgent: set by hand, with its own due date. Wins over the Approved look if both are on. */
+  .card.is-urgent { border: 2px solid var(--urgent); padding: 17px 19px 15px; background: color-mix(in srgb, var(--urgent-soft) 65%, var(--surface)); box-shadow: 0 0 0 4px color-mix(in srgb, var(--urgent) 18%, transparent), var(--shadow); }
+  .card.is-urgent::before { content: attr(data-urgent); position: absolute; top: -11px; left: 16px; background: var(--urgent); color: var(--surface); font-family: 'Work Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.03em; padding: 3px 11px; border-radius: 999px; white-space: nowrap; max-width: calc(100% - 32px); overflow: hidden; text-overflow: ellipsis; }
+  .card.is-urgent.editing::before { display: none; }
+  .card.is-urgent.is-approved::before { max-width: calc(100% - 150px); } /* leave room for the Approved badge on the right */
+  .icon-btn.urgent-btn.on { background: var(--urgent-soft); color: var(--urgent); border-color: transparent; }
+  .urgent-row { display: grid; grid-template-columns: 1fr 150px; gap: 10px; align-items: center; }
+  .urgent-row .toggle-row input { accent-color: var(--urgent); }
 
   /* Reference image (16:9, matches the 1920 x 1080 spec) */
   .card-image { display: block; width: 100%; aspect-ratio: 16 / 9; padding: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--surface-2); cursor: zoom-in; }
@@ -101,6 +112,23 @@
   .lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(12,12,16,0.84); display: flex; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
   .lightbox[hidden] { display: none; }
   .lightbox img { max-width: 100%; max-height: 100%; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); background: #fff; }
+  .card-images { display: flex; flex-direction: column; gap: 6px; }
+  .card-image { position: relative; }
+  .image-count { position: absolute; right: 8px; bottom: 8px; background: rgba(12,12,16,0.72); color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 2px 7px; border-radius: 999px; }
+  .thumb-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .card-image.thumb { border-radius: 7px; }
+  .image-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .image-tile { position: relative; aspect-ratio: 16 / 9; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--surface-2); }
+  .image-tile img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .image-tile .icon-btn { position: absolute; top: 5px; right: 5px; width: 26px; height: 26px; }
+  .image-tile .slot { position: absolute; left: 6px; bottom: 6px; background: rgba(12,12,16,0.72); color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; padding: 1px 6px; border-radius: 999px; }
+  .image-grid .image-drop { font-size: 12px; }
+  .field-label .hint { text-transform: none; letter-spacing: 0; font-weight: 500; margin-left: 6px; }
+  .lb-nav { position: fixed; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: none; background: rgba(255,255,255,0.16); color: #fff; font-size: 26px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .lb-nav:hover { background: rgba(255,255,255,0.28); }
+  .lb-nav:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .lb-nav.prev { left: 18px; } .lb-nav.next { right: 18px; }
+  .lb-nav[hidden] { display: none; }
   .lightbox .cap { position: fixed; left: 0; right: 0; bottom: 14px; text-align: center; color: #fff; font-size: 13px; font-weight: 500; text-shadow: 0 1px 3px rgba(0,0,0,0.6); pointer-events: none; }
   .updated-flag { display: flex; align-items: center; gap: 8px; margin: -18px -20px 0; padding: 8px 20px; border-radius: 13px 13px 0 0; background: var(--new-soft); color: var(--new); font-size: 12px; font-weight: 600; line-height: 1.4; }
   .updated-flag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--new); flex-shrink: 0; }
@@ -201,12 +229,13 @@
     <span class="item"><span class="swatch" style="background:var(--new)"></span>New</span>
     <span class="item"><span class="swatch" style="background:var(--proceed)"></span>Proceed</span>
     <span class="item"><span class="swatch" style="background:var(--hold)"></span>Hold</span>
+    <span class="item"><span class="swatch" style="background:var(--urgent)"></span>Urgent</span>
     <span class="item"><span class="swatch" style="background:var(--approved)"></span>Approved</span>
     <span class="item"><span class="swatch" style="background:var(--complete)"></span>Complete</span>
     <span class="item"><span class="swatch" style="background:var(--canceled)"></span>Canceled</span>
   </footer>
 </div>
-<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image preview"><img id="lightboxImg" alt=""><div class="cap" id="lightboxCap"></div></div>
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image preview"><button type="button" class="lb-nav prev" id="lbPrev" aria-label="Previous image">&#8249;</button><img id="lightboxImg" alt=""><button type="button" class="lb-nav next" id="lbNext" aria-label="Next image">&#8250;</button><div class="cap" id="lightboxCap"></div></div>
 
 <script>
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTTTV9r8eGhH4xBrcfP0gMgwnLdOkqjt8kOl6IJbukF0rpa5iHiDfPZd0VXmyZ8of9/exec";
@@ -261,24 +290,37 @@
   function loadLocal() { try { const raw = localStorage.getItem(LOCAL_KEY); return raw ? JSON.parse(raw) : null; } catch (e) { return null; } }
   function saveLocal(rows) {
     try { localStorage.setItem(LOCAL_KEY, JSON.stringify(rows)); }
-    catch (e) { try { localStorage.setItem(LOCAL_KEY, JSON.stringify(rows.map(r => ({ ...r, image: "" })))); } catch (e2) {} }
+    catch (e) { try { localStorage.setItem(LOCAL_KEY, JSON.stringify(rows.map(r => ({ ...r, images: [] })))); } catch (e2) {} }
   }
 
-  // Images: stored in the sheet as up to 10 text cells, because the backend accepts at most 20,000 characters
-  // per field. Each chunk is prefixed with "~" so the spreadsheet never mistakes base64 that starts with "+"
-  // or "=" for a formula.
-  const IMAGE_KEYS = ["image", "image2", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10"];
+  // Images: up to 4 per card, stored in the sheet as text cells. The backend accepts at most 20,000 characters
+  // per field, so each image is split into chunks of 19,000, and every chunk is prefixed with "~" so the
+  // spreadsheet never reads base64 that starts with "+" or "=" as a formula. The first image keeps the original
+  // column names (image, image2 … image10); the others use imageB…, imageC…, imageD… with a smaller budget.
   const IMAGE_CHUNK = 19000;
-  const IMAGE_MAX = IMAGE_KEYS.length * IMAGE_CHUNK;
+  const chunkKeys = (base, n) => Array.from({ length: n }, (_, i) => base + (i ? String(i + 1) : ""));
+  const IMAGE_SLOTS = [chunkKeys("image", 10), chunkKeys("imageB", 6), chunkKeys("imageC", 6), chunkKeys("imageD", 6)];
+  const MAX_IMAGES = IMAGE_SLOTS.length;
+  const slotLimit = i => IMAGE_SLOTS[Math.min(i, MAX_IMAGES - 1)].length * IMAGE_CHUNK;
   function safeImage(s) {
     s = String(s == null ? "" : s).trim();
     if (/^data:image\/(jpeg|png|webp|gif);base64,[A-Za-z0-9+\/=]+$/.test(s)) return s;
     return /^https:\/\//i.test(s) ? s : "";
   }
-  function joinImage(r) { return safeImage(IMAGE_KEYS.map(k => String(r[k] == null ? "" : r[k]).replace(/^~/, "")).join("")); }
-  function imageFields(url) {
+  // Rows from the sheet carry chunk columns; rows already in memory carry an `images` array.
+  function readImages(r) {
+    const hasChunks = IMAGE_SLOTS.some(keys => keys.some(k => r[k] != null && r[k] !== ""));
+    if (hasChunks) return IMAGE_SLOTS.map(keys => safeImage(keys.map(k => String(r[k] == null ? "" : r[k]).replace(/^~/, "")).join(""))).filter(Boolean);
+    return Array.isArray(r.images) ? r.images.map(safeImage).filter(Boolean).slice(0, MAX_IMAGES) : [];
+  }
+  // Fields to send so every slot from `from` onward matches `images`; empty strings clear unused cells.
+  function imageFields(images, from) {
     const f = {};
-    IMAGE_KEYS.forEach((k, i) => { const part = (url || "").slice(i * IMAGE_CHUNK, (i + 1) * IMAGE_CHUNK); f[k] = part ? "~" + part : ""; });
+    IMAGE_SLOTS.forEach((keys, slot) => {
+      if (slot < (from || 0)) return;
+      const url = images[slot] || "";
+      keys.forEach((k, i) => { const part = url.slice(i * IMAGE_CHUNK, (i + 1) * IMAGE_CHUNK); f[k] = part ? "~" + part : ""; });
+    });
     return f;
   }
   function loadImageFile(file) {
@@ -289,8 +331,8 @@
       img.src = url;
     });
   }
-  // Scales the picture down (1920 x 1080 becomes 1280 x 720) and compresses it until it fits the storage limit.
-  async function fileToImage(file) {
+  // Scales the picture down (1920 x 1080 becomes 1280 x 720) and compresses it until it fits its slot.
+  async function fileToImage(file, maxChars) {
     if (!file || !/^image\/(png|jpe?g|webp|gif)$/i.test(file.type)) throw new Error("Use a PNG, JPG, WebP or GIF image.");
     const img = await loadImageFile(file);
     const canvas = document.createElement("canvas"); const ctx = canvas.getContext("2d");
@@ -302,22 +344,38 @@
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       for (const q of [0.82, 0.72, 0.62, 0.52]) {
         const out = canvas.toDataURL("image/jpeg", q);
-        if (out.length <= IMAGE_MAX) return out;
+        if (out.length <= maxChars) return out;
       }
     }
     throw new Error("That image is too detailed to store here. Try a simpler or smaller version.");
   }
-  const pendingImage = new Map(); // card id -> image chosen in the editor but not saved yet ("" means remove)
-  function openLightbox(src, caption) {
-    const box = document.getElementById("lightbox");
-    document.getElementById("lightboxImg").src = src;
-    document.getElementById("lightboxImg").alt = caption || "";
-    document.getElementById("lightboxCap").textContent = caption || "";
-    box.hidden = false;
+  const pendingImages = new Map(); // card id -> working copy of the image list while the editor is open
+  const lb = { images: [], index: 0, name: "" };
+  function drawLightbox() {
+    const n = lb.images.length;
+    document.getElementById("lightboxImg").src = lb.images[lb.index];
+    document.getElementById("lightboxImg").alt = lb.name || "";
+    document.getElementById("lightboxCap").textContent = (lb.name || "") + (n > 1 ? "  ·  " + (lb.index + 1) + " of " + n : "");
+    document.getElementById("lbPrev").hidden = n < 2;
+    document.getElementById("lbNext").hidden = n < 2;
   }
-  function closeLightbox() { const box = document.getElementById("lightbox"); box.hidden = true; document.getElementById("lightboxImg").removeAttribute("src"); }
+  function openLightbox(images, index, name) {
+    lb.images = images.slice(); lb.index = Math.max(0, Math.min(index || 0, images.length - 1)); lb.name = name || "";
+    if (!lb.images.length) return;
+    drawLightbox();
+    document.getElementById("lightbox").hidden = false;
+  }
+  function stepLightbox(d) { const n = lb.images.length; if (n < 2) return; lb.index = (lb.index + d + n) % n; drawLightbox(); }
+  function closeLightbox() { document.getElementById("lightbox").hidden = true; document.getElementById("lightboxImg").removeAttribute("src"); }
   document.getElementById("lightbox").addEventListener("click", closeLightbox);
-  document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+  document.getElementById("lbPrev").addEventListener("click", e => { e.stopPropagation(); stepLightbox(-1); });
+  document.getElementById("lbNext").addEventListener("click", e => { e.stopPropagation(); stepLightbox(1); });
+  document.addEventListener("keydown", e => {
+    if (document.getElementById("lightbox").hidden) return;
+    if (e.key === "Escape") closeLightbox();
+    else if (e.key === "ArrowLeft") stepLightbox(-1);
+    else if (e.key === "ArrowRight") stepLightbox(1);
+  });
   const hasImageFile = e => !!(e.dataTransfer && [...(e.dataTransfer.types || [])].includes("Files"));
 
   // Backend rows store notes as newline-joined text and refs as JSON text.
@@ -332,8 +390,10 @@
     out.updated = out.updated === true || out.updated === "true" || out.updated === "TRUE";
     out.updatedOn = typeof out.updatedOn === "string" ? out.updatedOn.slice(0, 10) : "";
     out.updatedNote = out.updatedNote == null ? "" : String(out.updatedNote);
-    out.image = joinImage(out);
-    IMAGE_KEYS.slice(1).forEach(k => { delete out[k]; });
+    out.urgent = out.urgent === true || out.urgent === "true" || out.urgent === "TRUE";
+    out.urgentDue = typeof out.urgentDue === "string" ? out.urgentDue.slice(0, 10) : "";
+    out.images = readImages(out);
+    IMAGE_SLOTS.forEach(keys => keys.forEach(k => { delete out[k]; }));
     return out;
   }
 
@@ -356,15 +416,32 @@
   const ICON_FLAG = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 14V2.5"/><path d="M3.5 3h8.5l-2 3 2 3H3.5"/></svg>';
   const fmtDay = iso => { if (!iso) return ""; const [y, m, d] = iso.split("-").map(Number); if (!y || !m || !d) return ""; return new Date(y, m - 1, d).toLocaleDateString(undefined, { month: "short", day: "numeric" }); };
   const todayIso = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+  const ICON_ALERT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2l6 10.6H2z"/><path d="M8 6.6v3"/><path d="M8 11.4v.1"/></svg>';
+  // Default urgent date: the card's next date that has not passed yet, otherwise its last known date.
+  function defaultUrgentDue(row) {
+    const t = todayIso();
+    const ahead = [row.first, row.final].filter(d => d && d >= t).sort();
+    return ahead[0] || row.final || row.first || t;
+  }
+  function urgentLabel(row) {
+    if (!row.urgentDue) return "Urgent";
+    const [y, m, d] = row.urgentDue.split("-").map(Number);
+    const now = new Date(); const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const days = Math.round((new Date(y, m - 1, d) - today) / 86400000);
+    const when = days === 0 ? "today" : days === 1 ? "tomorrow" : days > 1 ? "in " + days + " days" : days === -1 ? "1 day late" : (-days) + " days late";
+    return "Urgent \u00b7 due " + fmtDay(row.urgentDue) + " \u00b7 " + when;
+  }
   const ICON_EXT = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2H2v8h8V7"/><path d="M7 1h4v4"/><path d="M11 1L5.5 6.5"/></svg>';
 
   function renderSummary() {
     const counts = Object.fromEntries(STATUSES.map(s => [s, 0]));
     visible().forEach(r => { counts[r.status]++; });
     const updatedCount = visible().filter(r => r.updated).length;
+    const urgentCount = visible().filter(r => r.urgent).length;
     document.getElementById("summary").innerHTML = STATUSES.map(s => `
       <span class="count-chip"><span class="dot" style="background:var(--${s})"></span><strong>${counts[s]}</strong> ${STATUS_LABEL[s]}</span>`).join("")
-      + (updatedCount ? `<span class="count-chip" style="border-color:var(--new);color:var(--new)"><strong style="color:var(--new)">${updatedCount}</strong> Updated</span>` : "");
+      + (updatedCount ? `<span class="count-chip" style="border-color:var(--new);color:var(--new)"><strong style="color:var(--new)">${updatedCount}</strong> Updated</span>` : "")
+      + (urgentCount ? `<span class="count-chip" style="border-color:var(--urgent);color:var(--urgent)"><strong style="color:var(--urgent)">${urgentCount}</strong> Urgent</span>` : "");
   }
 
   function statusSelectHtml(row) {
@@ -381,9 +458,14 @@
         ? `<a class="ref-pill" href="${attr(u)}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.label || "Link")}${ICON_EXT}</a>`
         : `<span class="ref-pill">${escapeHtml(r.label)}</span>`;
     }).join("")}</div>` : "";
+    const imgs = row.images || [];
+    const imagesHtml = imgs.length ? `<div class="card-images">
+          <button type="button" class="card-image" data-index="0" aria-label="View image 1 of ${imgs.length} for ${attr(row.deliverable)}"><img src="${attr(imgs[0])}" alt="Reference image for ${attr(row.deliverable)}" loading="lazy">${imgs.length > 1 ? `<span class="image-count">1 / ${imgs.length}</span>` : ""}</button>
+          ${imgs.length > 1 ? `<div class="thumb-row">${imgs.slice(1).map((src, i) => `<button type="button" class="card-image thumb" data-index="${i + 1}" aria-label="View image ${i + 2} of ${imgs.length} for ${attr(row.deliverable)}"><img src="${attr(src)}" alt="" loading="lazy"></button>`).join("")}</div>` : ""}
+        </div>` : "";
     const flagHtml = row.updated ? `<div class="updated-flag">Updated${row.updatedOn ? ` <span class="when">${escapeHtml(fmtDay(row.updatedOn))}</span>` : ""}${row.updatedNote ? ` <span class="what">&middot; ${escapeHtml(row.updatedNote)}</span>` : ""}</div>` : "";
     return `
-      <article class="card ${row.status === 'canceled' ? 'is-canceled' : ''} ${row.status === 'approved' ? 'is-approved' : ''} ${row.updated ? 'is-updated' : ''}" data-id="${attr(row.id)}">
+      <article class="card ${row.status === 'canceled' ? 'is-canceled' : ''} ${row.status === 'approved' ? 'is-approved' : ''} ${row.updated ? 'is-updated' : ''} ${row.urgent ? 'is-urgent' : ''}" data-id="${attr(row.id)}" ${row.urgent ? `data-urgent="${attr(urgentLabel(row))}"` : ""}>
         ${flagHtml}
         <div class="card-head">
           <div class="card-title">
@@ -393,10 +475,11 @@
           <div class="head-controls">
             ${statusSelectHtml(row)}
             <button class="icon-btn flag-btn ${row.updated ? 'on' : ''}" aria-pressed="${row.updated ? 'true' : 'false'}" aria-label="${row.updated ? 'Clear updated flag on' : 'Mark as updated:'} ${attr(row.deliverable)}" title="${row.updated ? 'Clear the Updated flag' : 'Flag this card as Updated'}">${ICON_FLAG}</button>
+            <button class="icon-btn urgent-btn ${row.urgent ? 'on' : ''}" aria-pressed="${row.urgent ? 'true' : 'false'}" aria-label="${row.urgent ? 'Clear urgent on' : 'Mark as urgent:'} ${attr(row.deliverable)}" title="${row.urgent ? 'Clear Urgent' : 'Mark as Urgent (set the date in the editor)'}">${ICON_ALERT}</button>
             <button class="icon-btn edit-btn" aria-label="Edit ${attr(row.deliverable)}" title="Edit details">${ICON_PENCIL}</button>
           </div>
         </div>
-        ${row.image ? `<button type="button" class="card-image" aria-label="View the image for ${attr(row.deliverable)}"><img src="${attr(row.image)}" alt="Reference image for ${attr(row.deliverable)}" loading="lazy"></button>` : ""}
+        ${imagesHtml}
         <div class="date-row">
           <div><label class="field-label">First pass</label><input type="date" class="first-input" value="${attr(row.first || '')}" aria-label="First pass date for ${attr(row.deliverable)}"></div>
           <div><label class="field-label">Final</label><input type="date" class="final-input" value="${attr(row.final || '')}" aria-label="Final date for ${attr(row.deliverable)}"></div>
@@ -426,12 +509,18 @@
             <input class="edit-input sans e-updated-note" style="margin-top:8px" value="${attr(row.updatedNote || "")}" placeholder="What changed? (optional, e.g. Final date moved to Oct 13)">
           </div>
           <div>
-            <label class="field-label">Image</label>
-            <div class="image-drop ${row.image ? "has-image" : ""}">${row.image ? `<img src="${attr(row.image)}" alt="">` : `<span>Drop an image here</span><span class="hint">1920 × 1080 fits exactly</span>`}</div>
+            <label class="field-label">Urgent</label>
+            <div class="urgent-row">
+              <label class="toggle-row"><input type="checkbox" class="e-urgent" ${row.urgent ? "checked" : ""}> Highlight this card as urgent</label>
+              <input type="date" class="e-urgent-due" value="${attr(row.urgentDue || defaultUrgentDue(row))}" aria-label="Urgent due date">
+            </div>
+          </div>
+          <div>
+            <label class="field-label">Images <span class="hint">up to ${MAX_IMAGES} · 1920 × 1080 fits exactly</span></label>
+            <div class="image-grid"></div>
             <div class="image-actions">
-              <button type="button" class="text-btn choose-image">Choose a file…</button>
-              <button type="button" class="text-btn danger remove-image" ${row.image ? "" : "hidden"}>Remove image</button>
-              <input type="file" class="e-image-file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+              <button type="button" class="text-btn choose-image">Choose files…</button>
+              <input type="file" class="e-image-file" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden>
               <span class="image-error" role="alert"></span>
             </div>
           </div>
@@ -488,24 +577,42 @@
         const row = state.find(r => r.id === id); if (row) row.status = e.target.value;
         save(id, { status: e.target.value });
       });
-      const imgBtn = card.querySelector(".card-image");
-      if (imgBtn) imgBtn.addEventListener("click", () => { const row = state.find(r => r.id === id); if (row && row.image) openLightbox(row.image, row.deliverable); });
-      // Dropping a picture on a card attaches it straight away.
+      card.querySelectorAll(".card-image").forEach(btn => btn.addEventListener("click", () => {
+        const row = state.find(r => r.id === id);
+        if (row && row.images && row.images.length) openLightbox(row.images, Number(btn.dataset.index) || 0, row.deliverable);
+      }));
+      // Dropping pictures on a card adds them straight away (up to MAX_IMAGES per card).
       card.addEventListener("dragover", e => { if (hasImageFile(e)) { e.preventDefault(); card.classList.add("drop-target"); } });
       card.addEventListener("dragleave", e => { if (!card.contains(e.relatedTarget)) card.classList.remove("drop-target"); });
       card.addEventListener("drop", async e => {
         if (!hasImageFile(e)) return;
         e.preventDefault(); card.classList.remove("drop-target");
         const row = state.find(r => r.id === id); if (!row) return;
-        const note = card.querySelector(".save-state");
-        try {
-          if (note) { note.textContent = "Preparing image…"; note.className = "save-state"; }
-          row.image = await fileToImage(e.dataTransfer.files[0]);
-          if (editing.size === 0) render();
-          save(id, imageFields(row.image));
-        } catch (err) { if (note) { note.textContent = err.message; note.className = "save-state error"; } }
+        row.images = row.images || [];
+        const files = [...e.dataTransfer.files];
+        const say = (t, err) => { const el = document.querySelector(`.card[data-id="${id}"] .save-state`); if (el) { el.textContent = t; el.className = "save-state" + (err ? " error" : ""); } };
+        const start = row.images.length;
+        if (start >= MAX_IMAGES) { say(`This card already has ${MAX_IMAGES} images. Remove one in the editor to add another.`, true); return; }
+        say("Preparing image…");
+        const problems = [];
+        for (const file of files) {
+          if (row.images.length >= MAX_IMAGES) { problems.push(`only ${MAX_IMAGES} images fit on a card`); break; }
+          try { row.images.push(await fileToImage(file, slotLimit(row.images.length))); }
+          catch (err) { problems.push(err.message); }
+        }
+        if (row.images.length === start) { say(problems[0] || "No image was added.", true); return; }
+        if (editing.size === 0) render();
+        await save(id, imageFields(row.images, start));
+        if (problems.length) say("Saved, but not everything was added: " + problems[0], true);
       });
       card.querySelector(".edit-btn").addEventListener("click", () => { editing.add(id); render(); });
+      card.querySelector(".urgent-btn").addEventListener("click", () => {
+        const row = state.find(r => r.id === id); if (!row) return;
+        row.urgent = !row.urgent;
+        if (row.urgent && !row.urgentDue) row.urgentDue = defaultUrgentDue(row);
+        render();
+        save(id, { urgent: row.urgent ? "true" : "false", urgentDue: row.urgentDue || "" });
+      });
       card.querySelector(".flag-btn").addEventListener("click", () => {
         const row = state.find(r => r.id === id); if (!row) return;
         row.updated = !row.updated;
@@ -528,34 +635,38 @@
         div.querySelector(".e-link-label").focus();
       });
       card.querySelectorAll(".remove-link").forEach(b => b.addEventListener("click", () => b.closest(".link-row").remove()));
-      const drop = card.querySelector(".image-drop"), fileInput = card.querySelector(".e-image-file");
-      const removeBtn = card.querySelector(".remove-image"), imgErr = card.querySelector(".image-error");
-      const showImage = src => {
-        drop.classList.toggle("has-image", !!src);
-        drop.innerHTML = src ? `<img src="${attr(src)}" alt="">` : `<span>Drop an image here</span><span class="hint">1920 × 1080 fits exactly</span>`;
-        removeBtn.hidden = !src;
+      const grid = card.querySelector(".image-grid"), fileInput = card.querySelector(".e-image-file"), imgErr = card.querySelector(".image-error");
+      if (!pendingImages.has(id)) pendingImages.set(id, [...(row.images || [])]);
+      const work = () => pendingImages.get(id);
+      const drawGrid = () => {
+        const list = work();
+        grid.innerHTML = list.map((src, i) => `<div class="image-tile"><img src="${attr(src)}" alt="Image ${i + 1}"><span class="slot">${i + 1}</span><button type="button" class="icon-btn remove-image" data-index="${i}" aria-label="Remove image ${i + 1}" title="Remove this image">${ICON_X}</button></div>`).join("")
+          + (list.length < MAX_IMAGES ? `<div class="image-drop"><span>Drop images here</span><span class="hint">${list.length} of ${MAX_IMAGES} used</span></div>` : "");
+        grid.querySelectorAll(".remove-image").forEach(b => b.addEventListener("click", () => { work().splice(Number(b.dataset.index), 1); imgErr.textContent = ""; drawGrid(); }));
       };
-      const takeFile = async file => {
+      const takeFiles = async files => {
         imgErr.textContent = "";
-        try { drop.innerHTML = "<span>Preparing image…</span>"; const src = await fileToImage(file); pendingImage.set(id, src); showImage(src); }
-        catch (err) { imgErr.textContent = err.message; showImage(pendingImage.has(id) ? pendingImage.get(id) : (row.image || "")); }
+        for (const file of [...files]) {
+          if (work().length >= MAX_IMAGES) { imgErr.textContent = `A card holds up to ${MAX_IMAGES} images. Remove one to add another.`; break; }
+          try { work().push(await fileToImage(file, slotLimit(work().length))); drawGrid(); }
+          catch (err) { imgErr.textContent = err.message; }
+        }
       };
       card.querySelector(".choose-image").addEventListener("click", () => fileInput.click());
-      fileInput.addEventListener("change", () => { if (fileInput.files[0]) takeFile(fileInput.files[0]); fileInput.value = ""; });
-      removeBtn.addEventListener("click", () => { pendingImage.set(id, ""); imgErr.textContent = ""; showImage(""); });
-      card.addEventListener("dragover", e => { if (hasImageFile(e)) { e.preventDefault(); drop.classList.add("over"); } });
-      card.addEventListener("dragleave", e => { if (!card.contains(e.relatedTarget)) drop.classList.remove("over"); });
-      card.addEventListener("drop", e => { if (!hasImageFile(e)) return; e.preventDefault(); drop.classList.remove("over"); takeFile(e.dataTransfer.files[0]); });
-      if (pendingImage.has(id)) showImage(pendingImage.get(id));
+      fileInput.addEventListener("change", () => { if (fileInput.files.length) takeFiles(fileInput.files); fileInput.value = ""; });
+      card.addEventListener("dragover", e => { if (hasImageFile(e)) { e.preventDefault(); const d = grid.querySelector(".image-drop"); if (d) d.classList.add("over"); } });
+      card.addEventListener("dragleave", e => { if (!card.contains(e.relatedTarget)) { const d = grid.querySelector(".image-drop"); if (d) d.classList.remove("over"); } });
+      card.addEventListener("drop", e => { if (!hasImageFile(e)) return; e.preventDefault(); takeFiles(e.dataTransfer.files); });
+      drawGrid();
       card.querySelector(".cancel-btn").addEventListener("click", () => {
-        editing.delete(id); pendingImage.delete(id);
+        editing.delete(id); pendingImages.delete(id);
         if (row && row._isNew) state = state.filter(r => r.id !== id);
         render();
       });
       card.querySelector(".delete-btn").addEventListener("click", () => {
         if (!confirm(`Remove "${row.deliverable || "this deliverable"}" from the tracker?`)) return;
         editing.delete(id);
-        pendingImage.delete(id);
+        pendingImages.delete(id);
         if (row._isNew) { state = state.filter(r => r.id !== id); render(); return; }
         row.deleted = true;
         render();
@@ -575,16 +686,22 @@
           notes: card.querySelector(".e-notes").value.split("\n").map(s => s.trim()).filter(Boolean).join("\n"),
           refs: JSON.stringify(refs),
           updated: card.querySelector(".e-updated").checked ? "true" : "false",
-          updatedNote: card.querySelector(".e-updated-note").value.trim()
+          updatedNote: card.querySelector(".e-updated-note").value.trim(),
+          urgent: card.querySelector(".e-urgent").checked ? "true" : "false",
+          urgentDue: card.querySelector(".e-urgent-due").value
         };
         fields.updatedOn = fields.updated === "true" ? (row.updated && row.updatedOn ? row.updatedOn : todayIso()) : "";
         if (fields.updated !== "true") fields.updatedNote = "";
         if (row._isNew) { fields.section = row.section; delete row._isNew; }
-        const newImage = pendingImage.has(id) ? pendingImage.get(id) : null;
-        pendingImage.delete(id);
+        const oldImages = row.images || [];
+        const newImages = pendingImages.has(id) ? pendingImages.get(id).slice(0, MAX_IMAGES) : oldImages.slice();
+        pendingImages.delete(id);
         editing.delete(id);
-        Object.assign(row, normalize({ ...row, ...fields, image: row.image }));
-        if (newImage !== null) { row.image = newImage; Object.assign(fields, imageFields(newImage)); }
+        Object.assign(row, normalize({ ...row, ...fields }));
+        row.images = newImages;
+        // Only the slots that actually changed are sent; removing an image shifts the later ones up.
+        let from = 0; while (from < MAX_IMAGES && (oldImages[from] || "") === (newImages[from] || "")) from++;
+        if (from < MAX_IMAGES) Object.assign(fields, imageFields(newImages, from));
         render();
         save(id, fields);
       });
