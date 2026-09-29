@@ -62,6 +62,20 @@
 
   header.top { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
   h1 { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 34px; letter-spacing: -0.01em; margin: 0 0 8px; text-wrap: balance; }
+  header.top { position: relative; }
+  header.top > div:first-child { padding-right: 170px; }
+  .lang-switch { position: absolute; top: 4px; right: 0; display: inline-flex; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); padding: 3px; gap: 2px; }
+  .lang-switch button { font: inherit; font-family: 'Work Sans', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: var(--text-muted); background: none; border: none; border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+  .lang-switch button:hover { color: var(--text); }
+  .lang-switch button[aria-pressed="true"] { background: var(--accent); color: var(--surface); }
+  .lang-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .tr-block { border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; }
+  .tr-block summary { cursor: pointer; font-size: 12.5px; font-weight: 600; color: var(--text-muted); }
+  .tr-block[open] summary { margin-bottom: 8px; }
+  .tr-help { font-size: 12px; color: var(--text-faint); margin: 0 0 10px; line-height: 1.45; }
+  .tr-lang { border: none; padding: 0; margin: 0 0 12px; display: flex; flex-direction: column; gap: 6px; }
+  .tr-lang:last-child { margin-bottom: 4px; }
+  .tr-lang legend { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); font-weight: 600; padding: 0; margin-bottom: 5px; }
   .lede { margin: 0; color: var(--text-muted); font-size: 15px; max-width: 62ch; line-height: 1.55; }
 
   .conn-banner { display: none; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 10px; background: var(--hold-soft); color: var(--hold); font-size: 13px; font-weight: 500; width: fit-content; }
@@ -89,7 +103,7 @@
   .card.is-updated { border-color: var(--new); }
   /* Approved: the whole card is lifted so sign-off is visible while scanning the board. */
   .card.is-approved { border: 2px solid var(--approved); padding: 17px 19px 15px; background: color-mix(in srgb, var(--approved-soft) 60%, var(--surface)); box-shadow: 0 0 0 4px color-mix(in srgb, var(--approved) 16%, transparent), var(--shadow); }
-  .card.is-approved::after { content: "\2713  Approved"; position: absolute; top: -11px; right: 16px; background: var(--approved); color: var(--surface); font-family: 'Work Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 3px 11px; border-radius: 999px; white-space: pre; }
+  .card.is-approved::after { content: "\2713  " attr(data-approved); position: absolute; top: -11px; right: 16px; background: var(--approved); color: var(--surface); font-family: 'Work Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 3px 11px; border-radius: 999px; white-space: pre; }
   .card.is-approved.editing::after { display: none; }
   /* Urgent: set by hand, with its own due date. Wins over the Approved look if both are on. */
   .card.is-urgent { border: 2px solid var(--urgent); padding: 17px 19px 15px; background: color-mix(in srgb, var(--urgent-soft) 65%, var(--surface)); box-shadow: 0 0 0 4px color-mix(in srgb, var(--urgent) 18%, transparent), var(--shadow); }
@@ -217,10 +231,15 @@
 <div class="page">
   <header class="top">
     <div>
-      <h1>Production Tracker</h1>
-      <p class="lede">Live deliverables status across all fan-experience builds. Change a status or date directly, or use the pencil on any card to edit its details &mdash; everything saves for everyone viewing this page.</p>
+      <h1 data-i18n="title">Production Tracker</h1>
+      <p class="lede" data-i18n="lede">Live deliverables status across all fan-experience builds. Change a status or date directly, or use the pencil on any card to edit its details &mdash; everything saves for everyone viewing this page.</p>
     </div>
-    <div id="connBanner" class="conn-banner">Not yet connected to the shared backend &mdash; changes are only saving in this browser for now.</div>
+    <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true" title="English">EN</button>
+      <button type="button" data-lang="es" aria-pressed="false" title="Espa&ntilde;ol">ES</button>
+      <button type="button" data-lang="it" aria-pressed="false" title="Italiano">IT</button>
+    </div>
+    <div id="connBanner" class="conn-banner" data-i18n="banner.offline">Not yet connected to the shared backend &mdash; changes are only saving in this browser for now.</div>
     <div class="summary-row">
       <div class="summary" id="summary"></div>
       <span id="syncState" class="sync-state" aria-live="polite"></span>
@@ -230,20 +249,74 @@
   <main id="groups"></main>
 
   <footer class="legend">
-    <span class="item"><span class="swatch" style="background:var(--new)"></span>New</span>
-    <span class="item"><span class="swatch" style="background:var(--proceed)"></span>Proceed</span>
-    <span class="item"><span class="swatch" style="background:var(--hold)"></span>Hold</span>
-    <span class="item"><span class="swatch" style="background:var(--revision)"></span>Revision</span>
-    <span class="item"><span class="swatch" style="background:var(--urgent)"></span>Urgent</span>
-    <span class="item"><span class="swatch" style="background:var(--approved)"></span>Approved</span>
-    <span class="item"><span class="swatch" style="background:var(--complete)"></span>Complete</span>
-    <span class="item"><span class="swatch" style="background:var(--canceled)"></span>Canceled</span>
+    <span class="item"><span class="swatch" style="background:var(--new)"></span><span data-i18n="status.new">New</span></span>
+    <span class="item"><span class="swatch" style="background:var(--proceed)"></span><span data-i18n="status.proceed">Proceed</span></span>
+    <span class="item"><span class="swatch" style="background:var(--hold)"></span><span data-i18n="status.hold">Hold</span></span>
+    <span class="item"><span class="swatch" style="background:var(--revision)"></span><span data-i18n="status.revision">Revision</span></span>
+    <span class="item"><span class="swatch" style="background:var(--urgent)"></span><span data-i18n="flag.urgent">Urgent</span></span>
+    <span class="item"><span class="swatch" style="background:var(--approved)"></span><span data-i18n="status.approved">Approved</span></span>
+    <span class="item"><span class="swatch" style="background:var(--complete)"></span><span data-i18n="status.complete">Complete</span></span>
+    <span class="item"><span class="swatch" style="background:var(--canceled)"></span><span data-i18n="status.canceled">Canceled</span></span>
   </footer>
 </div>
-<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image preview"><button type="button" class="lb-nav prev" id="lbPrev" aria-label="Previous image">&#8249;</button><img id="lightboxImg" alt=""><button type="button" class="lb-nav next" id="lbNext" aria-label="Next image">&#8250;</button><div class="cap" id="lightboxCap"></div></div>
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image preview" data-i18n-aria="aria.lightbox"><button type="button" class="lb-nav prev" id="lbPrev" aria-label="Previous image" data-i18n-aria="aria.prev">&#8249;</button><img id="lightboxImg" alt=""><button type="button" class="lb-nav next" id="lbNext" aria-label="Next image" data-i18n-aria="aria.next">&#8250;</button><div class="cap" id="lightboxCap"></div></div>
 
 <script>
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTTTV9r8eGhH4xBrcfP0gMgwnLdOkqjt8kOl6IJbukF0rpa5iHiDfPZd0VXmyZ8of9/exec";
+
+  // ---- Languages. English is the source; Spanish and Italian are for the agency teams in Argentina and Italy.
+  // Interface text lives in I18N. Card text is translated per card (see `tr` on each row and loc()).
+  const I18N = {"en":{"title":"Production Tracker","lede":"Live deliverables status across all fan-experience builds. Change a status or date directly, or use the pencil on any card to edit its details — everything saves for everyone viewing this page.","banner.offline":"Not yet connected to the shared backend — changes are only saving in this browser for now.","banner.unreachable":"Could not reach the shared tracker — showing the last saved copy on this device.","sync.syncing":"Syncing latest changes…","sync.upToDate":"Up to date","status.new":"New","status.proceed":"Proceed","status.hold":"Hold","status.revision":"Revision","status.approved":"Approved","status.complete":"Complete","status.canceled":"Canceled","flag.updated":"Updated","flag.urgent":"Urgent","badge.approved":"Approved","sec.1|Sticker Dispenser":"Sticker Dispenser","sec.2|Photo ID Card Collector Kiosk":"Photo ID Card Collector Kiosk","sec.3|Artist Signing & Lithograph Area":"Artist Signing & Lithograph Area","sec.5|Coronado Reception":"Coronado Reception","sec.4|Center Stage & Motion":"Center Stage & Motion","lbl.first":"First pass","lbl.final":"Final","lbl.deliverable":"Deliverable","ph.deliverable":"Deliverable name","lbl.specs":"Key specs","ph.specs":"e.g. 24\" × 36\" · 300 dpi","lbl.status":"Status","lbl.notes":"Notes (one per line)","ph.notes":"Bleed, copy direction, open questions…","lbl.updatedFlag":"Updated flag","txt.showUpdated":"Show an “Updated” banner on this card","ph.updatedNote":"What changed? (optional, e.g. Final date moved to Oct 13)","lbl.urgent":"Urgent","txt.highlightUrgent":"Highlight this card as urgent","aria.urgentDue":"Urgent due date","lbl.images":"Images","hint.images":"up to {n} · 1920 × 1080 fits exactly","btn.chooseFiles":"Choose files…","lbl.links":"Links","ph.linkLabel":"Label (e.g. Copy)","aria.removeLink":"Remove link","btn.addLink":"+ Add link","btn.removeDeliverable":"Remove deliverable","btn.cancel":"Cancel","btn.done":"Done","btn.addDeliverable":"+ Add deliverable","aria.statusFor":"Status for {name}","aria.clearUpdated":"Clear updated flag on {name}","aria.markUpdated":"Mark as updated: {name}","tip.clearUpdated":"Clear the Updated flag","tip.markUpdated":"Flag this card as Updated","aria.clearUrgent":"Clear urgent on {name}","aria.markUrgent":"Mark as urgent: {name}","tip.clearUrgent":"Clear Urgent","tip.markUrgent":"Mark as Urgent (set the date in the editor)","aria.edit":"Edit {name}","tip.edit":"Edit details","aria.firstFor":"First pass date for {name}","aria.finalFor":"Final date for {name}","aria.viewImage":"View image {i} of {n} for {name}","alt.image":"Reference image for {name}","img.dropHere":"Drop images here","img.used":"{i} of {n} used","img.removeN":"Remove image {i}","img.removeTip":"Remove this image","img.altN":"Image {i}","msg.full":"This card already has {n} images. Remove one in the editor to add another.","msg.preparing":"Preparing image…","msg.onlyFit":"only {n} images fit on a card","msg.noneAdded":"No image was added.","msg.partial":"Saved, but not everything was added: {why}","msg.holdsUpTo":"A card holds up to {n} images. Remove one to add another.","err.type":"Use a PNG, JPG, WebP or GIF image.","err.read":"That file could not be read as an image.","err.tooDetailed":"That image is too detailed to store here. Try a simpler or smaller version.","save.local":"Saved locally","save.saving":"Saving…","save.saved":"Saved {time}","save.failed":"Failed to save — check connection and try again","confirm.remove":"Remove \"{name}\" from the tracker?","txt.thisDeliverable":"this deliverable","txt.untitled":"Untitled","txt.link":"Link","urgent.label":"Urgent · due {date} · {when}","when.today":"today","when.tomorrow":"tomorrow","when.inDays":"in {n} days","when.lateOne":"1 day late","when.lateN":"{n} days late","lb.of":"{i} of {n}","aria.lightbox":"Image preview","aria.prev":"Previous image","aria.next":"Next image","lang.label":"Language","tr.title":"Translations (Spanish and Italian)","tr.help":"Shown to people who switch the page to that language. If the English text changes later, that field shows English again until its translation is updated.","tr.es":"Spanish","tr.it":"Italian"},"es":{"title":"Seguimiento de producción","lede":"Estado en vivo de los entregables de todas las experiencias para fans. Cambia un estado o una fecha directamente, o usa el lápiz de cualquier tarjeta para editar sus detalles: todo se guarda para todas las personas que ven esta página.","banner.offline":"Aún sin conexión con el sistema compartido: por ahora los cambios solo se guardan en este navegador.","banner.unreachable":"No se pudo conectar con el tracker compartido: se muestra la última copia guardada en este dispositivo.","sync.syncing":"Sincronizando los últimos cambios…","sync.upToDate":"Actualizado","status.new":"Nuevo","status.proceed":"Avanzar","status.hold":"En espera","status.revision":"Revisión","status.approved":"Aprobado","status.complete":"Completado","status.canceled":"Cancelado","flag.updated":"Actualizado","flag.urgent":"Urgente","badge.approved":"Aprobado","sec.1|Sticker Dispenser":"Dispensador de stickers","sec.2|Photo ID Card Collector Kiosk":"Kiosco de tarjetas coleccionables con foto","sec.3|Artist Signing & Lithograph Area":"Área de firmas de artistas y litografías","sec.5|Coronado Reception":"Recepción Coronado","sec.4|Center Stage & Motion":"Escenario central y motion graphics","lbl.first":"Primera entrega","lbl.final":"Entrega final","lbl.deliverable":"Entregable","ph.deliverable":"Nombre del entregable","lbl.specs":"Especificaciones clave","ph.specs":"p. ej. 24\" × 36\" · 300 dpi","lbl.status":"Estado","lbl.notes":"Notas (una por línea)","ph.notes":"Sangrado, indicaciones de texto, preguntas abiertas…","lbl.updatedFlag":"Aviso de actualización","txt.showUpdated":"Mostrar un aviso de “Actualizado” en esta tarjeta","ph.updatedNote":"¿Qué cambió? (opcional, p. ej. la entrega final pasó al 13 de oct.)","lbl.urgent":"Urgente","txt.highlightUrgent":"Destacar esta tarjeta como urgente","aria.urgentDue":"Fecha límite urgente","lbl.images":"Imágenes","hint.images":"hasta {n} · 1920 × 1080 encaja exacto","btn.chooseFiles":"Elegir archivos…","lbl.links":"Enlaces","ph.linkLabel":"Etiqueta (p. ej. Texto)","aria.removeLink":"Quitar enlace","btn.addLink":"+ Agregar enlace","btn.removeDeliverable":"Quitar entregable","btn.cancel":"Cancelar","btn.done":"Listo","btn.addDeliverable":"+ Agregar entregable","aria.statusFor":"Estado de {name}","aria.clearUpdated":"Quitar el aviso de actualización de {name}","aria.markUpdated":"Marcar como actualizado: {name}","tip.clearUpdated":"Quitar el aviso de Actualizado","tip.markUpdated":"Marcar esta tarjeta como Actualizada","aria.clearUrgent":"Quitar urgente de {name}","aria.markUrgent":"Marcar como urgente: {name}","tip.clearUrgent":"Quitar Urgente","tip.markUrgent":"Marcar como Urgente (la fecha se define en el editor)","aria.edit":"Editar {name}","tip.edit":"Editar detalles","aria.firstFor":"Fecha de primera entrega de {name}","aria.finalFor":"Fecha de entrega final de {name}","aria.viewImage":"Ver imagen {i} de {n} de {name}","alt.image":"Imagen de referencia de {name}","img.dropHere":"Suelta las imágenes aquí","img.used":"{i} de {n} usadas","img.removeN":"Quitar imagen {i}","img.removeTip":"Quitar esta imagen","img.altN":"Imagen {i}","msg.full":"Esta tarjeta ya tiene {n} imágenes. Quita una en el editor para agregar otra.","msg.preparing":"Preparando la imagen…","msg.onlyFit":"solo caben {n} imágenes en una tarjeta","msg.noneAdded":"No se agregó ninguna imagen.","msg.partial":"Guardado, pero no se agregó todo: {why}","msg.holdsUpTo":"Una tarjeta admite hasta {n} imágenes. Quita una para agregar otra.","err.type":"Usa una imagen PNG, JPG, WebP o GIF.","err.read":"Ese archivo no se pudo leer como imagen.","err.tooDetailed":"Esa imagen tiene demasiado detalle para guardarla aquí. Prueba con una versión más simple o más pequeña.","save.local":"Guardado localmente","save.saving":"Guardando…","save.saved":"Guardado {time}","save.failed":"No se pudo guardar: revisa la conexión e inténtalo de nuevo","confirm.remove":"¿Quitar \"{name}\" del tracker?","txt.thisDeliverable":"este entregable","txt.untitled":"Sin título","txt.link":"Enlace","urgent.label":"Urgente · vence {date} · {when}","when.today":"hoy","when.tomorrow":"mañana","when.inDays":"en {n} días","when.lateOne":"1 día de atraso","when.lateN":"{n} días de atraso","lb.of":"{i} de {n}","aria.lightbox":"Vista previa de la imagen","aria.prev":"Imagen anterior","aria.next":"Imagen siguiente","lang.label":"Idioma","tr.title":"Traducciones (español e italiano)","tr.help":"Se muestran a quienes cambian la página a ese idioma. Si el texto en inglés cambia después, ese campo vuelve a mostrarse en inglés hasta que se actualice su traducción.","tr.es":"Español","tr.it":"Italiano","ref.Template":"Plantilla","ref.Copy":"Texto","ref.Artist Bios":"Biografías de artistas","ref.Artist Photos":"Fotos de artistas","ref.Storyboard & inspiration":"Storyboard e inspiración","ref.Assets":"Recursos","ref.Copy & Example":"Texto y ejemplo","ref.Elsa Style Guide":"Guía de estilo de Elsa","ref.Property Logos":"Logos de las propiedades","ref.Inspiration":"Inspiración","ref.All Style Guides":"Todas las guías de estilo"},"it":{"title":"Tracker di produzione","lede":"Stato in tempo reale dei deliverable di tutte le esperienze per i fan. Cambia uno stato o una data direttamente, oppure usa la matita su una scheda per modificarne i dettagli: tutto viene salvato per chiunque stia guardando questa pagina.","banner.offline":"Non ancora collegato al sistema condiviso: per ora le modifiche vengono salvate solo in questo browser.","banner.unreachable":"Impossibile raggiungere il tracker condiviso: viene mostrata l’ultima copia salvata su questo dispositivo.","sync.syncing":"Sincronizzazione delle ultime modifiche…","sync.upToDate":"Aggiornato","status.new":"Nuovo","status.proceed":"Procedere","status.hold":"In sospeso","status.revision":"Revisione","status.approved":"Approvato","status.complete":"Completato","status.canceled":"Annullato","flag.updated":"Aggiornato","flag.urgent":"Urgente","badge.approved":"Approvato","sec.1|Sticker Dispenser":"Distributore di sticker","sec.2|Photo ID Card Collector Kiosk":"Chiosco delle card da collezione con foto","sec.3|Artist Signing & Lithograph Area":"Area firme degli artisti e litografie","sec.5|Coronado Reception":"Ricevimento Coronado","sec.4|Center Stage & Motion":"Palco centrale e motion graphics","lbl.first":"Prima consegna","lbl.final":"Consegna finale","lbl.deliverable":"Deliverable","ph.deliverable":"Nome del deliverable","lbl.specs":"Specifiche principali","ph.specs":"es. 24\" × 36\" · 300 dpi","lbl.status":"Stato","lbl.notes":"Note (una per riga)","ph.notes":"Abbondanza, indicazioni sui testi, domande aperte…","lbl.updatedFlag":"Avviso di aggiornamento","txt.showUpdated":"Mostra un avviso “Aggiornato” su questa scheda","ph.updatedNote":"Cosa è cambiato? (facoltativo, es. consegna finale spostata al 13 ott.)","lbl.urgent":"Urgente","txt.highlightUrgent":"Evidenzia questa scheda come urgente","aria.urgentDue":"Scadenza urgente","lbl.images":"Immagini","hint.images":"fino a {n} · 1920 × 1080 entra esattamente","btn.chooseFiles":"Scegli i file…","lbl.links":"Link","ph.linkLabel":"Etichetta (es. Testo)","aria.removeLink":"Rimuovi link","btn.addLink":"+ Aggiungi link","btn.removeDeliverable":"Rimuovi deliverable","btn.cancel":"Annulla","btn.done":"Fatto","btn.addDeliverable":"+ Aggiungi deliverable","aria.statusFor":"Stato di {name}","aria.clearUpdated":"Rimuovi l’avviso di aggiornamento da {name}","aria.markUpdated":"Segna come aggiornato: {name}","tip.clearUpdated":"Rimuovi l’avviso Aggiornato","tip.markUpdated":"Segna questa scheda come Aggiornata","aria.clearUrgent":"Rimuovi urgente da {name}","aria.markUrgent":"Segna come urgente: {name}","tip.clearUrgent":"Rimuovi Urgente","tip.markUrgent":"Segna come Urgente (la data si imposta nell’editor)","aria.edit":"Modifica {name}","tip.edit":"Modifica i dettagli","aria.firstFor":"Data della prima consegna di {name}","aria.finalFor":"Data della consegna finale di {name}","aria.viewImage":"Vedi immagine {i} di {n} di {name}","alt.image":"Immagine di riferimento di {name}","img.dropHere":"Trascina qui le immagini","img.used":"{i} di {n} usate","img.removeN":"Rimuovi immagine {i}","img.removeTip":"Rimuovi questa immagine","img.altN":"Immagine {i}","msg.full":"Questa scheda ha già {n} immagini. Rimuovine una nell’editor per aggiungerne un’altra.","msg.preparing":"Preparazione dell’immagine…","msg.onlyFit":"in una scheda entrano solo {n} immagini","msg.noneAdded":"Nessuna immagine aggiunta.","msg.partial":"Salvato, ma non è stato aggiunto tutto: {why}","msg.holdsUpTo":"Una scheda contiene fino a {n} immagini. Rimuovine una per aggiungerne un’altra.","err.type":"Usa un’immagine PNG, JPG, WebP o GIF.","err.read":"Impossibile leggere quel file come immagine.","err.tooDetailed":"Quell’immagine è troppo dettagliata per essere salvata qui. Prova una versione più semplice o più piccola.","save.local":"Salvato in locale","save.saving":"Salvataggio…","save.saved":"Salvato {time}","save.failed":"Salvataggio non riuscito: controlla la connessione e riprova","confirm.remove":"Rimuovere \"{name}\" dal tracker?","txt.thisDeliverable":"questo deliverable","txt.untitled":"Senza titolo","txt.link":"Link","urgent.label":"Urgente · scade {date} · {when}","when.today":"oggi","when.tomorrow":"domani","when.inDays":"tra {n} giorni","when.lateOne":"1 giorno di ritardo","when.lateN":"{n} giorni di ritardo","lb.of":"{i} di {n}","aria.lightbox":"Anteprima dell’immagine","aria.prev":"Immagine precedente","aria.next":"Immagine successiva","lang.label":"Lingua","tr.title":"Traduzioni (spagnolo e italiano)","tr.help":"Vengono mostrate a chi imposta la pagina in quella lingua. Se il testo inglese cambia in seguito, quel campo torna in inglese finché la traduzione non viene aggiornata.","tr.es":"Spagnolo","tr.it":"Italiano","ref.Template":"Template","ref.Copy":"Testo","ref.Artist Bios":"Biografie degli artisti","ref.Artist Photos":"Foto degli artisti","ref.Storyboard & inspiration":"Storyboard e ispirazione","ref.Assets":"Asset","ref.Copy & Example":"Testo ed esempio","ref.Elsa Style Guide":"Style guide di Elsa","ref.Property Logos":"Loghi delle property","ref.Inspiration":"Ispirazione","ref.All Style Guides":"Tutte le style guide"}};
+  const LANGS = ["en", "es", "it"], TR_LANGS = ["es", "it"], LANG_KEY = "production-tracker-lang";
+  function pickLang() {
+    const fromUrl = (new URLSearchParams(location.search).get("lang") || "").toLowerCase();
+    if (LANGS.includes(fromUrl)) { try { localStorage.setItem(LANG_KEY, fromUrl); } catch (e) {} return fromUrl; }
+    let saved = ""; try { saved = localStorage.getItem(LANG_KEY) || ""; } catch (e) {}
+    if (LANGS.includes(saved)) return saved;
+    const nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+    return LANGS.includes(nav) ? nav : "en";
+  }
+  let LANG = pickLang();
+  const locale = () => LANG === "en" ? undefined : LANG;
+  function t(key, vars) {
+    let str = (I18N[LANG] && I18N[LANG][key]); if (str == null) str = I18N.en[key]; if (str == null) str = key;
+    return vars ? str.replace(/\{(\w+)\}/g, (m, k) => vars[k] == null ? "" : String(vars[k])) : str;
+  }
+  const refLabel = label => (LANG !== "en" && I18N[LANG]["ref." + label]) || label;
+  const sectionTitle = key => (I18N[LANG]["sec." + key]) || key.split("|")[1];
+  // Card text in the viewer's language. A translation is used only while the English it was made from is
+  // unchanged, so an edited field falls back to English instead of showing an out-of-date translation.
+  function enText(row, field) { return field === "notes" ? (row.notes || []).join("\n") : String(row[field] == null ? "" : row[field]); }
+  function loc(row, field) {
+    const en = enText(row, field);
+    if (LANG === "en") return en;
+    const e = row.tr && row.tr[LANG] && row.tr[LANG][field];
+    return (e && e.t && e.s === en) ? e.t : en;
+  }
+  const trStored = (row, lang, field) => { const e = row.tr && row.tr[lang] && row.tr[lang][field]; return e && e.t ? e.t : ""; };
+  function readTr(r) {
+    const o = {};
+    TR_LANGS.forEach(l => {
+      const raw = r["tr_" + l];
+      if (typeof raw === "string" && raw) { try { const p = JSON.parse(raw); if (p && typeof p === "object") o[l] = p; } catch (e) {} }
+      else if (r.tr && r.tr[l]) o[l] = r.tr[l];
+    });
+    return o;
+  }
+  function applyStatic() {
+    document.documentElement.lang = LANG;
+    document.title = t("title");
+    document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll("[data-i18n-aria]").forEach(el => { el.setAttribute("aria-label", t(el.dataset.i18nAria)); });
+    const sw = document.getElementById("langSwitch");
+    sw.setAttribute("aria-label", t("lang.label"));
+    sw.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === LANG ? "true" : "false"));
+  }
+  function setLang(l) {
+    if (!LANGS.includes(l) || l === LANG) return;
+    LANG = l; try { localStorage.setItem(LANG_KEY, l); } catch (e) {}
+    applyStatic(); render();
+  }
 
   const STATUSES = ["new", "proceed", "hold", "revision", "approved", "complete", "canceled"];
   const STATUS_LABEL = { new: "New", proceed: "Proceed", hold: "Hold", revision: "Revision", approved: "Approved", complete: "Complete", canceled: "Canceled" };
@@ -336,13 +409,13 @@
     return new Promise((resolve, reject) => {
       const url = URL.createObjectURL(file); const img = new Image();
       img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
-      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("That file could not be read as an image.")); };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error(t("err.read"))); };
       img.src = url;
     });
   }
   // Scales the picture down (1920 x 1080 becomes 1280 x 720) and compresses it until it fits its slot.
   async function fileToImage(file, maxChars) {
-    if (!file || !/^image\/(png|jpe?g|webp|gif)$/i.test(file.type)) throw new Error("Use a PNG, JPG, WebP or GIF image.");
+    if (!file || !/^image\/(png|jpe?g|webp|gif)$/i.test(file.type)) throw new Error(t("err.type"));
     const img = await loadImageFile(file);
     const canvas = document.createElement("canvas"); const ctx = canvas.getContext("2d");
     for (const w of [1280, 1120, 960, 800, 640]) {
@@ -356,7 +429,7 @@
         if (out.length <= maxChars) return out;
       }
     }
-    throw new Error("That image is too detailed to store here. Try a simpler or smaller version.");
+    throw new Error(t("err.tooDetailed"));
   }
   const pendingImages = new Map(); // card id -> working copy of the image list while the editor is open
   const lb = { images: [], index: 0, name: "" };
@@ -364,7 +437,7 @@
     const n = lb.images.length;
     document.getElementById("lightboxImg").src = lb.images[lb.index];
     document.getElementById("lightboxImg").alt = lb.name || "";
-    document.getElementById("lightboxCap").textContent = (lb.name || "") + (n > 1 ? "  ·  " + (lb.index + 1) + " of " + n : "");
+    document.getElementById("lightboxCap").textContent = (lb.name || "") + (n > 1 ? "  ·  " + t("lb.of", { i: lb.index + 1, n }) : "");
     document.getElementById("lbPrev").hidden = n < 2;
     document.getElementById("lbNext").hidden = n < 2;
   }
@@ -401,6 +474,8 @@
     out.updatedNote = out.updatedNote == null ? "" : String(out.updatedNote);
     out.urgent = out.urgent === true || out.urgent === "true" || out.urgent === "TRUE";
     out.urgentDue = typeof out.urgentDue === "string" ? out.urgentDue.slice(0, 10) : "";
+    out.tr = readTr(out);
+    TR_LANGS.forEach(l => { delete out["tr_" + l]; });
     out.images = readImages(out);
     IMAGE_SLOTS.forEach(keys => keys.forEach(k => { delete out[k]; }));
     return out;
@@ -423,7 +498,7 @@
   const ICON_PENCIL = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 2.5l2 2L5 13H3v-2z"/><path d="M10 4l2 2"/></svg>';
   const ICON_X = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>';
   const ICON_FLAG = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 14V2.5"/><path d="M3.5 3h8.5l-2 3 2 3H3.5"/></svg>';
-  const fmtDay = iso => { if (!iso) return ""; const [y, m, d] = iso.split("-").map(Number); if (!y || !m || !d) return ""; return new Date(y, m - 1, d).toLocaleDateString(undefined, { month: "short", day: "numeric" }); };
+  const fmtDay = iso => { if (!iso) return ""; const [y, m, d] = iso.split("-").map(Number); if (!y || !m || !d) return ""; return new Date(y, m - 1, d).toLocaleDateString(locale(), { month: "short", day: "numeric" }); };
   const todayIso = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
   const ICON_ALERT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2l6 10.6H2z"/><path d="M8 6.6v3"/><path d="M8 11.4v.1"/></svg>';
   // Default urgent date: the card's next date that has not passed yet, otherwise its last known date.
@@ -433,12 +508,12 @@
     return ahead[0] || row.final || row.first || t;
   }
   function urgentLabel(row) {
-    if (!row.urgentDue) return "Urgent";
+    if (!row.urgentDue) return t("flag.urgent");
     const [y, m, d] = row.urgentDue.split("-").map(Number);
     const now = new Date(); const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const days = Math.round((new Date(y, m - 1, d) - today) / 86400000);
-    const when = days === 0 ? "today" : days === 1 ? "tomorrow" : days > 1 ? "in " + days + " days" : days === -1 ? "1 day late" : (-days) + " days late";
-    return "Urgent \u00b7 due " + fmtDay(row.urgentDue) + " \u00b7 " + when;
+    const when = days === 0 ? t("when.today") : days === 1 ? t("when.tomorrow") : days > 1 ? t("when.inDays", { n: days }) : days === -1 ? t("when.lateOne") : t("when.lateN", { n: -days });
+    return t("urgent.label", { date: fmtDay(row.urgentDue), when });
   }
   const ICON_EXT = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2H2v8h8V7"/><path d="M7 1h4v4"/><path d="M11 1L5.5 6.5"/></svg>';
 
@@ -448,50 +523,51 @@
     const updatedCount = visible().filter(r => r.updated).length;
     const urgentCount = visible().filter(r => r.urgent).length;
     document.getElementById("summary").innerHTML = STATUSES.map(s => `
-      <span class="count-chip"><span class="dot" style="background:var(--${s})"></span><strong>${counts[s]}</strong> ${STATUS_LABEL[s]}</span>`).join("")
-      + (updatedCount ? `<span class="count-chip" style="border-color:var(--new);color:var(--new)"><strong style="color:var(--new)">${updatedCount}</strong> Updated</span>` : "")
-      + (urgentCount ? `<span class="count-chip" style="border-color:var(--urgent);color:var(--urgent)"><strong style="color:var(--urgent)">${urgentCount}</strong> Urgent</span>` : "");
+      <span class="count-chip"><span class="dot" style="background:var(--${s})"></span><strong>${counts[s]}</strong> ${escapeHtml(t("status." + s))}</span>`).join("")
+      + (updatedCount ? `<span class="count-chip" style="border-color:var(--new);color:var(--new)"><strong style="color:var(--new)">${updatedCount}</strong> ${escapeHtml(t("flag.updated"))}</span>` : "")
+      + (urgentCount ? `<span class="count-chip" style="border-color:var(--urgent);color:var(--urgent)"><strong style="color:var(--urgent)">${urgentCount}</strong> ${escapeHtml(t("flag.urgent"))}</span>` : "");
   }
 
   function statusSelectHtml(row) {
-    return `<select class="status-select status-${row.status}" aria-label="Status for ${attr(row.deliverable)}">
-      ${STATUSES.map(s => `<option value="${s}" ${s === row.status ? "selected" : ""}>${STATUS_LABEL[s]}</option>`).join("")}
+    return `<select class="status-select status-${row.status}" aria-label="${attr(t("aria.statusFor", { name: loc(row, "deliverable") }))}">
+      ${STATUSES.map(s => `<option value="${s}" ${s === row.status ? "selected" : ""}>${escapeHtml(t("status." + s))}</option>`).join("")}
     </select>`;
   }
 
   function viewCardHtml(row) {
-    const notesHtml = row.notes.map(n => `<p class="note-line">${escapeHtml(n)}</p>`).join("");
+    const name = loc(row, "deliverable");
+    const notesHtml = loc(row, "notes").split("\n").filter(Boolean).map(n => `<p class="note-line">${escapeHtml(n)}</p>`).join("");
     const refsHtml = row.refs.length ? `<div class="refs">${row.refs.map(r => {
       const u = safeUrl(r.url);
       return u
-        ? `<a class="ref-pill" href="${attr(u)}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.label || "Link")}${ICON_EXT}</a>`
-        : `<span class="ref-pill">${escapeHtml(r.label)}</span>`;
+        ? `<a class="ref-pill" href="${attr(u)}" target="_blank" rel="noopener noreferrer">${escapeHtml(refLabel(r.label) || t("txt.link"))}${ICON_EXT}</a>`
+        : `<span class="ref-pill">${escapeHtml(refLabel(r.label))}</span>`;
     }).join("")}</div>` : "";
     const imgs = row.images || [];
     const imagesHtml = imgs.length ? `<div class="card-images">
-          <button type="button" class="card-image" data-index="0" aria-label="View image 1 of ${imgs.length} for ${attr(row.deliverable)}"><img src="${attr(imgs[0])}" alt="Reference image for ${attr(row.deliverable)}" loading="lazy">${imgs.length > 1 ? `<span class="image-count">1 / ${imgs.length}</span>` : ""}</button>
-          ${imgs.length > 1 ? `<div class="thumb-row">${imgs.slice(1).map((src, i) => `<button type="button" class="card-image thumb" data-index="${i + 1}" aria-label="View image ${i + 2} of ${imgs.length} for ${attr(row.deliverable)}"><img src="${attr(src)}" alt="" loading="lazy"></button>`).join("")}</div>` : ""}
+          <button type="button" class="card-image" data-index="0" aria-label="${attr(t("aria.viewImage", { i: 1, n: imgs.length, name }))}"><img src="${attr(imgs[0])}" alt="${attr(t("alt.image", { name }))}" loading="lazy">${imgs.length > 1 ? `<span class="image-count">1 / ${imgs.length}</span>` : ""}</button>
+          ${imgs.length > 1 ? `<div class="thumb-row">${imgs.slice(1).map((src, i) => `<button type="button" class="card-image thumb" data-index="${i + 1}" aria-label="${attr(t("aria.viewImage", { i: i + 2, n: imgs.length, name }))}"><img src="${attr(src)}" alt="" loading="lazy"></button>`).join("")}</div>` : ""}
         </div>` : "";
-    const flagHtml = row.updated ? `<div class="updated-flag">Updated${row.updatedOn ? ` <span class="when">${escapeHtml(fmtDay(row.updatedOn))}</span>` : ""}${row.updatedNote ? ` <span class="what">&middot; ${escapeHtml(row.updatedNote)}</span>` : ""}</div>` : "";
+    const flagHtml = row.updated ? `<div class="updated-flag">${escapeHtml(t("flag.updated"))}${row.updatedOn ? ` <span class="when">${escapeHtml(fmtDay(row.updatedOn))}</span>` : ""}${row.updatedNote ? ` <span class="what">&middot; ${escapeHtml(loc(row, "updatedNote"))}</span>` : ""}</div>` : "";
     return `
-      <article class="card ${row.status === 'canceled' ? 'is-canceled' : ''} ${row.status === 'approved' ? 'is-approved' : ''} ${row.updated ? 'is-updated' : ''} ${row.urgent ? 'is-urgent' : ''}" data-id="${attr(row.id)}" ${row.urgent ? `data-urgent="${attr(urgentLabel(row))}"` : ""}>
+      <article class="card ${row.status === 'canceled' ? 'is-canceled' : ''} ${row.status === 'approved' ? 'is-approved' : ''} ${row.updated ? 'is-updated' : ''} ${row.urgent ? 'is-urgent' : ''}" data-id="${attr(row.id)}" data-approved="${attr(t("badge.approved"))}" ${row.urgent ? `data-urgent="${attr(urgentLabel(row))}"` : ""}>
         ${flagHtml}
         <div class="card-head">
           <div class="card-title">
-            <span class="deliverable-name">${escapeHtml(row.deliverable)}</span>
-            <span class="specs">${escapeHtml(row.specs)}</span>
+            <span class="deliverable-name">${escapeHtml(name)}</span>
+            <span class="specs">${escapeHtml(loc(row, "specs"))}</span>
           </div>
           <div class="head-controls">
             ${statusSelectHtml(row)}
-            <button class="icon-btn flag-btn ${row.updated ? 'on' : ''}" aria-pressed="${row.updated ? 'true' : 'false'}" aria-label="${row.updated ? 'Clear updated flag on' : 'Mark as updated:'} ${attr(row.deliverable)}" title="${row.updated ? 'Clear the Updated flag' : 'Flag this card as Updated'}">${ICON_FLAG}</button>
-            <button class="icon-btn urgent-btn ${row.urgent ? 'on' : ''}" aria-pressed="${row.urgent ? 'true' : 'false'}" aria-label="${row.urgent ? 'Clear urgent on' : 'Mark as urgent:'} ${attr(row.deliverable)}" title="${row.urgent ? 'Clear Urgent' : 'Mark as Urgent (set the date in the editor)'}">${ICON_ALERT}</button>
-            <button class="icon-btn edit-btn" aria-label="Edit ${attr(row.deliverable)}" title="Edit details">${ICON_PENCIL}</button>
+            <button class="icon-btn flag-btn ${row.updated ? 'on' : ''}" aria-pressed="${row.updated ? 'true' : 'false'}" aria-label="${attr(t(row.updated ? "aria.clearUpdated" : "aria.markUpdated", { name }))}" title="${attr(t(row.updated ? "tip.clearUpdated" : "tip.markUpdated"))}">${ICON_FLAG}</button>
+            <button class="icon-btn urgent-btn ${row.urgent ? 'on' : ''}" aria-pressed="${row.urgent ? 'true' : 'false'}" aria-label="${attr(t(row.urgent ? "aria.clearUrgent" : "aria.markUrgent", { name }))}" title="${attr(t(row.urgent ? "tip.clearUrgent" : "tip.markUrgent"))}">${ICON_ALERT}</button>
+            <button class="icon-btn edit-btn" aria-label="${attr(t("aria.edit", { name }))}" title="${attr(t("tip.edit"))}">${ICON_PENCIL}</button>
           </div>
         </div>
         ${imagesHtml}
         <div class="date-row">
-          <div><label class="field-label">First pass</label><input type="date" class="first-input" value="${attr(row.first || '')}" aria-label="First pass date for ${attr(row.deliverable)}"></div>
-          <div><label class="field-label">Final</label><input type="date" class="final-input" value="${attr(row.final || '')}" aria-label="Final date for ${attr(row.deliverable)}"></div>
+          <div><label class="field-label">${escapeHtml(t("lbl.first"))}</label><input type="date" class="first-input" value="${attr(row.first || '')}" aria-label="${attr(t("aria.firstFor", { name }))}"></div>
+          <div><label class="field-label">${escapeHtml(t("lbl.final"))}</label><input type="date" class="final-input" value="${attr(row.final || '')}" aria-label="${attr(t("aria.finalFor", { name }))}"></div>
         </div>
         <div class="notes-cell">${notesHtml}</div>
         ${refsHtml}
@@ -504,51 +580,61 @@
     return `
       <article class="card editing" data-id="${attr(row.id)}">
         <div class="edit-block">
-          <div><label class="field-label">Deliverable</label><input class="edit-input sans e-name" value="${attr(row.deliverable)}" placeholder="Deliverable name"></div>
-          <div><label class="field-label">Key specs</label><input class="edit-input e-specs" value="${attr(row.specs)}" placeholder='e.g. 24" × 36" · 300 dpi'></div>
+          <div><label class="field-label">${escapeHtml(t("lbl.deliverable"))}</label><input class="edit-input sans e-name" value="${attr(row.deliverable)}" placeholder="${attr(t("ph.deliverable"))}"></div>
+          <div><label class="field-label">${escapeHtml(t("lbl.specs"))}</label><input class="edit-input e-specs" value="${attr(row.specs)}" placeholder="${attr(t("ph.specs"))}"></div>
           <div class="date-row" style="border:none;padding:0">
-            <div><label class="field-label">First pass</label><input type="date" class="e-first" value="${attr(row.first || '')}"></div>
-            <div><label class="field-label">Final</label><input type="date" class="e-final" value="${attr(row.final || '')}"></div>
+            <div><label class="field-label">${escapeHtml(t("lbl.first"))}</label><input type="date" class="e-first" value="${attr(row.first || '')}"></div>
+            <div><label class="field-label">${escapeHtml(t("lbl.final"))}</label><input type="date" class="e-final" value="${attr(row.final || '')}"></div>
           </div>
-          <div><label class="field-label">Status</label>${statusSelectHtml(row).replace('class="status-select', 'class="status-select e-status')}</div>
-          <div><label class="field-label">Notes (one per line)</label><textarea class="edit-textarea sans e-notes" placeholder="Bleed, copy direction, open questions…">${escapeHtml(row.notes.join("\n"))}</textarea></div>
+          <div><label class="field-label">${escapeHtml(t("lbl.status"))}</label>${statusSelectHtml(row).replace('class="status-select', 'class="status-select e-status')}</div>
+          <div><label class="field-label">${escapeHtml(t("lbl.notes"))}</label><textarea class="edit-textarea sans e-notes" placeholder="${attr(t("ph.notes"))}">${escapeHtml(row.notes.join("\n"))}</textarea></div>
           <div>
-            <label class="field-label">Updated flag</label>
-            <label class="toggle-row"><input type="checkbox" class="e-updated" ${row.updated ? "checked" : ""}> Show an &ldquo;Updated&rdquo; banner on this card</label>
-            <input class="edit-input sans e-updated-note" style="margin-top:8px" value="${attr(row.updatedNote || "")}" placeholder="What changed? (optional, e.g. Final date moved to Oct 13)">
+            <label class="field-label">${escapeHtml(t("lbl.updatedFlag"))}</label>
+            <label class="toggle-row"><input type="checkbox" class="e-updated" ${row.updated ? "checked" : ""}> ${escapeHtml(t("txt.showUpdated"))}</label>
+            <input class="edit-input sans e-updated-note" style="margin-top:8px" value="${attr(row.updatedNote || "")}" placeholder="${attr(t("ph.updatedNote"))}">
           </div>
           <div>
-            <label class="field-label">Urgent</label>
+            <label class="field-label">${escapeHtml(t("lbl.urgent"))}</label>
             <div class="urgent-row">
-              <label class="toggle-row"><input type="checkbox" class="e-urgent" ${row.urgent ? "checked" : ""}> Highlight this card as urgent</label>
-              <input type="date" class="e-urgent-due" value="${attr(row.urgentDue || defaultUrgentDue(row))}" aria-label="Urgent due date">
+              <label class="toggle-row"><input type="checkbox" class="e-urgent" ${row.urgent ? "checked" : ""}> ${escapeHtml(t("txt.highlightUrgent"))}</label>
+              <input type="date" class="e-urgent-due" value="${attr(row.urgentDue || defaultUrgentDue(row))}" aria-label="${attr(t("aria.urgentDue"))}">
             </div>
           </div>
           <div>
-            <label class="field-label">Images <span class="hint">up to ${MAX_IMAGES} · 1920 × 1080 fits exactly</span></label>
+            <label class="field-label">${escapeHtml(t("lbl.images"))} <span class="hint">${escapeHtml(t("hint.images", { n: MAX_IMAGES }))}</span></label>
             <div class="image-grid"></div>
             <div class="image-actions">
-              <button type="button" class="text-btn choose-image">Choose files…</button>
+              <button type="button" class="text-btn choose-image">${escapeHtml(t("btn.chooseFiles"))}</button>
               <input type="file" class="e-image-file" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden>
               <span class="image-error" role="alert"></span>
             </div>
           </div>
           <div>
-            <label class="field-label">Links</label>
+            <label class="field-label">${escapeHtml(t("lbl.links"))}</label>
             <div class="link-list">
               ${refs.map(r => `<div class="link-row">
-                <input class="edit-input sans e-link-label" value="${attr(r.label)}" placeholder="Label (e.g. Copy)">
+                <input class="edit-input sans e-link-label" value="${attr(r.label)}" placeholder="${attr(t("ph.linkLabel"))}">
                 <input class="edit-input e-link-url" value="${attr(r.url)}" placeholder="https://…">
-                <button class="icon-btn remove-link" aria-label="Remove link">${ICON_X}</button>
+                <button class="icon-btn remove-link" aria-label="${attr(t("aria.removeLink"))}">${ICON_X}</button>
               </div>`).join("")}
             </div>
-            <button class="text-btn add-link">+ Add link</button>
+            <button class="text-btn add-link">${escapeHtml(t("btn.addLink"))}</button>
           </div>
+          <details class="tr-block">
+            <summary>${escapeHtml(t("tr.title"))}</summary>
+            <p class="tr-help">${escapeHtml(t("tr.help"))}</p>
+            ${TR_LANGS.map(l => `<fieldset class="tr-lang" data-lang="${l}">
+              <legend>${escapeHtml(t("tr." + l))}</legend>
+              <input class="edit-input sans e-tr-name" value="${attr(trStored(row, l, "deliverable"))}" placeholder="${attr(t("lbl.deliverable"))}" lang="${l}">
+              <input class="edit-input e-tr-specs" value="${attr(trStored(row, l, "specs"))}" placeholder="${attr(t("lbl.specs"))}" lang="${l}">
+              <textarea class="edit-textarea sans e-tr-notes" placeholder="${attr(t("lbl.notes"))}" lang="${l}">${escapeHtml(trStored(row, l, "notes"))}</textarea>
+            </fieldset>`).join("")}
+          </details>
           <div class="edit-actions">
-            <button class="text-btn danger delete-btn">Remove deliverable</button>
+            <button class="text-btn danger delete-btn">${escapeHtml(t("btn.removeDeliverable"))}</button>
             <div style="display:flex;gap:8px">
-              <button class="btn cancel-btn">Cancel</button>
-              <button class="btn primary done-btn">Done</button>
+              <button class="btn cancel-btn">${escapeHtml(t("btn.cancel"))}</button>
+              <button class="btn primary done-btn">${escapeHtml(t("btn.done"))}</button>
             </div>
           </div>
           <span class="save-state"></span>
@@ -559,14 +645,14 @@
   function render() {
     const groupsEl = document.getElementById("groups");
     groupsEl.innerHTML = SECTIONS.map((key, i) => {
-      const num = i + 1, title = key.split("|")[1];
+      const num = i + 1, title = sectionTitle(key);
       const rows = visible().filter(r => r.section === key);
       return `
         <section class="group" data-section="${attr(key)}">
           <div class="group-title"><span class="group-badge">${num}</span><h2>${escapeHtml(title)}</h2></div>
           <div class="card-grid">
             ${rows.map(r => editing.has(r.id) ? editCardHtml(r) : viewCardHtml(r)).join("")}
-            <button class="add-card" data-section="${attr(key)}">+ Add deliverable</button>
+            <button class="add-card" data-section="${attr(key)}">${escapeHtml(t("btn.addDeliverable"))}</button>
           </div>
         </section>`;
     }).join("");
@@ -588,7 +674,7 @@
       });
       card.querySelectorAll(".card-image").forEach(btn => btn.addEventListener("click", () => {
         const row = state.find(r => r.id === id);
-        if (row && row.images && row.images.length) openLightbox(row.images, Number(btn.dataset.index) || 0, row.deliverable);
+        if (row && row.images && row.images.length) openLightbox(row.images, Number(btn.dataset.index) || 0, loc(row, "deliverable"));
       }));
       // Dropping pictures on a card adds them straight away (up to MAX_IMAGES per card).
       card.addEventListener("dragover", e => { if (hasImageFile(e)) { e.preventDefault(); card.classList.add("drop-target"); } });
@@ -601,18 +687,18 @@
         const files = [...e.dataTransfer.files];
         const say = (t, err) => { const el = document.querySelector(`.card[data-id="${id}"] .save-state`); if (el) { el.textContent = t; el.className = "save-state" + (err ? " error" : ""); } };
         const start = row.images.length;
-        if (start >= MAX_IMAGES) { say(`This card already has ${MAX_IMAGES} images. Remove one in the editor to add another.`, true); return; }
-        say("Preparing image…");
+        if (start >= MAX_IMAGES) { say(t("msg.full", { n: MAX_IMAGES }), true); return; }
+        say(t("msg.preparing"));
         const problems = [];
         for (const file of files) {
-          if (row.images.length >= MAX_IMAGES) { problems.push(`only ${MAX_IMAGES} images fit on a card`); break; }
+          if (row.images.length >= MAX_IMAGES) { problems.push(t("msg.onlyFit", { n: MAX_IMAGES })); break; }
           try { row.images.push(await fileToImage(file, slotLimit(row.images.length))); }
           catch (err) { problems.push(err.message); }
         }
-        if (row.images.length === start) { say(problems[0] || "No image was added.", true); return; }
+        if (row.images.length === start) { say(problems[0] || t("msg.noneAdded"), true); return; }
         if (editing.size === 0) render();
         await save(id, imageFields(row.images, start));
-        if (problems.length) say("Saved, but not everything was added: " + problems[0], true);
+        if (problems.length) say(t("msg.partial", { why: problems[0] }), true);
       });
       card.querySelector(".edit-btn").addEventListener("click", () => { editing.add(id); render(); });
       card.querySelector(".urgent-btn").addEventListener("click", () => {
@@ -638,7 +724,7 @@
       statusSel.addEventListener("change", e => { e.target.className = "status-select e-status status-" + e.target.value; });
       card.querySelector(".add-link").addEventListener("click", () => {
         const div = document.createElement("div"); div.className = "link-row";
-        div.innerHTML = `<input class="edit-input sans e-link-label" placeholder="Label (e.g. Copy)"><input class="edit-input e-link-url" placeholder="https://…"><button class="icon-btn remove-link" aria-label="Remove link">${ICON_X}</button>`;
+        div.innerHTML = `<input class="edit-input sans e-link-label" placeholder="${attr(t("ph.linkLabel"))}"><input class="edit-input e-link-url" placeholder="https://…"><button class="icon-btn remove-link" aria-label="${attr(t("aria.removeLink"))}">${ICON_X}</button>`;
         card.querySelector(".link-list").appendChild(div);
         div.querySelector(".remove-link").addEventListener("click", () => div.remove());
         div.querySelector(".e-link-label").focus();
@@ -649,14 +735,14 @@
       const work = () => pendingImages.get(id);
       const drawGrid = () => {
         const list = work();
-        grid.innerHTML = list.map((src, i) => `<div class="image-tile"><img src="${attr(src)}" alt="Image ${i + 1}"><span class="slot">${i + 1}</span><button type="button" class="icon-btn remove-image" data-index="${i}" aria-label="Remove image ${i + 1}" title="Remove this image">${ICON_X}</button></div>`).join("")
-          + (list.length < MAX_IMAGES ? `<div class="image-drop"><span>Drop images here</span><span class="hint">${list.length} of ${MAX_IMAGES} used</span></div>` : "");
+        grid.innerHTML = list.map((src, i) => `<div class="image-tile"><img src="${attr(src)}" alt="${attr(t("img.altN", { i: i + 1 }))}"><span class="slot">${i + 1}</span><button type="button" class="icon-btn remove-image" data-index="${i}" aria-label="${attr(t("img.removeN", { i: i + 1 }))}" title="${attr(t("img.removeTip"))}">${ICON_X}</button></div>`).join("")
+          + (list.length < MAX_IMAGES ? `<div class="image-drop"><span>${escapeHtml(t("img.dropHere"))}</span><span class="hint">${escapeHtml(t("img.used", { i: list.length, n: MAX_IMAGES }))}</span></div>` : "");
         grid.querySelectorAll(".remove-image").forEach(b => b.addEventListener("click", () => { work().splice(Number(b.dataset.index), 1); imgErr.textContent = ""; drawGrid(); }));
       };
       const takeFiles = async files => {
         imgErr.textContent = "";
         for (const file of [...files]) {
-          if (work().length >= MAX_IMAGES) { imgErr.textContent = `A card holds up to ${MAX_IMAGES} images. Remove one to add another.`; break; }
+          if (work().length >= MAX_IMAGES) { imgErr.textContent = t("msg.holdsUpTo", { n: MAX_IMAGES }); break; }
           try { work().push(await fileToImage(file, slotLimit(work().length))); drawGrid(); }
           catch (err) { imgErr.textContent = err.message; }
         }
@@ -673,7 +759,7 @@
         render();
       });
       card.querySelector(".delete-btn").addEventListener("click", () => {
-        if (!confirm(`Remove "${row.deliverable || "this deliverable"}" from the tracker?`)) return;
+        if (!confirm(t("confirm.remove", { name: loc(row, "deliverable") || t("txt.thisDeliverable") }))) return;
         editing.delete(id);
         pendingImages.delete(id);
         if (row._isNew) { state = state.filter(r => r.id !== id); render(); return; }
@@ -687,7 +773,7 @@
           url: r.querySelector(".e-link-url").value.trim()
         })).filter(r => r.label || r.url);
         const fields = {
-          deliverable: card.querySelector(".e-name").value.trim() || "Untitled",
+          deliverable: card.querySelector(".e-name").value.trim() || t("txt.untitled"),
           specs: card.querySelector(".e-specs").value.trim(),
           first: card.querySelector(".e-first").value,
           final: card.querySelector(".e-final").value,
@@ -702,6 +788,18 @@
         fields.updatedOn = fields.updated === "true" ? (row.updated && row.updatedOn ? row.updatedOn : todayIso()) : "";
         if (fields.updated !== "true") fields.updatedNote = "";
         if (row._isNew) { fields.section = row.section; delete row._isNew; }
+        // Translations: a field is rewritten only if its translation box was edited. An untouched box keeps
+        // its stored translation and the English it was made from, so stale ones fall back to English.
+        TR_LANGS.forEach(l => {
+          const box = card.querySelector(`.tr-lang[data-lang="${l}"]`); if (!box) return;
+          const old = (row.tr && row.tr[l]) || {}; const next = { ...old };
+          [["deliverable", ".e-tr-name"], ["specs", ".e-tr-specs"], ["notes", ".e-tr-notes"]].forEach(([f, sel]) => {
+            const v = box.querySelector(sel).value.split("\n").map(x => x.trim()).filter(Boolean).join("\n");
+            if (v === (old[f] && old[f].t ? old[f].t : "")) return;
+            if (!v) delete next[f]; else next[f] = { s: fields[f], t: v };
+          });
+          if (JSON.stringify(next) !== JSON.stringify(old)) fields["tr_" + l] = JSON.stringify(next);
+        });
         const oldImages = row.images || [];
         const newImages = pendingImages.has(id) ? pendingImages.get(id).slice(0, MAX_IMAGES) : oldImages.slice();
         pendingImages.delete(id);
@@ -734,25 +832,28 @@
     const saveEl = document.querySelector(`.card[data-id="${id}"] .save-state`);
     const set = (t, err) => { if (saveEl) { saveEl.textContent = t; saveEl.className = "save-state" + (err ? " error" : ""); } };
 
-    if (!backendConfigured) { set("Saved locally"); return; }
-    set("Saving…");
+    if (!backendConfigured) { set(t("save.local")); return; }
+    set(t("save.saving"));
     try {
       const res = await fetch(SCRIPT_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ id, fields }) });
       const data = await res.json();
       if (!res.ok || !data.ok) throw new Error(data.error || "bad response");
-      set("Saved " + new Date().toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" }));
+      set(t("save.saved", { time: new Date().toLocaleTimeString(locale(), { hour: "numeric", minute: "2-digit" }) }));
     } catch (err) {
-      set("Failed to save — check connection and try again", true);
+      set(t("save.failed"), true);
     }
   }
 
+  document.getElementById("langSwitch").addEventListener("click", e => { const b = e.target.closest("button[data-lang]"); if (b) setLang(b.dataset.lang); });
+
   async function init() {
+    applyStatic();
     const banner = document.getElementById("connBanner");
     // Paint immediately from the local copy; the shared backend can take a few seconds to wake up.
     render();
     if (!backendConfigured) { banner.classList.add("show"); return; }
     const sync = document.getElementById("syncState");
-    sync.textContent = "Syncing latest changes…";
+    sync.textContent = t("sync.syncing");
     sync.classList.add("show");
     try {
       const res = await fetch(SCRIPT_URL);
@@ -761,11 +862,11 @@
       state = mergeWithDefaults(rows);
       saveLocal(state);
       if (editing.size === 0) render();
-      sync.textContent = "Up to date";
+      sync.textContent = t("sync.upToDate");
       setTimeout(() => sync.classList.remove("show"), 1800);
     } catch (err) {
       sync.classList.remove("show");
-      banner.textContent = "Could not reach the shared tracker — showing the last saved copy on this device.";
+      banner.dataset.i18n = "banner.unreachable"; banner.textContent = t("banner.unreachable");
       banner.classList.add("show");
     }
   }
